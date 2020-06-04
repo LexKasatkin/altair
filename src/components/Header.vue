@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-card class="overflow-hidden">
+        <div>
             <v-app-bar
                     absolute
                     color="#01579b"
@@ -12,10 +12,11 @@
                     src="@/assets/img/header.jpg"
             >
                 <template v-slot:img="{ props }">
-                    <v-img gradient="to top right, rgba(13, 71, 161, 0.95), rgba(13, 71, 161, 0.7)"
+                    <v-img gradient="to top right, rgba(56, 142, 60, 0.95), rgba(56, 142, 60, 0.7)"
                            v-bind="props"
                     ></v-img>
                 </template>
+                <v-subheader>{{subTitle}}</v-subheader>
                 <v-spacer/>
                 <v-toolbar-title>{{title}}</v-toolbar-title>
                 <v-spacer/>
@@ -36,16 +37,19 @@
                     <Tabs></Tabs>
                 </template>
             </v-app-bar>
-            <v-sheet
-                    class="overflow-y-auto"
-                    id="scrolling-techniques-3"
-                    max-height="600"
-            >
-                <v-container style="height: 1000px;">
-                    <router-view></router-view>
-                </v-container>
-            </v-sheet>
-        </v-card>
+        </div>
+        <div>
+            <v-card class="overflow-hidden">
+                <v-sheet
+                        class="overflow-y-auto"
+                        id="scrolling-techniques-3"
+                >
+                    <v-container>
+                        <router-view></router-view>
+                    </v-container>
+                </v-sheet>
+            </v-card>
+        </div>
     </v-app>
 </template>
 
@@ -58,6 +62,7 @@
         data() {
             return {
                 title: 'Альтаир Инвест',
+                subTitle: 'Шаг за шагом к вашему благополучию! 209-51-71',
             }
         }
     }

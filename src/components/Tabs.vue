@@ -3,7 +3,7 @@
             dark
             fixed-tabs
     >
-        <v-tab :key="i" :to="tab.navigateTo" v-for="(tab,i) in tabItems">{{tab.name}}
+        <v-tab :key="i" :to="tab.route" v-for="(tab,i) in tabItems">{{tab.name}}
         </v-tab>
     </v-tabs>
 </template>
@@ -16,19 +16,19 @@
                 return [
                     {
                         name: 'Главная',
-                        navigateTo: '/main'
+                        route: '/main'
                     },
                     {
                         name: 'Компания',
-                        navigateTo: '/company'
+                        route: '/company'
                     },
                     {
                         name: 'Квартиры',
-                        navigateTo: '/flats'
+                        route: '/flats'
                     },
                     {
                         name: 'Контакты',
-                        navigateTo: '/contacts'
+                        route: '/contacts'
                     },
                 ]
             }
