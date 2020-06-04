@@ -1,7 +1,22 @@
 <template>
-    <div id="app">
-        <Header></Header>
-    </div>
+    <v-app>
+        <div id="app">
+            <Header></Header>
+
+            <div>
+                <v-card class="overflow-hidden">
+                    <v-sheet
+                            class="overflow-y-auto"
+                            id="scrolling-techniques-3"
+                    >
+                        <v-container style="height: 1000px; margin-top: 250px">
+                            <router-view></router-view>
+                        </v-container>
+                    </v-sheet>
+                </v-card>
+            </div>
+        </div>
+    </v-app>
 </template>
 
 <style>

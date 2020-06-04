@@ -10,25 +10,23 @@
             Вас интересует покупка квартир в Красноярске по ипотеке? Мы с радостью поможем вам получить кредит на жилье.
             Без
             комиссии и оплаты агентских услуг.</p>
-        <p class="text-justify">
-            Основные виды деятельности компании <b>ООО «Альтаир-Инвест»</b>:
-        </p>
-        <ul>
-            <li :key="i" v-for="(action,i) in mainActions">{{action}}</li>
-        </ul>
+        <v-card-title>
+            Основные виды деятельности компании <b> ООО «Альтаир-Инвест»</b>:
+        </v-card-title>
 
         <v-container class="grey lighten-5">
-            <v-row
-                    :justify="j"
-                    :key="j"
-                    v-for="j in mainActions/3"
+            <v-row :key="i"
+                   justify="start"
+                   v-for="i in mainActions.length"
+
             >
-                <v-col
-                        :key="i"
-                        md="4"
-                        v-for="i in 3"
+                <v-col :key="j"
+                       md="4"
+                       v-for="j in mainActions[i-1].items.length"
                 >
-                    <ActionCard></ActionCard>
+                    <ActionCard :image="mainActions[i-1].items[j-1].image"
+                                :title="mainActions[i-1].items[j-1].title">
+                    </ActionCard>
                 </v-col>
             </v-row>
         </v-container>
@@ -44,16 +42,50 @@
         computed: {
             mainActions() {
                 return [
-                    'Продажа квартир на вторичном рынке',
-                    'Продажа квартир в новостройках',
-                    'Коммерческая недвижимость',
-                    'Загородная недвижимость',
-                    'Элитная недвижимость',
-                    'Ипотечное кредитование',
-                    'Работа со всеми видами субсидий и сертификатов',
-                    'Заказ любых справок'
+                    {
+                        items: [{
+                            title: 'Продажа квартир на вторичном рынке',
+                            image: 'second-realty.png'
+                        },
+                            {
+                                title: 'Продажа квартир в новостройках',
+                                image: 'new-realty.png'
+                            },
+                            {
+                                title: 'Коммерческая недвижимость',
+                                image: 'commerce.png'
+                            },]
+                    },
+                    {
+                        items: [
+                            {
+                                title: 'Загородная недвижимость',
+                                image: 'out-city.png'
+                            },
+                            {
+                                title: 'Элитная недвижимость',
+                                image: 'elite.png'
+                            },
+                            {
+                                title: 'Ипотечное кредитование',
+                                image: 'mortgage.png'
+                            },
+                        ]
+                    },
+                    {
+                        items: [
+                            {
+                                title: 'Работа со всеми видами субсидий и сертификатов',
+                                image: 'subsidies.png'
+                            },
+                            {
+                                title: 'Заказ любых справок',
+                                image: 'references.png'
+                            },
+                        ]
+                    },
                 ]
-            }
+            },
         }
     }
 </script>

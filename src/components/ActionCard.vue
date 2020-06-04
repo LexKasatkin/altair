@@ -1,16 +1,32 @@
 <template>
     <v-card
-            class="pa-2"
-            outlined
-            tile
+            class="mx-auto"
+            max-width="256px"
     >
-        One of two columns
+        <v-card-subtitle class="text-center">
+            {{title}}
+        </v-card-subtitle>
+        <v-row align="center" justify="center">
+            <v-img
+                    :src="imagePath"
+                    max-width="128px"
+            ></v-img>
+        </v-row>
     </v-card>
 </template>
 
 <script>
     export default {
-        name: "ActionCard"
+        props: {
+            title: String,
+            image: String
+        },
+        name: "ActionCard",
+        computed: {
+            imagePath() {
+                return require("@/assets/img/" + this.image);
+            }
+        }
     }
 </script>
 
