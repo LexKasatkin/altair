@@ -1,7 +1,7 @@
 <template>
     <v-card
             class="mx-auto"
-            max-width="600">
+            max-width="1000">
         <v-card-title>Главная</v-card-title>
         <v-card-text class="text-justify">
             Если вы хотите купить квартиру в Красноярске, но не можете найти подходящие варианты, то мы с радостью
@@ -14,9 +14,9 @@
             Без
             комиссии и оплаты агентских услуг.
         </v-card-text>
-        <v-card-subtitle class="justify-start">
+        <v-card-title class="text-justify">
             Основные виды деятельности компании ООО «Альтаир-Инвест»:
-        </v-card-subtitle>
+        </v-card-title>
 
         <v-container class="grey lighten-5">
             <v-row :key="i"
