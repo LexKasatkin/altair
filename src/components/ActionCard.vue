@@ -1,15 +1,11 @@
 <template>
-    <v-card
-            class="mx-auto"
-            max-width="256px"
-    >
+    <v-card class="mx-auto action-card">
         <v-card-subtitle class="text-center">
             {{title}}
         </v-card-subtitle>
-        <v-row align="center" justify="center">
-            <v-img
-                    :src="imagePath"
-                    max-width="128px"
+        <v-row class="align-content-end justify-center">
+            <v-img :src="imagePath"
+                   class="action-image"
             ></v-img>
         </v-row>
     </v-card>
@@ -31,5 +27,13 @@
 </script>
 
 <style scoped>
+    .action-card {
+        max-width: 256px;
+        height: 208px;
+    }
+
+    .action-image {
+        max-width: 128px;
+    }
 
 </style>
