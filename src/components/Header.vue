@@ -11,7 +11,7 @@
                 src="@/assets/img/header.jpg"
         >
             <template v-slot:img="{ props }">
-                <v-img gradient="to top right, rgba(56, 142, 60, 0.95), rgba(56, 142, 60, 0.7)"
+                <v-img gradient="to top right, rgba(59, 72, 174, 0.95), rgba(59, 72, 174, 0.7)"
                        v-bind="props"
                 ></v-img>
             </template>
@@ -48,7 +48,6 @@
         data() {
             return {
                 title: 'Альтаир Инвест',
-                subTitle: 'Шаг за шагом к вашему благополучию! 209-51-71',
             }
         }
     }
