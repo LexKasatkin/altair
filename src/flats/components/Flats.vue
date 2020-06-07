@@ -14,6 +14,7 @@
                        v-for="j in flats.length - ((i-1)*3)"
                 >
                     <FlatCard :image="flats[(i-1)*3+j-1].photo"
+                              :message="text(flats[(i-1)*3+j-1])"
                               :title="flats[(i-1)*3+j-1].address">
                     </FlatCard>
                 </v-col>
@@ -36,7 +37,11 @@
                 errors: []
             }
         },
-
+        methods: {
+            text(flat) {
+                return `${flat.description}\n${flat.flat_type}\n${flat.realty_type}`
+            }
+        },
         mounted() {
 
             axios.get(`${API_HOST}/flats/`, {
