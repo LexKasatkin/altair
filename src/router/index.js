@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from "../components/Main";
 import Company from "../components/Company";
+import Flats from "../flats/components/Flats";
 
 Vue.use(VueRouter)
 
@@ -13,6 +14,10 @@ const routes = [
     {
         path: '/company',
         component: Company
+    },
+    {
+        path: '/flats',
+        component: Flats
     },
     {
         path: '*',

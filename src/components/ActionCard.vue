@@ -3,7 +3,7 @@
         <v-card-subtitle class="text-center">
             {{title}}
         </v-card-subtitle>
-        <v-row class="align-content-end justify-center">
+        <v-row class="justify-center">
             <v-img :src="imagePath"
                    class="action-image"
             ></v-img>
@@ -34,6 +34,7 @@
 
     .action-image {
         max-width: 128px;
+        align-content: end;
     }
 
 </style>

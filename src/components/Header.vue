@@ -15,7 +15,6 @@
                        v-bind="props"
                 ></v-img>
             </template>
-            <v-subheader>{{subTitle}}</v-subheader>
             <v-spacer/>
             <v-toolbar-title>{{title}}</v-toolbar-title>
             <v-spacer/>
