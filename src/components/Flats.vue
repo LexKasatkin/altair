@@ -1,7 +1,5 @@
 <template>
-    <v-card
-            class="mx-auto"
-            max-width="1000">
+    <div class="mx-auto main-container">
         <v-card-title>Квартиры</v-card-title>
 
         <v-container class="grey lighten-5">
@@ -20,42 +18,34 @@
                 </v-col>
             </v-row>
         </v-container>
-    </v-card>
+    </div>
 </template>
 
 <script>
     import FlatCard from "./FlatCard";
-    import axios from "axios";
-    import {API_HOST, HEADERS} from "../../../config";
+    import {mapActions, mapGetters} from 'vuex'
 
     export default {
         name: "Flats",
         components: {FlatCard},
         data() {
-            return {
-                flats: [],
-                errors: []
-            }
+            return {}
         },
         methods: {
+            ...mapActions([
+                'getFlats'
+            ]),
             text(flat) {
                 return `${flat.description}\n${flat.flat_type}\n${flat.realty_type}`
             }
         },
+        computed: {
+            ...mapGetters([
+                'flats'
+            ])
+        },
         mounted() {
-
-            axios.get(`${API_HOST}/flats/`, {
-                params: {
-                    format: 'json',
-                },
-                headers: HEADERS,
-
-            }).then(response => {
-                this.flats = response.data
-            })
-                .catch(e => {
-                    this.errors.push(e)
-                })
+            this.getFlats();
         }
     }
 </script>

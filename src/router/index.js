@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from "../components/Main";
 import Company from "../components/Company";
-import Flats from "../flats/components/Flats";
+import Flats from "../components/Flats";
 
 Vue.use(VueRouter)
 
