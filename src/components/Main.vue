@@ -1,8 +1,6 @@
 <template>
-    <div class="main-container">
-        <v-card
-                class="mx-auto"
-                max-width="1000">
+    <div class="main-container mx-auto">
+        <v-card>
             <v-card-title>Главная</v-card-title>
             <v-card-text class="text-justify">
                 Если вы хотите купить квартиру в Красноярске, но не можете найти подходящие варианты, то мы с радостью

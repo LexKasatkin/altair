@@ -1,5 +1,5 @@
 <template>
-    <v-card class="mx-auto action-card">
+    <v-card class="mx-auto flat-card">
         <v-card-title class="text-center">
             {{title}}
         </v-card-title>
@@ -8,9 +8,7 @@
             {{message}}
         </v-card-text>
         <v-row class="align-content-end justify-center">
-            <v-img :src="image"
-                   class="action-image"
-            ></v-img>
+            <v-img :src="image" class="flat-image"></v-img>
         </v-row>
     </v-card>
 </template>
@@ -26,12 +24,12 @@
 </script>
 
 <style scoped>
-    .action-card {
+    .flat-card {
         max-width: 256px;
     }
 
-    .action-image {
-        max-width: 128px;
+    .flat-image {
+        max-width: 90%;
         align-content: end;
     }
 </style>

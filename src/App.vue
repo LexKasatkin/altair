@@ -4,20 +4,27 @@
             <Header></Header>
 
             <div>
-                <v-card class="overflow-hidden">
-                    <v-sheet
-                            class="overflow-y-auto"
-                            id="scrolling-techniques-3"
-                    >
-                        <v-container style="height: 1000px; margin-top: 250px">
-                            <router-view></router-view>
-                        </v-container>
-                    </v-sheet>
-                </v-card>
+                <v-sheet
+                        class="overflow-y-auto"
+                        id="scrolling-techniques-3"
+                >
+                    <v-container style="margin-top: 250px">
+                        <router-view></router-view>
+                    </v-container>
+                </v-sheet>
             </div>
         </div>
     </v-app>
 </template>
+
+<script>
+    import Header from "./components/Header";
+
+    export default {
+        components: {Header}
+    }
+</script>
+
 
 <style>
     #app {
@@ -38,13 +45,7 @@
     }
 
     .main-container {
-        width: 900px;
+        max-width: 768px;
     }
-</style>
-<script>
-    import Header from "./components/Header";
 
-    export default {
-        components: {Header}
-    }
-</script>
+</style>
