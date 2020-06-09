@@ -25,11 +25,11 @@
 
 <style scoped>
     .flat-card {
-        max-width: 256px;
+        max-width: 340px;
     }
 
     .flat-image {
-        max-width: 90%;
+        max-width: 92%;
         align-content: end;
     }
 </style>
