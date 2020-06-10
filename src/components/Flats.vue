@@ -49,49 +49,55 @@
                 </v-row>
 
                 <v-row justify="space-between">
-                    <!--                <v-col class="d-flex" cols="12" sm="4">-->
-                    <!--                    <v-row>-->
-                    <!--                        <v-col class="d-flex" cols="1" sm="6">-->
-                    <!--                            <v-text-field-->
-                    <!--                                    countFrom-->
-                    <!--                                    label="От"-->
-                    <!--                                    single-line-->
-                    <!--                                    v-model="countFrom"-->
-                    <!--                            ></v-text-field>-->
-                    <!--                        </v-col>-->
-                    <!--                        <v-col class="align-center" cols="1" sm="6">-->
-                    <!--                            <v-text-field-->
-                    <!--                                    countTo-->
-                    <!--                                    label="До"-->
-                    <!--                                    single-line-->
-                    <!--                                    v-model="countTo"-->
-                    <!--                            ></v-text-field>-->
-                    <!--                        </v-col>-->
-                    <!--                    </v-row>-->
-                    <!--                </v-col>-->
+                    <v-col class="d-flex" cols="12" sm="4">
+                        <v-row>
+                            <v-col class="d-flex" cols="1" sm="6">
+                                <v-text-field
+                                        @input="setCostMin"
+                                        countFrom
+                                        dense
+                                        label="От"
+                                        outlined
+                                        v-model="costMin"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col class="align-center" cols="1" sm="6">
+                                <v-text-field
+                                        @input="setCostMax"
+                                        countTo
+                                        dense
+                                        label="До"
+                                        outlined
+                                        v-model="costMax"
+                                ></v-text-field>
+                            </v-col>
+                        </v-row>
+                    </v-col>
 
-                    <!--                <v-col class="d-flex" cols="12" sm="4">-->
-                    <!--                    <v-row>-->
-                    <!--                        <v-col class="d-flex" cols="1" sm="6">-->
-                    <!--                            <v-text-field-->
-                    <!--                                    label="От"-->
-                    <!--                                    single-line-->
-                    <!--                                    :rules="squareFromRules"-->
-                    <!--                                    squareFrom-->
-                    <!--                                    v-model="squareFrom"-->
-                    <!--                            ></v-text-field>-->
-                    <!--                        </v-col>-->
-                    <!--                        <v-col class="d-flex" cols="1" sm="6">-->
-                    <!--                            <v-text-field-->
-                    <!--                                    label="До"-->
-                    <!--                                    single-line-->
-                    <!--                                    :rules="squareToRules"-->
-                    <!--                                    squareTo-->
-                    <!--                                    v-model="squareTo"-->
-                    <!--                            ></v-text-field>-->
-                    <!--                        </v-col>-->
-                    <!--                    </v-row>-->
-                    <!--                </v-col>-->
+                    <v-col class="d-flex" cols="12" sm="4">
+                        <v-row>
+                            <v-col class="d-flex" cols="1" sm="6">
+                                <v-text-field
+                                        @input="setSquareMin"
+                                        dense
+                                        label="От"
+                                        outlined
+                                        squareMin
+                                        v-model="squareMin"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col class="d-flex" cols="1" sm="6">
+                                <v-text-field
+                                        @input="setSquareMax"
+                                        dense
+                                        label="До"
+                                        outlined
+                                        squareMax
+                                        v-model="squareMax"
+                                ></v-text-field>
+                            </v-col>
+                        </v-row>
+                    </v-col>
                     <v-col class="d-flex" cols="12" sm="4">
                         <v-btn class="ma-2 justify-end"
                                color="success"
@@ -156,6 +162,10 @@
                 'setActiveCountFlatsId',
                 'setActiveDistrictId',
                 'setActiveDeveloperId',
+                'setCostMin',
+                'setCostMax',
+                'setSquareMin',
+                'setSquareMax',
             ]),
 
             ...mapActions([
@@ -184,6 +194,10 @@
                 'activeDistrictId',
                 'developers',
                 'activeDeveloperId',
+                'costMin',
+                'costMax',
+                'squareMin',
+                'squareMax',
             ])
         },
 

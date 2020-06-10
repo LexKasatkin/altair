@@ -13,6 +13,10 @@ const store = new Vuex.Store({
         activeDistrictId: null,
         developers: [],
         activeDeveloperId: null,
+        costMin: null,
+        costMax: null,
+        squareMin: null,
+        squareMax: null,
     },
 
     mutations: {
@@ -43,6 +47,22 @@ const store = new Vuex.Store({
         setActiveDeveloperId(state, activeDeveloperId) {
             state.activeDeveloperId = activeDeveloperId;
         },
+
+        setCostMin(state, costMin) {
+            state.costMin = costMin;
+        },
+
+        setCostMax(state, costMax) {
+            state.costMax = costMax;
+        },
+
+        setSquareMin(state, squareMin) {
+            state.squareMin = squareMin;
+        },
+
+        setSquareMax(state, squareMax) {
+            state.squareMax = squareMax;
+        },
     },
 
     actions: {
@@ -52,6 +72,10 @@ const store = new Vuex.Store({
                         flat_type: state.activeCountFlatsId,
                         district: state.activeDistrictId,
                         developer: state.activeDeveloperId,
+                        cost_min: state.costMin,
+                        cost_max: state.costMax,
+                        square_min: state.squareMin,
+                        square_max: state.costMax,
                     },
                     headers: HEADERS,
                     method: "GET"
@@ -138,6 +162,22 @@ const store = new Vuex.Store({
 
         activeDeveloperId(state) {
             return state.activeDeveloperId;
+        },
+
+        costMin(state) {
+            return state.costMin;
+        },
+
+        costMax(state) {
+            return state.costMax;
+        },
+
+        squareMin(state) {
+            return state.squareMin;
+        },
+
+        squareMax(state) {
+            return state.squareMax;
         },
     }
 })
