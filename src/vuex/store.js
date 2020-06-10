@@ -13,6 +13,8 @@ const store = new Vuex.Store({
         activeDistrictId: null,
         developers: [],
         activeDeveloperId: null,
+        wallMaterials: [],
+        activeWallMaterialId: null,
         costMin: null,
         costMax: null,
         squareMin: null,
@@ -46,6 +48,14 @@ const store = new Vuex.Store({
 
         setActiveDeveloperId(state, activeDeveloperId) {
             state.activeDeveloperId = activeDeveloperId;
+        },
+
+        setWallMaterialsToState(state, wallMaterials) {
+            state.wallMaterials = wallMaterials;
+        },
+
+        setActiveWallMaterialId(state, activeWallMaterialId) {
+            state.activeWallMaterialId = activeWallMaterialId;
         },
 
         setCostMin(state, costMin) {
@@ -134,6 +144,21 @@ const store = new Vuex.Store({
                 }
             )
         },
+
+        getWallMaterials({commit}) {
+            return axios.get(`${API_HOST}/wall-materials/`, {
+                    params: {}, headers: HEADERS,
+                    method: "GET"
+                }
+            ).then(response => {
+                commit('setWallMaterialsToState', response.data.wall_materials);
+                return response.wall_materials;
+            }).catch(error => {
+                    console.log(error);
+                    return error;
+                }
+            )
+        },
     },
     getters: {
         flats(state) {
@@ -162,6 +187,14 @@ const store = new Vuex.Store({
 
         activeDeveloperId(state) {
             return state.activeDeveloperId;
+        },
+
+        wallMaterials(state) {
+            return state.wallMaterials;
+        },
+
+        activeWallMaterialId(state) {
+            return state.activeWallMaterialId;
         },
 
         costMin(state) {

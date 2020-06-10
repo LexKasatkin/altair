@@ -40,12 +40,16 @@
                         ></v-select>
                     </v-col>
 
-                    <!--                <v-col class="d-flex" cols="12" sm="3">-->
-                    <!--                    <v-select :items="wallMaterials"-->
-                    <!--                              label="Материал стен"-->
-                    <!--                              wallMeterial-->
-                    <!--                    ></v-select>-->
-                    <!--                </v-col>-->
+                    <v-col class="d-flex" cols="12" sm="3">
+                        <v-select :items="wallMaterials"
+                                  :value="activeWallMaterialId"
+                                  @input="setActiveWallMaterialId"
+                                  item-text="name"
+                                  item-value="id"
+                                  label="Материал стен"
+                                  wallMeterial
+                        ></v-select>
+                    </v-col>
                 </v-row>
 
                 <v-row justify="space-between">
@@ -166,6 +170,7 @@
                 'setCostMax',
                 'setSquareMin',
                 'setSquareMax',
+                'setActiveWallMaterialId',
             ]),
 
             ...mapActions([
@@ -173,6 +178,7 @@
                 'getCountFlats',
                 'getDistricts',
                 'getDevelopers',
+                'getWallMaterials',
             ]),
 
             text(flat) {
@@ -194,6 +200,8 @@
                 'activeDistrictId',
                 'developers',
                 'activeDeveloperId',
+                'wallMaterials',
+                'activeWallMaterialId',
                 'costMin',
                 'costMax',
                 'squareMin',
@@ -206,6 +214,7 @@
             this.getCountFlats();
             this.getDistricts();
             this.getDevelopers();
+            this.getWallMaterials();
         }
     }
 </script>
