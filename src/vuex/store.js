@@ -85,7 +85,7 @@ const store = new Vuex.Store({
                         cost_min: state.costMin,
                         cost_max: state.costMax,
                         square_min: state.squareMin,
-                        square_max: state.costMax,
+                        square_max: state.squareMax,
                     },
                     headers: HEADERS,
                     method: "GET"

@@ -70,6 +70,7 @@
                                         @input="setCostMax"
                                         countTo
                                         dense
+                                        :error-messages="costMaxErrors"
                                         label="До"
                                         outlined
                                         v-model="costMax"
@@ -111,15 +112,39 @@
                         </v-btn>
                     </v-col>
                 </v-row>
+
+                <!--                remove-->
+                <v-row
+                        align="center"
+                        justify="start"
+                >
+                    <v-col
+                            :key="selection.text"
+                            class="shrink"
+                            v-for="(selection, i) in selections"
+                    >
+                        <v-chip @click:close="selected.splice(i, 1)"
+                                close
+                        >
+                            <v-icon
+                                    left
+                                    v-text="selection.icon"
+                            ></v-icon>
+                            {{ selection.text }}
+                        </v-chip>
+                    </v-col>
+                </v-row>
+                <!--            end remove-->
             </v-form>
         </v-card>
 
+        <v-divider class="divider"></v-divider>
         <v-container class="grey lighten-5">
             <v-row :key="i"
                    justify="start"
                    v-for="i in Math.ceil(flats.length/3)"
             >
-                <v-col :key="j"
+                <v-col :key="i*3+j"
                        md="4"
                        v-for="j in flats.length - ((i-1)*3)"
                 >
@@ -146,20 +171,14 @@
             return {}
         },
 
-        // countFlats: [],
-        // districts: [],
-        // developers: [],
-        // wallMaterials: [],
-        // countFrom: '',
-        // countTo: '',
-        // squareFrom: '',
-        // squareFromRules: [
-        //     v => parseInt(v.value, 10) <= parseInt(squareTo.value, 10) || 'Площадь должна быть меньше максимальной',
-        // ],
-        // squareTo: '',
-        // squareToRules: [
-        //     v => parseInt(v.value, 10) <= parseInt(square.value, 10) || 'Площадь должна быть больше минимальной',
-        // ],
+        validations: {
+            costMax: {
+                moreCost: (value, vm) => (value >= vm.minCost),
+            },
+            costMin: {},
+            squareMax: {},
+            squareMin: {}
+        },
 
         methods: {
             ...mapMutations([
@@ -206,15 +225,22 @@
                 'costMax',
                 'squareMin',
                 'squareMax',
-            ])
+            ]),
+
+            costMaxErrors() {
+                const errors = []
+                if (!this.$v.costMax.$dirty) return errors
+                !this.$v.costMax.moreCost && errors.push('Максимальная стоимость должна быть больше минимальной.')
+                return errors
+            },
         },
 
         mounted() {
-            this.getFlats();
             this.getCountFlats();
             this.getDistricts();
             this.getDevelopers();
             this.getWallMaterials();
+            this.getFlats();
         }
     }
 </script>
@@ -222,5 +248,10 @@
 <style scoped>
     .filters {
         padding: 16px;
+        margin: 16px;
+    }
+
+    .divider {
+        margin-top: 24px;
     }
 </style>
