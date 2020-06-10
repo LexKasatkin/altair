@@ -1,87 +1,103 @@
 <template>
     <div class="mx-auto main-container">
         <v-card class="mx-auto filters">
-            <v-row justify="space-between">
-                <v-col class="d-flex" cols="12" sm="3">
-                    <v-select :items="countFlats"
-                              countFlat
-                              label="Количество комнат"
-                    ></v-select>
-                </v-col>
+            <v-form
+                    @submit.prevent="searchFlats"
+                    lazy-validation
+                    ref="flatsFilters"
+            >
+                <v-row justify="space-between">
+                    <v-col class="d-flex" cols="12" sm="3">
+                        <v-select :items="countFlats"
+                                  :value="activeCountFlatsId"
+                                  @input="setActiveCountFlatsId"
+                                  countFlat
+                                  item-text="name"
+                                  item-value="id"
+                                  label="Количество комнат"
+                        ></v-select>
+                    </v-col>
 
-                <v-col class="d-flex" cols="12" sm="3">
-                    <v-select :items="districts"
-                              district
-                              label="Район"
-                    ></v-select>
-                </v-col>
+                    <v-col class="d-flex" cols="12" sm="3">
+                        <v-select :items="districts"
+                                  :value="activeDistrictId"
+                                  @input="setActiveDistrictId"
+                                  district
+                                  item-text="name"
+                                  item-value="id"
+                                  label="Район"
+                        ></v-select>
+                    </v-col>
 
-                <v-col class="d-flex" cols="12" sm="3">
-                    <v-select :items="developers"
-                              developer
-                              label="Застройщик"
-                    ></v-select>
-                </v-col>
+                    <!--                <v-col class="d-flex" cols="12" sm="3">-->
+                    <!--                    <v-select :items="developers"-->
+                    <!--                              developer-->
+                    <!--                              label="Застройщик"-->
+                    <!--                    ></v-select>-->
+                    <!--                </v-col>-->
 
-                <v-col class="d-flex" cols="12" sm="3">
-                    <v-select :items="wallMaterials"
-                              label="Материал стен"
-                              wallMeterial
-                    ></v-select>
-                </v-col>
-            </v-row>
+                    <!--                <v-col class="d-flex" cols="12" sm="3">-->
+                    <!--                    <v-select :items="wallMaterials"-->
+                    <!--                              label="Материал стен"-->
+                    <!--                              wallMeterial-->
+                    <!--                    ></v-select>-->
+                    <!--                </v-col>-->
+                </v-row>
 
-            <v-row justify="space-between">
-                <v-col class="d-flex" cols="12" sm="4">
-                    <v-row>
-                        <v-col class="d-flex" cols="1" sm="6">
-                            <v-text-field
-                                    countFrom
-                                    label="От"
-                                    single-line
-                                    v-model="countFrom"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col class="align-center" cols="1" sm="6">
-                            <v-text-field
-                                    countTo
-                                    label="До"
-                                    single-line
-                                    v-model="countTo"
-                            ></v-text-field>
-                        </v-col>
-                    </v-row>
-                </v-col>
+                <v-row justify="space-between">
+                    <!--                <v-col class="d-flex" cols="12" sm="4">-->
+                    <!--                    <v-row>-->
+                    <!--                        <v-col class="d-flex" cols="1" sm="6">-->
+                    <!--                            <v-text-field-->
+                    <!--                                    countFrom-->
+                    <!--                                    label="От"-->
+                    <!--                                    single-line-->
+                    <!--                                    v-model="countFrom"-->
+                    <!--                            ></v-text-field>-->
+                    <!--                        </v-col>-->
+                    <!--                        <v-col class="align-center" cols="1" sm="6">-->
+                    <!--                            <v-text-field-->
+                    <!--                                    countTo-->
+                    <!--                                    label="До"-->
+                    <!--                                    single-line-->
+                    <!--                                    v-model="countTo"-->
+                    <!--                            ></v-text-field>-->
+                    <!--                        </v-col>-->
+                    <!--                    </v-row>-->
+                    <!--                </v-col>-->
 
-                <v-col class="d-flex" cols="12" sm="4">
-                    <v-row>
-                        <v-col class="d-flex" cols="1" sm="6">
-                            <v-text-field
-                                    label="От"
-                                    single-line
-                                    squareFrom
-                                    v-model="squareFrom"
-                            ></v-text-field>
-                        </v-col>
-                        <v-col class="d-flex" cols="1" sm="6">
-                            <v-text-field
-                                    label="До"
-                                    single-line
-                                    squareTo
-                                    v-model="squareTo"
-                            ></v-text-field>
-                        </v-col>
-                    </v-row>
-                </v-col>
-                <v-col class="d-flex" cols="12" sm="4">
-                    <v-btn @click="loader = 'loading2'"
-                           class="ma-2 justify-end"
-                           color="success"
-                    >
-                        Показать
-                    </v-btn>
-                </v-col>
-            </v-row>
+                    <!--                <v-col class="d-flex" cols="12" sm="4">-->
+                    <!--                    <v-row>-->
+                    <!--                        <v-col class="d-flex" cols="1" sm="6">-->
+                    <!--                            <v-text-field-->
+                    <!--                                    label="От"-->
+                    <!--                                    single-line-->
+                    <!--                                    :rules="squareFromRules"-->
+                    <!--                                    squareFrom-->
+                    <!--                                    v-model="squareFrom"-->
+                    <!--                            ></v-text-field>-->
+                    <!--                        </v-col>-->
+                    <!--                        <v-col class="d-flex" cols="1" sm="6">-->
+                    <!--                            <v-text-field-->
+                    <!--                                    label="До"-->
+                    <!--                                    single-line-->
+                    <!--                                    :rules="squareToRules"-->
+                    <!--                                    squareTo-->
+                    <!--                                    v-model="squareTo"-->
+                    <!--                            ></v-text-field>-->
+                    <!--                        </v-col>-->
+                    <!--                    </v-row>-->
+                    <!--                </v-col>-->
+                    <v-col class="d-flex" cols="12" sm="4">
+                        <v-btn class="ma-2 justify-end"
+                               color="success"
+                               type="submit"
+                        >
+                            Показать
+                        </v-btn>
+                    </v-col>
+                </v-row>
+            </v-form>
         </v-card>
 
         <v-container class="grey lighten-5">
@@ -94,6 +110,7 @@
                        v-for="j in flats.length - ((i-1)*3)"
                 >
                     <FlatCard :image="flats[(i-1)*3+j-1].photo"
+                              :key="flats[(i-1)*3+j-1].id"
                               :message="text(flats[(i-1)*3+j-1])"
                               :title="flats[(i-1)*3+j-1].address">
                     </FlatCard>
@@ -105,29 +122,67 @@
 
 <script>
     import FlatCard from "./FlatCard";
-    import {mapActions, mapGetters} from 'vuex'
+    import {mapActions, mapGetters, mapMutations} from 'vuex'
 
     export default {
         name: "Flats",
         components: {FlatCard},
+
         data() {
             return {}
         },
+
+        // countFlats: [],
+        // districts: [],
+        // developers: [],
+        // wallMaterials: [],
+        // countFrom: '',
+        // countTo: '',
+        // squareFrom: '',
+        // squareFromRules: [
+        //     v => parseInt(v.value, 10) <= parseInt(squareTo.value, 10) || 'Площадь должна быть меньше максимальной',
+        // ],
+        // squareTo: '',
+        // squareToRules: [
+        //     v => parseInt(v.value, 10) <= parseInt(square.value, 10) || 'Площадь должна быть больше минимальной',
+        // ],
+
         methods: {
-            ...mapActions([
-                'getFlats'
+            ...mapMutations([
+                'setActiveCountFlatsId',
+                'setActiveDistrictId',
             ]),
+
+            ...mapActions([
+                'getFlats',
+                'getCountFlats',
+                'getDistricts',
+            ]),
+
             text(flat) {
                 return `${flat.description}\n${flat.flat_type}\n${flat.realty_type}`
-            }
+            },
+
+            searchFlats() {
+                this.$refs.flatsFilters.validate();
+                this.getFlats();
+            },
         },
+
         computed: {
             ...mapGetters([
-                'flats'
+                'flats',
+                'countFlats',
+                'activeCountFlatsId',
+                'districts',
+                'activeDistrictId',
             ])
         },
+
         mounted() {
             this.getFlats();
+            this.getCountFlats();
+            this.getDistricts();
         }
     }
 </script>
