@@ -29,12 +29,16 @@
                         ></v-select>
                     </v-col>
 
-                    <!--                <v-col class="d-flex" cols="12" sm="3">-->
-                    <!--                    <v-select :items="developers"-->
-                    <!--                              developer-->
-                    <!--                              label="Застройщик"-->
-                    <!--                    ></v-select>-->
-                    <!--                </v-col>-->
+                    <v-col class="d-flex" cols="12" sm="3">
+                        <v-select :items="developers"
+                                  :value="activeDeveloperId"
+                                  @input="setActiveDeveloperId"
+                                  developer
+                                  item-text="name"
+                                  item-value="id"
+                                  label="Застройщик"
+                        ></v-select>
+                    </v-col>
 
                     <!--                <v-col class="d-flex" cols="12" sm="3">-->
                     <!--                    <v-select :items="wallMaterials"-->
@@ -151,12 +155,14 @@
             ...mapMutations([
                 'setActiveCountFlatsId',
                 'setActiveDistrictId',
+                'setActiveDeveloperId',
             ]),
 
             ...mapActions([
                 'getFlats',
                 'getCountFlats',
                 'getDistricts',
+                'getDevelopers',
             ]),
 
             text(flat) {
@@ -176,6 +182,8 @@
                 'activeCountFlatsId',
                 'districts',
                 'activeDistrictId',
+                'developers',
+                'activeDeveloperId',
             ])
         },
 
@@ -183,6 +191,7 @@
             this.getFlats();
             this.getCountFlats();
             this.getDistricts();
+            this.getDevelopers();
         }
     }
 </script>

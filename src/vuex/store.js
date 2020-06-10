@@ -11,6 +11,8 @@ const store = new Vuex.Store({
         activeCountFlatsId: null,
         districts: [],
         activeDistrictId: null,
+        developers: [],
+        activeDeveloperId: null,
     },
 
     mutations: {
@@ -32,7 +34,15 @@ const store = new Vuex.Store({
 
         setActiveDistrictId(state, activeDistrictId) {
             state.activeDistrictId = activeDistrictId;
-        }
+        },
+
+        setDevelopersToState(state, developers) {
+            state.developers = developers;
+        },
+
+        setActiveDeveloperId(state, activeDeveloperId) {
+            state.activeDeveloperId = activeDeveloperId;
+        },
     },
 
     actions: {
@@ -41,6 +51,7 @@ const store = new Vuex.Store({
                     params: {
                         flat_type: state.activeCountFlatsId,
                         district: state.activeDistrictId,
+                        developer: state.activeDeveloperId,
                     },
                     headers: HEADERS,
                     method: "GET"
@@ -84,6 +95,21 @@ const store = new Vuex.Store({
                 }
             )
         },
+
+        getDevelopers({commit}) {
+            return axios.get(`${API_HOST}/developers/`, {
+                    params: {}, headers: HEADERS,
+                    method: "GET"
+                }
+            ).then(response => {
+                commit('setDevelopersToState', response.data.developers);
+                return response.developers;
+            }).catch(error => {
+                    console.log(error);
+                    return error;
+                }
+            )
+        },
     },
     getters: {
         flats(state) {
@@ -104,6 +130,14 @@ const store = new Vuex.Store({
 
         activeDistrictId(state) {
             return state.activeDistrictId;
+        },
+
+        developers(state) {
+            return state.developers;
+        },
+
+        activeDeveloperId(state) {
+            return state.activeDeveloperId;
         },
     }
 })
