@@ -19,6 +19,17 @@ const store = new Vuex.Store({
         costMax: null,
         squareMin: null,
         squareMax: null,
+        currentFilters: {},
+        filters: {
+            wallMaterial: 'Материал стен',
+            countFlats: 'Количество комнат',
+            district: 'Район',
+            developer: 'Застройщик',
+            costMin: 'Минимальная стоимость',
+            costMax: 'Максимальная стоимость',
+            squareMin: 'Минимальная площадь',
+            squareMax: 'Максимальная площадь',
+        }
     },
 
     mutations: {
@@ -32,6 +43,9 @@ const store = new Vuex.Store({
 
         setActiveCountFlatsId(state, activeCountFlatsId) {
             state.activeCountFlatsId = activeCountFlatsId;
+            if (activeCountFlatsId && !state.currentFilters[state.filters.countFlats]) {
+                state.currentFilters['countFlats'] = state.filters.countFlats;
+            }
         },
 
         setDistrictsToState(state, districts) {
@@ -40,6 +54,9 @@ const store = new Vuex.Store({
 
         setActiveDistrictId(state, activeDistrictId) {
             state.activeDistrictId = activeDistrictId;
+            if (activeDistrictId && !state.currentFilters[state.filters.district]) {
+                state.currentFilters['district'] = state.filters.district;
+            }
         },
 
         setDevelopersToState(state, developers) {
@@ -48,6 +65,9 @@ const store = new Vuex.Store({
 
         setActiveDeveloperId(state, activeDeveloperId) {
             state.activeDeveloperId = activeDeveloperId;
+            if (activeDeveloperId && !state.currentFilters[state.filters.developer]) {
+                state.currentFilters['developer'] = state.filters.developer;
+            }
         },
 
         setWallMaterialsToState(state, wallMaterials) {
@@ -56,35 +76,58 @@ const store = new Vuex.Store({
 
         setActiveWallMaterialId(state, activeWallMaterialId) {
             state.activeWallMaterialId = activeWallMaterialId;
+            if (activeWallMaterialId && !state.currentFilters[state.filters.wallMaterial]) {
+                state.currentFilters['wallMaterial'] = state.filters.wallMaterial;
+            }
         },
 
         setCostMin(state, costMin) {
             state.costMin = costMin;
+            if (costMin && !state.currentFilters[state.filters.costMin]) {
+                state.currentFilters['costMin'] = state.filters.costMin;
+            }
         },
 
         setCostMax(state, costMax) {
             state.costMax = costMax;
+            if (costMax && !state.currentFilters[state.filters.costMax]) {
+                state.currentFilters['costMax'] = state.filters.costMax;
+            }
         },
 
         setSquareMin(state, squareMin) {
             state.squareMin = squareMin;
+            if (squareMin && !state.currentFilters[state.filters.squareMin]) {
+                state.currentFilters['squareMin'] = state.filters.squareMin;
+            }
         },
 
         setSquareMax(state, squareMax) {
             state.squareMax = squareMax;
+            if (squareMax && !state.currentFilters[state.filters.squareMax]) {
+                state.currentFilters['squareMax'] = state.filters.squareMax;
+            }
+        },
+
+        deleteCurrentFilter(state, index) {
+            state.currentFilters.splice(index, 1);
         },
     },
 
     actions: {
+        removeFilter({commit}, filter) {
+            commit('deleteCurrentFilter', filter.index);
+        },
+
         getFlats({commit, state}) {
             return axios.get(`${API_HOST}/flats/`, {
-                    params: {
-                        flat_type: state.activeCountFlatsId,
-                        district: state.activeDistrictId,
-                        developer: state.activeDeveloperId,
-                        cost_min: state.costMin,
-                        cost_max: state.costMax,
-                        square_min: state.squareMin,
+                params: {
+                    flat_type: state.activeCountFlatsId,
+                    district: state.activeDistrictId,
+                    developer: state.activeDeveloperId,
+                    cost_min: state.costMin,
+                    cost_max: state.costMax,
+                    square_min: state.squareMin,
                         square_max: state.squareMax,
                     },
                     headers: HEADERS,
@@ -212,7 +255,11 @@ const store = new Vuex.Store({
         squareMax(state) {
             return state.squareMax;
         },
-    }
+
+        currentFilters(state) {
+            return state.currentFilters;
+        },
+    },
 })
 
 export default store;

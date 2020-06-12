@@ -124,28 +124,21 @@
                     </v-col>
                 </v-row>
 
-                <!--                remove-->
                 <v-row
                         align="center"
                         justify="start"
                 >
-                    <v-col
-                            :key="selection.text"
-                            class="shrink"
-                            v-for="(selection, i) in selections"
+                    <v-col :key="filter"
+                           class="shrink"
+                           v-for="(filter,index) in currentFilters"
                     >
-                        <v-chip @click:close="selected.splice(i, 1)"
+                        <v-chip @click:close="removeFilter({filter: filter, index: index})"
                                 close
                         >
-                            <v-icon
-                                    left
-                                    v-text="selection.icon"
-                            ></v-icon>
-                            {{ selection.text }}
+                            {{ filter }}
                         </v-chip>
                     </v-col>
                 </v-row>
-                <!--            end remove-->
             </v-form>
         </v-card>
 
@@ -207,6 +200,7 @@
                 'getDistricts',
                 'getDevelopers',
                 'getWallMaterials',
+                'removeFilter',
             ]),
 
             text(flat) {
@@ -234,6 +228,7 @@
                 'costMax',
                 'squareMin',
                 'squareMax',
+                'currentFilters',
             ]),
 
         },
