@@ -60,9 +60,12 @@
                                         @input="setCostMin"
                                         countFrom
                                         dense
+                                        :rules="[value => {if(!costMax || value <= costMax) return
+                                        else {return 'Минимальная стоимость должна быть меньше максимальной.'}}]"
                                         label="От"
+                                        type="number"
                                         outlined
-                                        v-model="costMin"
+                                        v-model.number="costMin"
                                 ></v-text-field>
                             </v-col>
                             <v-col class="align-center" cols="1" sm="6">
@@ -70,10 +73,12 @@
                                         @input="setCostMax"
                                         countTo
                                         dense
-                                        :error-messages="costMaxErrors"
+                                        :rules="[value => {if(!costMin || value >= costMin) return
+                                        else {return  'Максимальная стоимость должна быть больше минимальной.'}}]"
+                                        type="number"
                                         label="До"
                                         outlined
-                                        v-model="costMax"
+                                        v-model.number="costMax"
                                 ></v-text-field>
                             </v-col>
                         </v-row>
@@ -86,9 +91,12 @@
                                         @input="setSquareMin"
                                         dense
                                         label="От"
+                                        :rules="[value => {if(!squareMax || value <= squareMax) return
+                                        else {return 'Минимальная площадь должна быть меньше максимальной.'}}]"
+                                        type="number"
                                         outlined
                                         squareMin
-                                        v-model="squareMin"
+                                        v-model.number="squareMin"
                                 ></v-text-field>
                             </v-col>
                             <v-col class="d-flex" cols="1" sm="6">
@@ -96,9 +104,12 @@
                                         @input="setSquareMax"
                                         dense
                                         label="До"
+                                        :rules="[value => {if(!squareMin || value >= squareMin) return
+                                        else {return  'Максимальная площадь должна быть больше минимальной.'}}]"
+                                        type="number"
                                         outlined
                                         squareMax
-                                        v-model="squareMax"
+                                        v-model.number="squareMax"
                                 ></v-text-field>
                             </v-col>
                         </v-row>
@@ -172,9 +183,7 @@
         },
 
         validations: {
-            costMax: {
-                moreCost: (value, vm) => (value >= vm.minCost),
-            },
+            costMax: {},
             costMin: {},
             squareMax: {},
             squareMin: {}
@@ -227,12 +236,6 @@
                 'squareMax',
             ]),
 
-            costMaxErrors() {
-                const errors = []
-                if (!this.$v.costMax.$dirty) return errors
-                !this.$v.costMax.moreCost && errors.push('Максимальная стоимость должна быть больше минимальной.')
-                return errors
-            },
         },
 
         mounted() {
