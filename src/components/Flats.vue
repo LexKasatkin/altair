@@ -130,12 +130,22 @@
                 >
                     <v-col :key="filter"
                            class="shrink"
-                           v-for="(filter,index) in currentFilters"
+                           v-for="filter in Object.keys(currentFilters)"
                     >
-                        <v-chip @click:close="removeFilter({filter: filter, index: index})"
+                        <v-chip @click:close="removeFilter(filter)"
                                 close
                         >
-                            {{ filter }}
+                            {{ currentFilters[filter] }}
+                        </v-chip>
+                    </v-col>
+
+                    <v-col class="shrink"
+                           v-if="Object.keys(currentFilters).length>0"
+                    >
+                        <v-chip @click:close="removeAllFilters()"
+                                close
+                        >
+                            Удалить все фильтры
                         </v-chip>
                     </v-col>
                 </v-row>
@@ -201,6 +211,7 @@
                 'getDevelopers',
                 'getWallMaterials',
                 'removeFilter',
+                'removeAllFilters',
             ]),
 
             text(flat) {
