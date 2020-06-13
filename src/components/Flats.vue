@@ -53,9 +53,12 @@
                 </v-row>
 
                 <v-row justify="space-between">
-                    <v-col class="d-flex" cols="12" sm="4">
+                    <v-col class="d-flex" cols="12" sm="5">
                         <v-row>
-                            <v-col class="d-flex" cols="1" sm="6">
+                            <v-col class="d-flex" cols="4" sm="3">
+                                Стоимость:
+                            </v-col>
+                            <v-col class="d-flex" cols="4" sm="4">
                                 <v-text-field
                                         @input="setCostMin"
                                         countFrom
@@ -68,7 +71,7 @@
                                         v-model.number="costMin"
                                 ></v-text-field>
                             </v-col>
-                            <v-col class="align-center" cols="1" sm="6">
+                            <v-col class="align-center" cols="4" sm="4">
                                 <v-text-field
                                         @input="setCostMax"
                                         countTo
@@ -84,9 +87,12 @@
                         </v-row>
                     </v-col>
 
-                    <v-col class="d-flex" cols="12" sm="4">
+                    <v-col class="d-flex" cols="12" sm="5">
                         <v-row>
-                            <v-col class="d-flex" cols="1" sm="6">
+                            <v-col class="d-flex" cols="4" sm="3">
+                                Площадь:
+                            </v-col>
+                            <v-col class="d-flex" cols="4" sm="4">
                                 <v-text-field
                                         @input="setSquareMin"
                                         dense
@@ -99,7 +105,7 @@
                                         v-model.number="squareMin"
                                 ></v-text-field>
                             </v-col>
-                            <v-col class="d-flex" cols="1" sm="6">
+                            <v-col class="d-flex" cols="4" sm="4">
                                 <v-text-field
                                         @input="setSquareMax"
                                         dense
@@ -114,7 +120,7 @@
                             </v-col>
                         </v-row>
                     </v-col>
-                    <v-col class="d-flex" cols="12" sm="4">
+                    <v-col class="d-flex" cols="12" sm="2">
                         <v-btn class="ma-2 justify-end"
                                color="success"
                                type="submit"
@@ -159,10 +165,11 @@
                    v-for="i in Math.ceil(flats.length/numberOfColumns)"
             >
                 <v-col :key="i*numberOfColumns+j"
-                       md="4"
+                       cols="12"
+                       sm="4"
                        v-for="j in flats.length - ((i-1)*numberOfColumns)"
                 >
-                    <FlatCard :flat="flats[(i-1)*numberOfColumns+j-1]">
+                    <FlatCard :flat="flats[j]">
                     </FlatCard>
                 </v-col>
             </v-row>
