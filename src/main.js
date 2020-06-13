@@ -4,13 +4,15 @@ import router from "./router";
 import {vuetify} from "./plugins/vuetify";
 import store from "./vuex/store"
 import Vuelidate from 'vuelidate'
+import Notifications from 'vue-notification'
 
-Vue.use(Vuelidate)
-Vue.config.productionTip = false
+Vue.use(Vuelidate);
+Vue.use(Notifications);
+Vue.config.productionTip = false;
 
 new Vue({
     router,
     vuetify,
     store: store,
     render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');

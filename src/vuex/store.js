@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import {API_HOST, HEADERS} from "../../config";
+import {loader} from "./loader";
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -208,7 +209,7 @@ const store = new Vuex.Store({
         },
 
         getWallMaterials({commit}) {
-            return axios.get(`${API_HOST}/wall-materials/`, {
+            return axios.get(`${API_HOST}/wall-material/`, {
                     params: {}, headers: HEADERS,
                     method: "GET"
                 }
@@ -279,6 +280,10 @@ const store = new Vuex.Store({
             return state.currentFilters;
         },
     },
+
+    modules: {
+        loader
+    }
 })
 
 export default store;

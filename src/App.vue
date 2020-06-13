@@ -2,13 +2,14 @@
     <v-app>
         <div id="app">
             <Header></Header>
-
+            <notifications group="errors" position="bottom right"/>
+            <ProgressDialog :visibility="loading"></ProgressDialog>
             <div>
                 <v-sheet
                         class="overflow-y-auto"
                         id="scrolling-techniques-3"
                 >
-                    <v-container style="margin-top: 250px">
+                    <v-container class="content-margin">
                         <router-view></router-view>
                     </v-container>
                 </v-sheet>
@@ -19,9 +20,52 @@
 
 <script>
     import Header from "./components/Header";
+    import axios from "axios";
+    import {mapActions, mapGetters} from "vuex";
+    import ProgressDialog from "./components/ProgressDialog";
 
     export default {
-        components: {Header}
+        components: {Header, ProgressDialog},
+
+        created() {
+            axios.interceptors.request.use((config) => {
+                this.setLoading(true);
+                return config;
+            }, (error) => {
+                this.setLoading(false);
+                this.showErrorMessage(error.message)
+                return Promise.reject(error);
+            });
+
+            axios.interceptors.response.use((response) => {
+                this.setLoading(false);
+                return response;
+            }, (error) => {
+                this.setLoading(false);
+                this.showErrorMessage(error.message)
+                return Promise.reject(error);
+            });
+        },
+
+        methods: {
+            ...mapActions('loader', [
+                'setLoading',
+            ]),
+
+            showErrorMessage(message) {
+                this.$notify({
+                    group: 'errors',
+                    text: message,
+                    type: 'error',
+                });
+            }
+        },
+
+        computed: {
+            ...mapGetters('loader', [
+                'loading',
+            ]),
+        }
     }
 </script>
 
@@ -37,6 +81,10 @@
 
     #nav {
         padding: 30px;
+    }
+
+    .content-margin {
+        margin-top: 250px;
     }
 
     #nav a {

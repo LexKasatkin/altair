@@ -1,14 +1,20 @@
 <template>
     <v-card class="mx-auto flat-card">
-        <v-card-title class="text-center">
-            {{title}}
+        <v-card-title class="text-start">
+            {{formattedCost}}
         </v-card-title>
 
+        <v-card-subtitle class="text-start">
+            {{formattedSquareCost}}/м<sup>2</sup>
+        </v-card-subtitle>
+
         <v-card-text class="text-justify">
-            {{message}}
+            <b class="color-text">{{flat.address}}</b> |
+            {{flat.square}}м<sup>2</sup> |
+            {{flat.flat_type}}
         </v-card-text>
         <v-row class="align-content-end justify-center">
-            <v-img :src="image" class="flat-image"></v-img>
+            <v-img :src="photo" class="flat-image"></v-img>
         </v-row>
     </v-card>
 </template>
@@ -16,9 +22,27 @@
 <script>
     export default {
         name: "FlatCard", props: {
-            title: String,
-            message: String,
-            image: String
+            flat: Object,
+        },
+
+        computed: {
+            formattedSquareCost() {
+                return new Intl.NumberFormat('ru-RU', {style: 'currency', currency: 'RUB'})
+                    .format(Math.round(this.flat.cost / this.flat.square));
+            },
+
+            formattedCost() {
+                return new Intl.NumberFormat('ru-RU', {style: 'currency', currency: 'RUB'})
+                    .format(Math.round(this.flat.cost));
+            },
+
+            photo() {
+                if (this.flat.photo) {
+                    return this.flat.photo;
+                } else {
+                    return require('@/assets/img/no-image.png');
+                }
+            }
         }
     }
 </script>
@@ -29,7 +53,12 @@
     }
 
     .flat-image {
-        max-width: 92%;
+        max-width: 93%;
+        height: 200px;
         align-content: end;
+    }
+
+    .color-text {
+        color: #0058b1;
     }
 </style>
