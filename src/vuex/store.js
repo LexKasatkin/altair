@@ -209,7 +209,7 @@ const store = new Vuex.Store({
         },
 
         getWallMaterials({commit}) {
-            return axios.get(`${API_HOST}/wall-material/`, {
+            return axios.get(`${API_HOST}/wall-materials/`, {
                     params: {}, headers: HEADERS,
                     method: "GET"
                 }
