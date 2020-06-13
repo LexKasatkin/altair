@@ -5,13 +5,13 @@ export const loader = {
         refCount: 0,
     },
     actions: {
-        setLoading({commit}, isLoading) {
+        setLoading({commit, state}, isLoading) {
             if (isLoading) {
                 commit('incrementCount');
                 commit('show');
-            } else if (this.refCount > 0) {
+            } else if (state.refCount > 0) {
                 commit('decrementCount');
-                if (this.refCount === 0) {
+                if (state.refCount === 0) {
                     commit('hide');
                 }
             }

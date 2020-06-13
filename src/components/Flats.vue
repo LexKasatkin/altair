@@ -156,13 +156,13 @@
         <v-container class="grey lighten-5">
             <v-row :key="i"
                    justify="start"
-                   v-for="i in Math.ceil(flats.length/3)"
+                   v-for="i in Math.ceil(flats.length/numberOfColumns)"
             >
-                <v-col :key="i*3+j"
+                <v-col :key="i*numberOfColumns+j"
                        md="4"
-                       v-for="j in flats.length - ((i-1)*3)"
+                       v-for="j in flats.length - ((i-1)*numberOfColumns)"
                 >
-                    <FlatCard :flat="flats[(i-1)*3+j-1]">
+                    <FlatCard :flat="flats[(i-1)*numberOfColumns+j-1]">
                     </FlatCard>
                 </v-col>
             </v-row>
@@ -179,7 +179,9 @@
         components: {FlatCard},
 
         data() {
-            return {}
+            return {
+                numberOfColumns: 3,
+            }
         },
 
         validations: {

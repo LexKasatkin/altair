@@ -155,6 +155,7 @@ const store = new Vuex.Store({
                 }
             ).then(flats => {
                 commit('setFlatsToState', flats.data);
+                this.dispatch('loader/setLoading', false);
                 return flats;
             }).catch(error => {
                     console.log(error);
@@ -170,6 +171,7 @@ const store = new Vuex.Store({
                 }
             ).then(response => {
                 commit('setCountFlatsToState', response.data.flat_types);
+                this.dispatch('loader/setLoading', false);
                 return response.flat_types;
             }).catch(error => {
                     console.log(error);
@@ -185,6 +187,7 @@ const store = new Vuex.Store({
                 }
             ).then(response => {
                 commit('setDistrictsToState', response.data.districts);
+                this.dispatch('loader/setLoading', false);
                 return response.districts;
             }).catch(error => {
                     console.log(error);
@@ -200,6 +203,7 @@ const store = new Vuex.Store({
                 }
             ).then(response => {
                 commit('setDevelopersToState', response.data.developers);
+                this.dispatch('loader/setLoading', false);
                 return response.developers;
             }).catch(error => {
                     console.log(error);
@@ -215,6 +219,7 @@ const store = new Vuex.Store({
                 }
             ).then(response => {
                 commit('setWallMaterialsToState', response.data.wall_materials);
+                this.dispatch('loader/setLoading', false);
                 return response.wall_materials;
             }).catch(error => {
                     console.log(error);
