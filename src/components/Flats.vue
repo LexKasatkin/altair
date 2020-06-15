@@ -63,8 +63,7 @@
                                         @input="setCostMin"
                                         countFrom
                                         dense
-                                        :rules="[value => {if(!costMax || value <= costMax) return true
-                                        else {return 'Минимальная стоимость должна быть меньше максимальной.'}}]"
+                                        :rules="[costMinRules]"
                                         label="От"
                                         type="number"
                                         outlined
@@ -76,8 +75,7 @@
                                         @input="setCostMax"
                                         countTo
                                         dense
-                                        :rules="[value => {if(!costMin || value >= costMin) return true
-                                        else {return  'Максимальная стоимость должна быть больше минимальной.'}}]"
+                                        :rules="[costMaxRules]"
                                         type="number"
                                         label="До"
                                         outlined
@@ -97,8 +95,7 @@
                                         @input="setSquareMin"
                                         dense
                                         label="От"
-                                        :rules="[value => {if(!squareMax || value <= squareMax) return true
-                                        else {return 'Минимальная площадь должна быть меньше максимальной.'}}]"
+                                        :rules="[squareMinRules]"
                                         type="number"
                                         outlined
                                         squareMin
@@ -110,8 +107,7 @@
                                         @input="setSquareMax"
                                         dense
                                         label="До"
-                                        :rules="[value => {if(!squareMin || value >= squareMin) return true
-                                        else {return  'Максимальная площадь должна быть больше минимальной.'}}]"
+                                        :rules="[squareMaxRules]"
                                         type="number"
                                         outlined
                                         squareMax
@@ -191,12 +187,6 @@
             }
         },
 
-        validations: {
-            costMax: {},
-            costMin: {},
-            squareMax: {},
-            squareMin: {}
-        },
 
         methods: {
             ...mapMutations([
@@ -231,6 +221,38 @@
             searchFlats() {
                 this.$refs.flatsFilters.validate();
                 this.getFlats();
+            },
+
+            costMaxRules(value) {
+                if (!this.costMin || Number(value) >= Number(this.costMin))
+                    return true;
+                else {
+                    return 'Максимальная стоимость должна быть больше минимальной.';
+                }
+            },
+
+            costMinRules(value) {
+                if (!this.costMax || Number(value) <= Number(this.costMax))
+                    return true;
+                else {
+                    return 'Минимальная стоимость должна быть меньше максимальной.';
+                }
+            },
+
+            squareMaxRules(value) {
+                if (!this.squareMin || Number(value) >= Number(this.squareMin))
+                    return true;
+                else {
+                    return 'Максимальная площадь должна быть больше минимальной.';
+                }
+            },
+
+            squareMinRules(value) {
+                if (!this.squareMax || Number(value) <= Number(this.squareMax))
+                    return true;
+                else {
+                    return 'Минимальная площадь должна быть меньше максимальной.';
+                }
             },
         },
 
