@@ -55,7 +55,7 @@
                 <v-row justify="space-between">
                     <v-col class="d-flex" cols="12" sm="5">
                         <v-row>
-                            <v-col class="d-flex" cols="4" sm="3">
+                            <v-col class="d-flex mt-2" cols="4" sm="3">
                                 Стоимость:
                             </v-col>
                             <v-col class="d-flex" cols="4" sm="4">
@@ -89,7 +89,7 @@
 
                     <v-col class="d-flex" cols="12" sm="5">
                         <v-row>
-                            <v-col class="d-flex" cols="4" sm="3">
+                            <v-col class="d-flex mt-2" cols="4" sm="3">
                                 Площадь:
                             </v-col>
                             <v-col class="d-flex" cols="4" sm="4">
@@ -121,7 +121,7 @@
                         </v-row>
                     </v-col>
                     <v-col class="d-flex" cols="12" sm="2">
-                        <v-btn class="ma-2 justify-end"
+                        <v-btn class="mt-3 justify-end"
                                color="success"
                                type="submit"
                         >
