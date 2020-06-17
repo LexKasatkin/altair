@@ -156,7 +156,7 @@ const store = new Vuex.Store({
             ).then(flats => {
                 commit('setFlatsToState', flats.data);
                 this.dispatch('loader/setLoading', false);
-                return flats;
+                return flats.data;
             }).catch(error => {
                     console.log(error);
                     return error;

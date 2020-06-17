@@ -37,8 +37,8 @@
             },
 
             photo() {
-                if (this.flat.photo) {
-                    return this.flat.photo;
+                if (this.flat.main_image) {
+                    return this.flat.main_image;
                 } else {
                     return require('@/assets/img/no-image.png');
                 }

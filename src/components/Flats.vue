@@ -156,16 +156,16 @@
 
         <v-divider class="divider"></v-divider>
         <v-container class="grey lighten-5">
-            <v-row :key="i"
+            <v-row :key="--i"
                    justify="start"
                    v-for="i in Math.ceil(flats.length/numberOfColumns)"
             >
-                <v-col :key="i*numberOfColumns+j"
+                <v-col :key="--i*numberOfColumns+j"
                        cols="12"
                        sm="4"
-                       v-for="j in flats.length - ((i-1)*numberOfColumns)"
+                       v-for="j in flats.length - (--i*numberOfColumns)"
                 >
-                    <FlatCard :flat="flats[j]">
+                    <FlatCard :flat="flats[--j]">
                     </FlatCard>
                 </v-col>
             </v-row>

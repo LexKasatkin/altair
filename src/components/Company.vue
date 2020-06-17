@@ -78,12 +78,72 @@
                 </ol>
             </v-card-text>
         </v-card>
+
+        <v-container class="grey lighten-5">
+            <v-row :key="--i"
+                   justify="start"
+                   v-for="i in Math.ceil(companyInfo.length/numberOfColumns)"
+            >
+                <v-col :key="--i*numberOfColumns+j"
+                       cols="12"
+                       sm="4"
+                       v-for="j in companyInfo.length - (--i*numberOfColumns)"
+                >
+                    <CompanyCard :data="companyInfo[--j]">
+                    </CompanyCard>
+                </v-col>
+            </v-row>
+        </v-container>
     </div>
 </template>
 
 <script>
+    import CompanyCard from "./CompanyCard";
+
     export default {
-        name: "Company"
+        name: "Company",
+        components: {CompanyCard},
+        data() {
+            return {
+                numberOfColumns: 4,
+                companyInfo:
+                    [
+                        {
+                            title: 'Компания "Альтаир-Инвест" - надежный партнер на рынке жилья уже 10 лет',
+                            image: '10-years.png'
+                        },
+                        {
+                            title: 'Наша компания является партнером крупных строительных компания г.Красноярска',
+                            image: 'new-realty.png'
+                        },
+                        {
+                            title: 'Коммерческая недвижимость',
+                            image: 'commerce.png'
+                        },
+                        {
+                            title: 'Загородная недвижимость',
+                            image: 'out-city.png'
+                        },
+                        {
+                            title: 'Элитная недвижимость',
+                            image: 'elite.png'
+                        },
+                        {
+                            title: 'Ипотечное кредитование',
+                            image: 'mortgage.png'
+                        },
+                        {
+
+                            title: 'Работа со всеми видами субсидий и сертификатов',
+                            image: 'subsidies.png'
+                        },
+                        {
+                            title: 'Заказ любых справок',
+                            image: 'references.png'
+                        }
+                    ]
+            }
+        },
     }
 </script>
 
