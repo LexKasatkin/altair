@@ -9,13 +9,21 @@
         </v-card-subtitle>
 
         <v-card-text class="text-justify">
-            <b class="color-text">{{flat.address}}</b> |
+            <b class="color-text">{{flat.street.district}} {{flat.street.name}} {{flat.house}} кв. {{flat.flat}}</b> |
             {{flat.square}}м<sup>2</sup> |
-            {{flat.flat_type}}
+            {{flat.flat_type.name}}
         </v-card-text>
-        <v-row class="align-content-end justify-center">
-            <v-img :src="photo" class="flat-image"></v-img>
-        </v-row>
+        <v-carousel cycle
+                    height="200px"
+                    hide-delimiter-background
+                    show-arrows-on-hover>
+            <v-carousel-item
+                    :key="i"
+                    v-for="(image,i) in images"
+            >
+                <v-img :src="image" class="flat-image"></v-img>
+            </v-carousel-item>
+        </v-carousel>
     </v-card>
 </template>
 
@@ -42,6 +50,18 @@
                 } else {
                     return require('@/assets/img/no-image.png');
                 }
+            },
+
+            layout() {
+                if (this.flat.layout) {
+                    return this.flat.layout;
+                } else {
+                    return require('@/assets/img/no-image.png');
+                }
+            },
+
+            images() {
+                return [this.photo(), this.layout()]
             }
         }
     }
