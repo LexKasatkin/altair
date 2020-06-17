@@ -61,7 +61,7 @@
             },
 
             images() {
-                return [this.photo(), this.layout()]
+                return [this.photo, this.layout]
             }
         }
     }
