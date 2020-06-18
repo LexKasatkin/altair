@@ -1,5 +1,6 @@
 <template>
-    <v-card class="mx-auto flat-card">
+    <v-card @click="openDialog" class="mx-auto flat-card">
+        <DescriptionDialog :flatId="flat.id" v-model="showDialog"></DescriptionDialog>
         <v-card-title class="text-start">
             {{formattedCost}}
         </v-card-title>
@@ -9,7 +10,7 @@
         </v-card-subtitle>
 
         <v-card-text class="text-justify">
-            <b class="color-text">{{flat.street.district}} {{flat.street.name}} {{flat.house}} кв. {{flat.flat}}</b> |
+            <b class="color-text">{{flat.street.name}} {{flat.house}} кв. {{flat.flat}}</b> |
             {{flat.square}}м<sup>2</sup> |
             {{flat.flat_type.name}}
         </v-card-text>
@@ -28,9 +29,29 @@
 </template>
 
 <script>
+    import DescriptionDialog from "./DescriptionDialog";
+    import {mapActions} from "vuex"
+
     export default {
-        name: "FlatCard", props: {
+        name: "FlatCard",
+        components: {DescriptionDialog},
+
+        data() {
+            return {
+                showDialog: false
+            }
+        },
+
+        props: {
             flat: Object,
+        },
+
+        methods: {
+            ...mapActions('flatDetails', []),
+
+            openDialog() {
+                this.showDialog = true
+            },
         },
 
         computed: {
@@ -73,7 +94,7 @@
     }
 
     .flat-image {
-        max-width: 93%;
+        max-width: 100%;
         height: 200px;
         align-content: end;
     }

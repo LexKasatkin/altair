@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import {API_HOST, HEADERS} from "../../config";
 import {loader} from "./loader";
+import {flatDetails} from "./flat-details";
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -287,7 +288,8 @@ const store = new Vuex.Store({
     },
 
     modules: {
-        loader
+        loader,
+        flatDetails,
     }
 })
 
