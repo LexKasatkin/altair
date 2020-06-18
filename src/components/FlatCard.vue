@@ -1,6 +1,5 @@
 <template>
-    <v-card @click="openDialog" class="mx-auto flat-card">
-        <DescriptionDialog :flatId="flat.id" v-model="showDialog"></DescriptionDialog>
+    <v-card @click="openDetails" class="mx-auto flat-card">
         <v-card-title class="text-start">
             {{formattedCost}}
         </v-card-title>
@@ -29,12 +28,10 @@
 </template>
 
 <script>
-    import DescriptionDialog from "./DescriptionDialog";
     import {mapActions} from "vuex"
 
     export default {
         name: "FlatCard",
-        components: {DescriptionDialog},
 
         data() {
             return {
@@ -49,8 +46,9 @@
         methods: {
             ...mapActions('flatDetails', []),
 
-            openDialog() {
-                this.showDialog = true
+            openDetails() {
+                const routeData = this.$router.resolve('/flat/' + this.flat.id);
+                window.open(routeData.href, '_blank');
             },
         },
 

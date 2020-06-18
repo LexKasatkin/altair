@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Main from "../components/Main";
 import Company from "../components/Company";
 import Flats from "../components/Flats";
+import FlatDetails from "../components/FlatDetails";
 
 Vue.use(VueRouter)
 
@@ -20,9 +21,15 @@ const routes = [
         component: Flats
     },
     {
+        path: '/flat/:id',
+        name: 'flatDetails',
+        component: FlatDetails
+    },
+    {
         path: '*',
         component: Main
     },
+
 ]
 
 const router = new VueRouter({

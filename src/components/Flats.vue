@@ -163,7 +163,7 @@
                 <v-col :key="--i*numberOfColumns+j"
                        cols="12"
                        sm="4"
-                       v-for="j in flats.length - (--i*numberOfColumns)"
+                       v-for="j in flats.length - i*numberOfColumns"
                 >
                     <FlatCard :flat="flats[--j]">
                     </FlatCard>
