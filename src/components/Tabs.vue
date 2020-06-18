@@ -1,9 +1,10 @@
 <template>
     <v-tabs
             dark
-            fixed-tabs
+            grow
+            v-model="activeTab"
     >
-        <v-tab :key="i" :to="tab.route" v-for="(tab,i) in tabItems">{{tab.name}}
+        <v-tab :key="i" :tabindex="i" :to="tab.route" v-for="(tab,i) in tabItems">{{tab.name}}
         </v-tab>
     </v-tabs>
 </template>
@@ -11,9 +12,11 @@
 <script>
     export default {
         name: "Tabs",
-        computed: {
-            tabItems() {
-                return [
+
+        data() {
+            return {
+                activeTab: 2,
+                tabItems: [
                     {
                         name: 'Главная',
                         route: '/main'

@@ -21,7 +21,7 @@ const routes = [
         component: Flats
     },
     {
-        path: '/flat/:id',
+        path: '/flat/:flatId',
         name: 'flatDetails',
         component: FlatDetails
     },

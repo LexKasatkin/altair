@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <v-card-title class="headline">Use Google's location service?</v-card-title>
+        <v-card-title class="headline">{{formattedCost}}</v-card-title>
 
         <v-card-text>
             Let Google help apps determine location. This means sending anonymous location data to Google, even when
@@ -16,18 +16,33 @@
     export default {
         name: "FlatDetails",
 
-        props: {
-            flatId: {
-                type: Number,
-            },
+        mounted() {
+            this.setFlatId(this.$route.params.flatId);
+            this.getFlat();
         },
 
         methods: {
-            ...mapActions('flatDetails', []),
+            ...mapActions('flatDetails', [
+                'setFlatId',
+                'getFlat'
+            ]),
         },
 
         computed: {
-            ...mapGetters('flatDetails', []),
+            ...mapGetters('flatDetails', [
+                'flat',
+                'currentFlatId',
+            ]),
+
+            formattedSquareCost() {
+                return new Intl.NumberFormat('ru-RU', {style: 'currency', currency: 'RUB'})
+                    .format(Math.round(this.flat.cost / this.flat.square));
+            },
+
+            formattedCost() {
+                return new Intl.NumberFormat('ru-RU', {style: 'currency', currency: 'RUB'})
+                    .format(Math.round(this.flat.cost));
+            },
         },
     }
 </script>
