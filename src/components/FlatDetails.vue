@@ -24,7 +24,7 @@
                     </v-flex>
                     <v-flex class="small-image-container" d-flex>
                         <v-carousel cycle
-                                    height="180px"
+                                    height="170px"
                                     hide-delimiter-background
                                     show-arrows-on-hover>
                             <v-carousel-item
@@ -33,7 +33,7 @@
                             >
                                 <v-img :src="image"
                                        @error="onErrorImagesLoading"
-                                       height="180px"></v-img>
+                                       height="170px"></v-img>
                             </v-carousel-item>
                         </v-carousel>
                     </v-flex>
@@ -124,13 +124,10 @@
 </script>
 
 <style scoped>
-    .content {
-        height: 400px;
-    }
-
     .main-image-container {
-        height: 400px;
-        padding: 16px;
+        height: 380px;
+        padding-bottom: 16px;
+        padding-left: 32px;
     }
 
     .small-image-container {

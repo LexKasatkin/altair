@@ -23,9 +23,10 @@ const store = new Vuex.Store({
         squareMax: null,
         currentFilters: {},
 
-        countPages: null,
-        currentPage: null,
-        offset: 24,
+        pagesCount: null,
+        currentPage: 1,
+        limit: 24,
+        offset: 0,
 
         filters: {
             activeWallMaterialId: 'Материал стен',
@@ -143,6 +144,10 @@ const store = new Vuex.Store({
             state.offset = offset;
         },
 
+        setLimit(state, limit) {
+            state.limit = limit;
+        },
+
         setCurrentPage(state, currentPage) {
             state.currentPage = currentPage;
         },
@@ -167,6 +172,8 @@ const store = new Vuex.Store({
                         cost_max: state.costMax,
                         square_min: state.squareMin,
                         square_max: state.squareMax,
+                        offset: state.offset,
+                        limit: state.limit,
                     },
                     headers: HEADERS,
                     method: "GET"
@@ -174,7 +181,7 @@ const store = new Vuex.Store({
             ).then(flats => {
                 const results = flats.data.results;
                 commit('setFlatsToState', results);
-                commit('setPagesCount', Math.ceil(flats.data.count / state.offset));
+                commit('setPagesCount', Math.ceil(flats.data.count / state.limit));
                 this.dispatch('loader/setLoading', false);
                 return results;
             }).catch(error => {
@@ -248,12 +255,16 @@ const store = new Vuex.Store({
             )
         },
 
-        setOffset({commit}, offset) {
-            commit('setOffset', offset);
+        setLimit({commit}, newLimit) {
+            commit('setLimit', newLimit);
         },
 
-        setCurrentPage({commit}, currentPage) {
-            commit('setCurrentPage', currentPage);
+        calculateOffset({commit, state}) {
+            commit('setOffset', (state.currentPage - 1) * state.limit);
+        },
+
+        setCurrentPage({commit}, newPage) {
+            commit('setCurrentPage', newPage);
         },
     },
     getters: {
@@ -314,11 +325,15 @@ const store = new Vuex.Store({
         },
 
         pagesCount(state) {
-            return state.countPages;
+            return state.pagesCount;
         },
 
         currentPage(state) {
             return state.currentPage;
+        },
+
+        currentLimit(state) {
+            return state.limit;
         },
     },
 

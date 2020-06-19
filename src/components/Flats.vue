@@ -171,11 +171,22 @@
             </v-row>
         </v-container>
 
-        <v-pagination
-                :length="4"
-                circle
-                v-model="page"
-        ></v-pagination>
+        <v-layout row wrap>
+            <v-flex xs11>
+                <v-pagination
+                        :length="pagesCount"
+                        @input="onChangeCurrentPage"
+                        circle
+                        v-model="currentPage"
+                ></v-pagination>
+            </v-flex>
+            <v-flex xs1>
+                <v-select :items="pagination.limits"
+                          @input="onChangeLimit"
+                          v-model="currentLimit"
+                ></v-select>
+            </v-flex>
+        </v-layout>
     </div>
 </template>
 
@@ -190,9 +201,11 @@
         data() {
             return {
                 numberOfColumns: 3,
+                pagination: {
+                    limits: [24, 48, 72, 96],
+                }
             }
         },
-
 
         methods: {
             ...mapMutations([
@@ -214,15 +227,10 @@
                 'getWallMaterials',
                 'removeFilter',
                 'removeAllFilters',
+                'setLimit',
+                'setCurrentPage',
+                'calculateOffset',
             ]),
-
-            photo(image) {
-                if (image != null) {
-                    return image
-                } else {
-                    return ''
-                }
-            },
 
             searchFlats() {
                 this.$refs.flatsFilters.validate();
@@ -260,6 +268,18 @@
                     return 'Минимальная площадь должна быть меньше максимальной.';
                 }
             },
+
+            onChangeCurrentPage(value) {
+                this.setCurrentPage(value);
+                this.calculateOffset();
+                this.getFlats();
+            },
+
+            onChangeLimit(value) {
+                this.setLimit(value);
+                this.calculateOffset();
+                this.getFlats();
+            },
         },
 
         computed: {
@@ -278,6 +298,9 @@
                 'squareMin',
                 'squareMax',
                 'currentFilters',
+                'currentLimit',
+                'currentPage',
+                'pagesCount',
             ]),
         },
 
@@ -287,7 +310,7 @@
             this.getDevelopers();
             this.getWallMaterials();
             this.getFlats();
-        }
+        },
     }
 </script>
 
