@@ -1,27 +1,31 @@
 <template>
-    <v-card @click="openDetails" class="mx-auto flat-card">
-        <v-card-title class="text-start">
-            {{formattedCost}}
-        </v-card-title>
+    <v-card class="mx-auto flat-card">
+        <div @click="openDetails" class="pointer">
+            <v-card-title class="text-start">
+                {{formattedCost}}
+            </v-card-title>
 
-        <v-card-subtitle class="text-start">
-            {{formattedSquareCost}}/м<sup>2</sup>
-        </v-card-subtitle>
+            <v-card-subtitle class="text-start">
+                {{formattedSquareCost}}/м<sup>2</sup>
+            </v-card-subtitle>
 
-        <v-card-text class="text-justify">
-            <b class="color-text">{{flat.street.name}} {{flat.house}} кв. {{flat.flat}}</b> |
-            {{flat.square}}м<sup>2</sup> |
-            {{flat.flat_type.name}}
-        </v-card-text>
+            <v-card-text class="text-justify">
+                <b class="color-text">{{flat.street.name}} {{flat.house}} кв. {{flat.flat}}</b> |
+                {{flat.square}}м<sup>2</sup> |
+                {{flat.flat_type.name}}
+            </v-card-text>
+        </div>
         <v-carousel cycle
+                    @click="null"
                     height="200px"
                     hide-delimiter-background
                     show-arrows-on-hover>
-            <v-carousel-item
-                    :key="i"
-                    v-for="(image,i) in images"
-            >
-                <v-img :src="image" class="flat-image"></v-img>
+            <v-carousel-item :key="i"
+                             v-for="(item,i) in items">
+                <v-img :src="item.src"
+                       @error="item.errorHandler"
+                       class="flat-image"
+                ></v-img>
             </v-carousel-item>
         </v-carousel>
     </v-card>
@@ -50,37 +54,46 @@
                 const routeData = this.$router.resolve('/flat/' + this.flat.id);
                 window.open(routeData.href, '_blank');
             },
+
+            onErrorMainImageLoading() {
+                this.errorMainImage = true;
+            },
+
+            onErrorLayoutLoading() {
+                this.errorLayout = true;
+            },
         },
 
         computed: {
             formattedSquareCost() {
-                return new Intl.NumberFormat('ru-RU', {style: 'currency', currency: 'RUB'})
-                    .format(Math.round(this.flat.cost / this.flat.square));
+                return new Intl.NumberFormat('ru-RU', {
+                    style: 'currency', currency: 'RUB', maximumFractionDigits: 0, minimumFractionDigits: 0,
+                }).format(Math.round(this.flat.cost / this.flat.square));
             },
 
             formattedCost() {
-                return new Intl.NumberFormat('ru-RU', {style: 'currency', currency: 'RUB'})
-                    .format(Math.round(this.flat.cost));
+                return new Intl.NumberFormat('ru-RU', {
+                    style: 'currency', currency: 'RUB', maximumFractionDigits: 0, minimumFractionDigits: 0,
+                }).format(Math.round(this.flat.cost));
             },
 
-            photo() {
-                if (this.flat.main_image) {
-                    return this.flat.main_image;
-                } else {
-                    return require('@/assets/img/no-image.png');
-                }
+            noImage() {
+                return require('@/assets/img/no-image.png');
             },
 
-            layout() {
-                if (this.flat.layout) {
-                    return this.flat.layout;
-                } else {
-                    return require('@/assets/img/no-image.png');
-                }
+            mainImage() {
+                return this.errorMainImage ? this.noImage : this.flat.main_image_thumbnail;
             },
 
-            images() {
-                return [this.photo, this.layout]
+            layoutImage() {
+                return this.errorLayout ? this.noImage : this.flat.layout_thumbnail
+            },
+
+            items() {
+                return [
+                    {src: this.mainImage, errorHandler: this.onErrorMainImageLoading},
+                    {src: this.layoutImage, errorHandler: this.onErrorLayoutLoading}
+                ];
             }
         }
     }
@@ -88,7 +101,7 @@
 
 <style scoped>
     .flat-card {
-        max-width: 340px;
+        max-width: 300px;
     }
 
     .flat-image {
@@ -99,5 +112,9 @@
 
     .color-text {
         color: #0058b1;
+    }
+
+    .pointer {
+        cursor: pointer;
     }
 </style>

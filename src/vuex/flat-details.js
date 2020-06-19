@@ -15,10 +15,7 @@ export const flatDetails = {
         },
 
         getFlat({commit, state}) {
-            return axios.get(`${API_HOST}/flat-details/`, {
-                    params: {
-                        id: state.flatId,
-                    },
+            return axios.get(`${API_HOST}/flats/${state.flatId}`, {
                     headers: HEADERS,
                     method: "GET"
                 }
@@ -27,8 +24,8 @@ export const flatDetails = {
                 this.dispatch('loader/setLoading', false);
                 return response.data;
             }).catch(error => {
-                    console.log(error);
-                    return error;
+                console.log(error);
+                return error;
                 }
             )
         },

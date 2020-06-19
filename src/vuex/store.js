@@ -22,6 +22,11 @@ const store = new Vuex.Store({
         squareMin: null,
         squareMax: null,
         currentFilters: {},
+
+        countPages: null,
+        currentPage: null,
+        offset: 24,
+
         filters: {
             activeWallMaterialId: 'Материал стен',
             activeCountFlatsId: 'Количество комнат',
@@ -129,6 +134,18 @@ const store = new Vuex.Store({
             state.activeDistrictId = null;
             state.activeCountFlatsId = null;
         },
+
+        setPagesCount(state, pagesCount) {
+            state.pagesCount = pagesCount;
+        },
+
+        setOffset(state, offset) {
+            state.offset = offset;
+        },
+
+        setCurrentPage(state, currentPage) {
+            state.currentPage = currentPage;
+        },
     },
 
     actions: {
@@ -155,9 +172,11 @@ const store = new Vuex.Store({
                     method: "GET"
                 }
             ).then(flats => {
-                commit('setFlatsToState', flats.data);
+                const results = flats.data.results;
+                commit('setFlatsToState', results);
+                commit('setPagesCount', Math.ceil(flats.data.count / state.offset));
                 this.dispatch('loader/setLoading', false);
-                return flats.data;
+                return results;
             }).catch(error => {
                     console.log(error);
                     return error;
@@ -228,6 +247,14 @@ const store = new Vuex.Store({
                 }
             )
         },
+
+        setOffset({commit}, offset) {
+            commit('setOffset', offset);
+        },
+
+        setCurrentPage({commit}, currentPage) {
+            commit('setCurrentPage', currentPage);
+        },
     },
     getters: {
         flats(state) {
@@ -284,6 +311,14 @@ const store = new Vuex.Store({
 
         currentFilters(state) {
             return state.currentFilters;
+        },
+
+        pagesCount(state) {
+            return state.countPages;
+        },
+
+        currentPage(state) {
+            return state.currentPage;
         },
     },
 

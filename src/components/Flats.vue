@@ -170,6 +170,12 @@
                 </v-col>
             </v-row>
         </v-container>
+
+        <v-pagination
+                :length="4"
+                circle
+                v-model="page"
+        ></v-pagination>
     </div>
 </template>
 
