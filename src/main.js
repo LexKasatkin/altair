@@ -5,6 +5,12 @@ import {vuetify} from "./plugins/vuetify";
 import store from "./vuex/store"
 import Vuelidate from 'vuelidate'
 import Notifications from 'vue-notification'
+import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import 'leaflet/dist/leaflet.css';
+
+Vue.component('l-map', LMap);
+Vue.component('l-tile-layer', LTileLayer);
+Vue.component('l-marker', LMarker);
 
 Vue.use(Vuelidate);
 Vue.use(Notifications);
