@@ -8,66 +8,87 @@
             {{formattedSquareCost}}/м<sup>2</sup>
         </v-card-subtitle>
 
-        <v-layout row wrap>
-            <v-flex class="main-image-container" d-flex md4 sm6 xs12>
-                <v-img :src="mainImage"
-                       @error="onErrorMainImageLoading"
-                ></v-img>
-            </v-flex>
-            <v-flex d-flex md3 sm6 xs12>
-                <v-layout row wrap>
-                    <v-flex class="small-image-container" d-flex>
-                        <v-img :src="layoutImage"
-                               @error="onErrorLayoutLoading"
-                               height="180px"
+        <v-layout row wrap >
+            <v-flex d-flex md4 sm5 xs12 class="main-image-container">
+                    <v-card flat tile>
+                        <v-img :src="mainImage"  
+                                @error="onErrorMainImageLoading"
                         ></v-img>
-                    </v-flex>
-                    <v-flex class="small-image-container" d-flex>
-                        <v-carousel cycle
-                                    height="170px"
-                                    hide-delimiter-background
-                                    show-arrows-on-hover>
-                            <v-carousel-item
-                                    :key="i"
-                                    v-for="(image,i) in this.images"
-                            >
-                                <v-img :src="image"
-                                       @error="onErrorImagesLoading"
-                                       height="170px"></v-img>
-                            </v-carousel-item>
-                        </v-carousel>
-                    </v-flex>
+                    </v-card>
+            </v-flex>
+            <v-flex d-flex md2 sm3 xs12>
+                <v-layout row wrap  >
+                        <v-card flat tile>
+                            <v-flex d-flex class="small-image-container">
+                                <v-img :src="layoutImage"
+                                    @error="onErrorLayoutLoading"
+                                    class="small-image-container"
+                                ></v-img>
+                            </v-flex>
+                        </v-card>
+                    <v-card flat tile>
+                            <v-flex d-flex class="small-image-container">
+                                <v-carousel cycle
+                                            hide-delimiter-background
+                                            show-arrows-on-hover
+                                            height="210px">
+                                    <v-card flat tile>
+                                        <v-carousel-item
+                                                :key="i"
+                                                v-for="(image,i) in this.images"
+                                        >
+                                                <v-img :src="image"
+                                                    @error="onErrorImagesLoading"
+                                                    class="small-image-container"
+                                                    ></v-img>
+                                        </v-carousel-item>
+                                    </v-card>
+                                </v-carousel>
+                        </v-flex>
+                    </v-card>
                 </v-layout>
             </v-flex>
-            <v-flex child-flex d-flex md5 sm6 xs12>
+            <v-flex flex-column md4 sm3 xs12>
+                <v-card-title class="text-start">
+                    Характеристики
+                </v-card-title>
+                <v-row align="center">
+                    <v-col cols="6">
+                        <v-subheader>Описание</v-subheader>
+                    </v-col>
+
+                    <v-col cols="6">
+                        {{flat.description}}
+                    </v-col>
+                </v-row>
                 <v-card-text class="text-start">
-                    {{flat.description}}
                 </v-card-text>
             </v-flex>
         </v-layout>
 
-        <template>
-            <l-map style="height: 400px" :zoom="zoom" :center="center">
-                <l-tile-layer :url="url"/>
-                <l-marker
-                        v-for="marker in markers"
-                        :key="marker.id"
-                        :visible="marker.visible"
-                        :draggable="marker.draggable"
-                        :lat-lng.sync="marker.position"
-                        @click="alert(marker)"
-                >
-                    <l-popup :content="marker.tooltip"/>
-                </l-marker>
-            </l-map>
-        </template>
+        <v-card-title class="text-start">
+            Расположение:
+        </v-card-title>
+
+        <l-map style="height: 400px" :zoom="zoom" :center="center">
+            <l-tile-layer :url="url"/>
+            <l-marker
+                    v-for="marker in markers"
+                    :key="marker.id"
+                    :visible="marker.visible"
+                    :draggable="marker.draggable"
+                    :lat-lng.sync="marker.position"
+                    @click="alert(marker)"
+            >
+                <l-popup :content="marker.tooltip"/>
+            </l-marker>
+        </l-map>
     </v-card>
 </template>
 
 <script>
     import {mapActions, mapGetters} from "vuex";
     import {LMap, LTileLayer, LMarker, LPopup} from 'vue2-leaflet';
-    import {HOST} from "../../config";
 
     export default {
         name: "FlatDetails",
@@ -86,7 +107,7 @@
                 errorLayout: null,
 
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                zoom: 20,
+                zoom: 17,
                 markers: [],
                 center: [52.06010563, 92.852572],
             }
@@ -139,11 +160,11 @@
             },
 
             mainImage() {
-                return this.errorMainImage ? this.noImage : `${HOST}${this.flat.main_image}`;
+                return this.errorMainImage ? this.noImage : this.flat.main_image;
             },
 
             layoutImage() {
-                return this.errorLayout ? this.noImage : `${HOST}${this.flat.layout}`;
+                return this.errorLayout ? this.noImage : this.flat.layout_thumbnail;
             },
 
             images() {
@@ -170,13 +191,16 @@
 
 <style scoped>
     .main-image-container {
-        height: 380px;
-        padding-bottom: 16px;
-        padding-left: 32px;
+        width: 600px;
+        height: 400px;
+        padding-top: 4px;
+        padding-left: 28px;
     }
 
     .small-image-container {
-        height: 200px;
-        padding: 16px;
+        width: 300px;
+        height: 215px;
+        padding-left: 4px;
+        padding-top: 4px;
     }
 </style>
