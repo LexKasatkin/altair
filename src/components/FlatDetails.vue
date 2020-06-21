@@ -1,94 +1,102 @@
 <template>
     <v-card class="mx-auto main-container">
-        <v-card-title class="headline text-start">
-            {{formattedCost}}
-        </v-card-title>
-
-        <v-card-subtitle class="text-start">
-            {{formattedSquareCost}}/м<sup>2</sup>
-        </v-card-subtitle>
-
-        <v-layout row wrap >
-            <v-flex d-flex md4 sm5 xs12 class="main-image-container">
+        <div>
+            <v-layout row wrap>
+                <v-flex class="main-image-container" d-flex md8 sm8 xs12>
                     <v-card flat tile>
-                        <v-img :src="mainImage"  
-                                @error="onErrorMainImageLoading"
+                        <v-img :src="mainImage"
+                               @error="onErrorMainImageLoading"
                         ></v-img>
                     </v-card>
-            </v-flex>
-            <v-flex d-flex md2 sm3 xs12>
-                <v-layout row wrap  >
-                        <v-card flat tile>
-                            <v-flex d-flex class="small-image-container">
+                </v-flex>
+                <v-flex class="small-images-container" d-flex md4 sm4 xs12>
+                    <v-layout column justify-space-between wrap>
+                        <v-card class="small-image-container" flat tile>
+                            <v-flex d-flex>
                                 <v-img :src="layoutImage"
-                                    @error="onErrorLayoutLoading"
-                                    class="small-image-container"
+                                       @error="onErrorLayoutLoading"
                                 ></v-img>
                             </v-flex>
                         </v-card>
-                    <v-card flat tile>
+                        <v-card flat tile>
                             <v-flex d-flex class="small-image-container">
                                 <v-carousel cycle
                                             hide-delimiter-background
                                             show-arrows-on-hover
-                                            height="210px">
+                                            height="200px">
                                     <v-card flat tile>
                                         <v-carousel-item
                                                 :key="i"
                                                 v-for="(image,i) in this.images"
                                         >
-                                                <v-img :src="image"
-                                                    @error="onErrorImagesLoading"
-                                                    class="small-image-container"
-                                                    ></v-img>
+                                            <v-img :src="image"
+                                                   @error="onErrorImagesLoading"
+                                            ></v-img>
                                         </v-carousel-item>
                                     </v-card>
                                 </v-carousel>
-                        </v-flex>
-                    </v-card>
-                </v-layout>
-            </v-flex>
-            <v-flex flex-column md4 sm3 xs12>
-                <v-card-title class="text-start">
-                    Характеристики
-                </v-card-title>
-                <v-row align="center">
-                    <v-col cols="6">
-                        <v-subheader>Описание</v-subheader>
-                    </v-col>
+                            </v-flex>
+                        </v-card>
+                    </v-layout>
+                </v-flex>
+            </v-layout>
+        </div>
+        <div>
+            <v-card-title class="headline text-start">
+                {{formattedCost}}
+            </v-card-title>
 
-                    <v-col cols="6">
-                        {{flat.description}}
-                    </v-col>
-                </v-row>
-                <v-card-text class="text-start">
-                </v-card-text>
-            </v-flex>
-        </v-layout>
+            <v-card-subtitle class="text-start">
+                {{formattedSquareCost}}/м<sup>2</sup>
+            </v-card-subtitle>
+            <v-card-title class="text-start">
+                Характеристики
+            </v-card-title>
+            <div :key="i"
+                 v-for="(qualification, i) in qualifications">
+                <v-card-subtitle class="text-start font-weight-bold">
+                    {{qualification.title}}
+                </v-card-subtitle>
 
-        <v-card-title class="text-start">
-            Расположение:
-        </v-card-title>
+                <v-list>
+                    <v-list-item-group>
+                        <v-list-item :key="j"
+                                     v-for="(subQualification, j) in qualification.values"
+                        >
+                            <v-list-item-subtitle class="text-start"
+                                                  v-text="subQualification.title"></v-list-item-subtitle>
+                            <v-list-item-subtitle class="text-right"
+                                                  v-text="subQualification.content"></v-list-item-subtitle>
+                        </v-list-item>
+                    </v-list-item-group>
+                </v-list>
+            </div>
 
-        <l-map style="height: 400px" :zoom="zoom" :center="center">
-            <l-tile-layer :url="url"/>
-            <l-marker
-                    v-for="marker in markers"
-                    :key="marker.id"
-                    :visible="marker.visible"
-                    :draggable="marker.draggable"
-                    :lat-lng.sync="marker.position"
-                    @click="alert(marker)"
-            >
-                <l-popup :content="marker.tooltip"/>
-            </l-marker>
-        </l-map>
+
+            <v-card-title class="text-start">
+                Расположение:
+            </v-card-title>
+
+            <l-map :center="center" :zoom="zoom" style="height: 400px">
+                <l-tile-layer :url="url"/>
+                <l-marker
+                        :draggable="marker.draggable"
+                        :key="marker.id"
+                        :lat-lng.sync="marker.position"
+                        :visible="marker.visible"
+                        @click="alert(marker)"
+                        v-for="marker in markers"
+                >
+                    <l-popup :content="marker.tooltip"/>
+                </l-marker>
+            </l-map>
+        </div>
     </v-card>
 </template>
 
 <script>
     import {mapActions, mapGetters} from "vuex";
-    import {LMap, LTileLayer, LMarker, LPopup} from 'vue2-leaflet';
+    import {LMap, LMarker, LPopup, LTileLayer} from 'vue2-leaflet';
 
     export default {
         name: "FlatDetails",
@@ -160,7 +168,7 @@
             },
 
             mainImage() {
-                return this.errorMainImage ? this.noImage : this.flat.main_image;
+                return this.errorMainImage ? this.noImage : this.flat.main_image_big;
             },
 
             layoutImage() {
@@ -169,6 +177,23 @@
 
             images() {
                 return this.errorImages ? [this.noImage] : [this.mainImage, this.layoutImage]
+            },
+
+            qualifications() {
+                return [{
+                    title: 'О квартире', values: [{title: 'Описание', content: this.flat.description},
+                        {title: 'Общая площадь', content: `${this.flat.square} м.кв.`},
+                        {title: 'Комнатнасть', content: this.flat.flat_type.name},
+                        {title: 'Этаж/Этажность', content: `${this.flat.floor}/${this.flat.max_floor}`},
+                    ],
+                }, {
+                    title: 'О доме', values: [{title: 'Стены', content: this.flat.wall_material.name},
+                        {title: 'Застройщик', content: this.flat.developer.name},
+                        {title: 'Жилой комплекс', content: this.flat.residential_complex.name},
+                        {title: 'Срок сдачи', content: `${this.flat.year_of_completion} ${this.flat.quarter}`},
+                    ]
+                }
+                ];
             },
         },
 
@@ -191,16 +216,24 @@
 
 <style scoped>
     .main-image-container {
-        width: 600px;
-        height: 400px;
-        padding-top: 4px;
-        padding-left: 28px;
+        width: 640px;
+        height: 480px;
+        padding-left: 12px;
     }
 
     .small-image-container {
         width: 300px;
-        height: 215px;
-        padding-left: 4px;
-        padding-top: 4px;
+        height: 200px;
+    }
+
+    .small-images-container {
+        height: 480px;
+        padding-left: 12px;
+        padding-right: 10px;
+        padding-bottom: 8px;
+    }
+
+    .main-container {
+        max-width: 940px;
     }
 </style>
