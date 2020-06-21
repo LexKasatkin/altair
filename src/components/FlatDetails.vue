@@ -78,16 +78,9 @@
             </v-card-title>
 
             <l-map :center="center" :zoom="zoom" style="height: 400px">
-                <l-tile-layer :url="url"/>
-                <l-marker
-                        :draggable="marker.draggable"
-                        :key="marker.id"
-                        :lat-lng.sync="marker.position"
-                        :visible="marker.visible"
-                        @click="alert(marker)"
-                        v-for="marker in markers"
-                >
-                    <l-popup :content="marker.tooltip"/>
+                <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
+                <l-marker :icon="defaultIcon" :lat-lng="marker">
+                    <l-tooltip :content="tooltip"></l-tooltip>
                 </l-marker>
             </l-map>
         </div>
@@ -115,9 +108,17 @@
                 errorLayout: null,
 
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 zoom: 17,
-                markers: [],
+                marker: [52.06010563, 92.852572],
+                tooltip: 'kdsjfksdf',
                 center: [52.06010563, 92.852572],
+                defaultIcon: L.icon({
+                    iconUrl: require('@/assets/img/marker.png'),
+                    iconSize: [40, 60],
+                    iconAnchor: [40, 60],
+                    popupAnchor: [-3, -76]
+                }),
             }
         },
 
@@ -200,14 +201,8 @@
         watch: {
             flat: function () {
                 this.center = [this.flat.longitude, this.flat.latitude];
-                const marker = {
-                    id: 0,
-                    position: {lat: this.flat.longitude, lng: this.flat.latitude},
-                    draggable: false,
-                    visible: true,
-                    tooltip: `${this.flat.street.name} ${this.flat.house}}`
-                };
-                this.markers.push(marker);
+                this.marker = [this.flat.latitude, this.flat.longitude];
+                this.tooltip = `${this.flat.street.name} ${this.flat.house}}`
                 this.center = [this.flat.longitude, this.flat.latitude]
             },
         },
