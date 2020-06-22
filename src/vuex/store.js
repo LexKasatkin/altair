@@ -49,6 +49,7 @@ const store = new Vuex.Store({
             {title: 'По площади, сначала большие', value: '-square', icon: 'mdi-sort-descending'},
         ],
         currentOrdering: null,
+        markers: [],
     },
 
     mutations: {
@@ -170,6 +171,15 @@ const store = new Vuex.Store({
         setCurrentOrdering(state, currentOrdering) {
             state.currentOrdering = currentOrdering;
         },
+
+        pushMarkers(state, flats) {
+            state.markers = flats.map(flat => {
+                return {
+                    position: [flat.longitude, flat.latitude],
+                    content: `${flat.street.district.city.name}, ${flat.street.name} ${flat.house}`
+                }
+            });
+        },
     },
 
     actions: {
@@ -198,12 +208,13 @@ const store = new Vuex.Store({
                     headers: HEADERS,
                     method: "GET"
                 }
-            ).then(flats => {
-                const results = flats.data.results;
-                commit('setFlatsToState', results);
-                commit('setPagesCount', Math.ceil(flats.data.count / state.limit));
+            ).then(response => {
+                const flats = response.data.results;
+                commit('setFlatsToState', flats);
+                commit('setPagesCount', Math.ceil(response.data.count / state.limit));
+                commit('pushMarkers', flats);
                 this.dispatch('loader/setLoading', false);
-                return results;
+                return flats;
             }).catch(error => {
                     console.log(error);
                     return error;
@@ -374,6 +385,10 @@ const store = new Vuex.Store({
 
         orderings(state) {
             return state.orderings;
+        },
+
+        markers(state) {
+            return state.markers;
         },
     },
 

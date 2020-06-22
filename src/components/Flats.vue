@@ -189,12 +189,14 @@
                 <l-tile-layer :attribution="attribution"
                               :url="url"
                 ></l-tile-layer>
-                <l-marker :icon="icon"
-                          :key="i"
-                          :lat-lng="marker.position"
-                          v-for="(marker,i) in this.markers">
-                    <l-popup :content="marker.content"/>
-                </l-marker>
+                <v-marker-cluster>
+                    <l-marker :icon="icon"
+                              :key="i"
+                              :lat-lng="marker.position"
+                              v-for="(marker,i) in this.markers">
+                        <l-popup :content="marker.content"/>
+                    </l-marker>
+                </v-marker-cluster>
             </l-map>
         </v-container>
 
@@ -237,10 +239,14 @@
     import FlatCard from "./FlatCard";
     import {mapActions, mapGetters, mapMutations} from 'vuex'
     import {icon} from "leaflet";
+    import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
 
     export default {
         name: "Flats",
-        components: {FlatCard},
+        components: {
+            FlatCard,
+            'v-marker-cluster': Vue2LeafletMarkerCluster,
+        },
 
         data() {
             return {
@@ -249,7 +255,6 @@
                     limits: [24, 48, 72, 96],
                 },
 
-                markers: [],
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 zoom: 10,
@@ -345,14 +350,6 @@
                 this.setCurrentOrdering(value);
                 this.getFlats();
             },
-
-            marker(flat) {
-                markers.push({
-                        position: [flat.longitude, flat.latitude],
-                        content: `${flat.street.district.city.name}, ${flat.street.name} ${flat.house}`
-                    }
-                );
-            }
         },
 
         computed: {
@@ -377,6 +374,7 @@
                 'showMap',
                 'orderings',
                 'currentOrdering',
+                'markers',
             ]),
 
             labelBtnMap() {
