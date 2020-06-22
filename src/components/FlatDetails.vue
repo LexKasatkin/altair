@@ -50,6 +50,12 @@
                 {{formattedSquareCost}}/м<sup>2</sup>
             </v-card-subtitle>
             <v-card-title class="text-start">
+                Описание
+            </v-card-title>
+            <v-card-text class="text-start">
+                {{this.flat.description}}
+            </v-card-text>
+            <v-card-title class="text-start">
                 Характеристики
             </v-card-title>
             <div :key="i"
@@ -58,18 +64,22 @@
                     {{qualification.title}}
                 </v-card-subtitle>
 
-                <v-list>
-                    <v-list-item-group>
-                        <v-list-item :key="j"
-                                     v-for="(subQualification, j) in qualification.values"
-                        >
-                            <v-list-item-subtitle class="text-start"
-                                                  v-text="subQualification.title"></v-list-item-subtitle>
-                            <v-list-item-subtitle class="text-right"
-                                                  v-text="subQualification.content"></v-list-item-subtitle>
-                        </v-list-item>
-                    </v-list-item-group>
-                </v-list>
+                <v-layout row>
+                    <v-flex md8 sm10 xs12>
+                        <v-list class="ml-4">
+                            <v-list-item-group>
+                                <v-list-item :key="j"
+                                             v-for="(subQualification, j) in qualification.values"
+                                >
+                                    <v-list-item-subtitle class="text-start"
+                                                          v-text="subQualification.title"></v-list-item-subtitle>
+                                    <v-list-item-subtitle class="text-right"
+                                                          v-text="subQualification.content"></v-list-item-subtitle>
+                                </v-list-item>
+                            </v-list-item-group>
+                        </v-list>
+                    </v-flex>
+                </v-layout>
             </div>
 
 
@@ -185,13 +195,14 @@
 
             qualifications() {
                 return [{
-                    title: 'О квартире', values: [{title: 'Описание', content: this.flat.description},
+                    title: 'О квартире', values: [
                         {title: 'Общая площадь', content: `${this.flat.square} м.кв.`},
                         {title: 'Комнатнасть', content: this.flat.flat_type.name},
                         {title: 'Этаж/Этажность', content: `${this.flat.floor}/${this.flat.max_floor}`},
                     ],
                 }, {
-                    title: 'О доме', values: [{title: 'Стены', content: this.flat.wall_material.name},
+                    title: 'О доме', values: [
+                        {title: 'Стены', content: this.flat.wall_material.name},
                         {title: 'Застройщик', content: this.flat.developer.name},
                         {title: 'Жилой комплекс', content: this.flat.residential_complex.name},
                         {title: 'Срок сдачи', content: `${this.flat.year_of_completion} ${this.flat.quarter}`},

@@ -158,15 +158,25 @@
 
         <v-container class="grey lighten-5">
             <v-row>
-                <v-select :items="orderings.map(ordering => (ordering.title))"
-                          :options="orderings.map(ordering => (ordering.value))"
-                          @change="setOrdering"
+                <v-select :items="orderings"
+                          @change="onSelectOrdering"
                           hide-details
                           menu-props="auto"
-                          prepend-icon="mdi-filter-variant"
                           single-line
+                          item-text="title"
+                          item-value="value"
                           v-model="currentOrdering"
-                ></v-select>
+                >
+                    <template slot="selection" slot-scope="data">
+                        <v-icon color="#0058b1">{{ data.item.icon }}</v-icon>
+                        <v-subheader class="color-text">{{data.item.title}}</v-subheader>
+                    </template>
+                    <template slot="item" slot-scope="data">
+                        <v-icon color="#0058b1">{{ data.item.icon }}</v-icon>
+                        <v-subheader class="color-text">{{data.item.title}}</v-subheader>
+                    </template>
+                </v-select>
+                <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
                 <v-btn @click="setMapShowing"
                        class="ma-2  text-right"
@@ -175,14 +185,14 @@
                 >{{labelBtnMap}}
                 </v-btn>
             </v-row>
-            <l-map :center="center" :zoom="zoom" class="mt-2" style="height: 400px" v-if="showMap">
+            <l-map :center="center" :zoom="zoom" class="mt-4" style="height: 400px" v-if="showMap">
                 <l-tile-layer :attribution="attribution"
                               :url="url"
                 ></l-tile-layer>
                 <l-marker :icon="icon"
                           :key="i"
                           :lat-lng="marker.position"
-                          v-for="(marker,i) in markers">
+                          v-for="(marker,i) in this.markers">
                     <l-popup :content="marker.content"/>
                 </l-marker>
             </l-map>
@@ -331,8 +341,9 @@
                 this.getFlats();
             },
 
-            setOrdering(value) {
-                this.setCurrentOrdering(value)
+            onSelectOrdering(value) {
+                this.setCurrentOrdering(value);
+                this.getFlats();
             },
 
             marker(flat) {
@@ -378,6 +389,7 @@
             this.getDistricts();
             this.getDevelopers();
             this.getWallMaterials();
+            this.setCurrentOrdering(this.orderings[0].value);
             this.getFlats();
         },
     }
@@ -391,5 +403,9 @@
 
     .divider {
         margin-top: 24px;
+    }
+
+    .color-text {
+        color: #0058b1;
     }
 </style>
