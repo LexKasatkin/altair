@@ -25,7 +25,9 @@
 
             >
                 <v-col :key="j"
-                       md="4"
+                       md4
+                       sm6
+                       xs12
                        v-for="j in mainActions[i-1].items.length"
                 >
                     <ActionCard :image="mainActions[i-1].items[j-1].image"

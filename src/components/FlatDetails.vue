@@ -9,7 +9,7 @@
                         ></v-img>
                     </v-card>
                 </v-flex>
-                <v-flex class="thumbnails-container align-center" d-flex md4 sm4 xs12>
+                <v-flex class="thumbnails-container" d-flex md4 sm4 xs12>
                     <v-layout column justify-space-between wrap>
                         <v-card class="thumbnail-container" flat tile>
                             <v-flex d-flex>
@@ -111,8 +111,8 @@
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 zoom: 15,
-                marker: [52.06010563, 92.852572],
-                center: [52.06010563, 92.852572],
+                marker: [56.010563, 92.852572],
+                center: [56.010563, 92.852572],
                 content: null,
                 defaultIcon: LIcon({
                     iconUrl: require('@/assets/img/marker.png'),
