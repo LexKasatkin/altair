@@ -9,9 +9,9 @@
                         ></v-img>
                     </v-card>
                 </v-flex>
-                <v-flex class="small-images-container" d-flex md4 sm4 xs12>
+                <v-flex class="thumbnails-container align-center" d-flex md4 sm4 xs12>
                     <v-layout column justify-space-between wrap>
-                        <v-card class="small-image-container" flat tile>
+                        <v-card class="thumbnail-container" flat tile>
                             <v-flex d-flex>
                                 <v-img :src="layoutImage"
                                        @error="onErrorLayoutLoading"
@@ -19,11 +19,11 @@
                             </v-flex>
                         </v-card>
                         <v-card flat tile>
-                            <v-flex d-flex class="small-image-container">
+                            <v-flex class="thumbnail-container" d-flex>
                                 <v-carousel cycle
                                             hide-delimiter-background
                                             show-arrows-on-hover
-                                            height="240px">
+                                            height="auto">
                                     <v-card flat tile>
                                         <v-carousel-item
                                                 :key="i"
@@ -89,7 +89,7 @@
 
 <script>
     import {mapActions, mapGetters} from "vuex";
-    import {LMap, LMarker, LPopup, LTileLayer} from 'vue2-leaflet';
+    import {LIcon, LMap, LMarker, LPopup, LTileLayer} from 'vue2-leaflet';
 
     export default {
         name: "FlatDetails",
@@ -98,7 +98,8 @@
             LMap,
             LTileLayer,
             LMarker,
-            LPopup
+            LPopup,
+            LIcon,
         },
 
         data() {
@@ -109,11 +110,11 @@
 
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                zoom: 17,
+                zoom: 15,
                 marker: [52.06010563, 92.852572],
                 center: [52.06010563, 92.852572],
                 content: null,
-                defaultIcon: L.icon({
+                defaultIcon: LIcon({
                     iconUrl: require('@/assets/img/marker.png'),
                     iconSize: [40, 60],
                     iconAnchor: [40, 60],
@@ -211,17 +212,20 @@
 <style scoped>
     .main-image-container {
         width: 640px;
-        height: 480px;
+        height: auto;
         padding-left: 12px;
+        padding-right: 12px;
+        padding-bottom: 4px;
     }
 
-    .small-image-container {
+    .thumbnail-container {
         width: 320px;
-        height: 240px;
+        height: auto;
+        padding-bottom: 4px;
     }
 
-    .small-images-container {
-        height: 480px;
+    .thumbnails-container {
+        height: auto;
         padding-left: 12px;
         padding-right: 12px;
     }
