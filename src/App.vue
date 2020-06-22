@@ -93,7 +93,7 @@
     }
 
     .main-container {
-        max-width: 940px;
+        max-width: 984px;
     }
 
 </style>

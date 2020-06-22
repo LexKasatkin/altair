@@ -23,7 +23,7 @@
                                 <v-carousel cycle
                                             hide-delimiter-background
                                             show-arrows-on-hover
-                                            height="200px">
+                                            height="240px">
                                     <v-card flat tile>
                                         <v-carousel-item
                                                 :key="i"
@@ -216,18 +216,17 @@
     }
 
     .small-image-container {
-        width: 300px;
-        height: 200px;
+        width: 320px;
+        height: 240px;
     }
 
     .small-images-container {
         height: 480px;
         padding-left: 12px;
-        padding-right: 10px;
-        padding-bottom: 8px;
+        padding-right: 12px;
     }
 
     .main-container {
-        max-width: 940px;
+        max-width: 984px;
     }
 </style>
