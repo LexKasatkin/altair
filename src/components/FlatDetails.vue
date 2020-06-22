@@ -80,7 +80,7 @@
             <l-map :center="center" :zoom="zoom" style="height: 400px">
                 <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
                 <l-marker :icon="defaultIcon" :lat-lng="marker">
-                    <l-tooltip :content="tooltip"></l-tooltip>
+                    <l-popup :content="content"/>
                 </l-marker>
             </l-map>
         </div>
@@ -111,8 +111,8 @@
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                 zoom: 17,
                 marker: [52.06010563, 92.852572],
-                tooltip: 'kdsjfksdf',
                 center: [52.06010563, 92.852572],
+                content: null,
                 defaultIcon: L.icon({
                     iconUrl: require('@/assets/img/marker.png'),
                     iconSize: [40, 60],
@@ -200,10 +200,9 @@
 
         watch: {
             flat: function () {
-                this.center = [this.flat.longitude, this.flat.latitude];
-                this.marker = [this.flat.latitude, this.flat.longitude];
-                this.tooltip = `${this.flat.street.name} ${this.flat.house}}`
+                this.content = `${this.flat.street.district.city.name}, ${this.flat.street.name} ${this.flat.house}`
                 this.center = [this.flat.longitude, this.flat.latitude]
+                this.marker = [this.flat.longitude, this.flat.latitude];
             },
         },
     }
