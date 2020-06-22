@@ -155,6 +155,39 @@
         </v-card>
 
         <v-divider class="divider"></v-divider>
+
+        <v-container class="grey lighten-5">
+            <v-row>
+                <v-select :items="orderings.map(ordering => (ordering.title))"
+                          :options="orderings.map(ordering => (ordering.value))"
+                          @change="setOrdering"
+                          hide-details
+                          menu-props="auto"
+                          prepend-icon="mdi-filter-variant"
+                          single-line
+                          v-model="currentOrdering"
+                ></v-select>
+                <v-spacer></v-spacer>
+                <v-btn @click="setMapShowing"
+                       class="ma-2  text-right"
+                       color="green"
+                       outlined
+                >{{labelBtnMap}}
+                </v-btn>
+            </v-row>
+            <l-map :center="center" :zoom="zoom" class="mt-2" style="height: 400px" v-if="showMap">
+                <l-tile-layer :attribution="attribution"
+                              :url="url"
+                ></l-tile-layer>
+                <l-marker :icon="icon"
+                          :key="i"
+                          :lat-lng="marker.position"
+                          v-for="(marker,i) in markers">
+                    <l-popup :content="marker.content"/>
+                </l-marker>
+            </l-map>
+        </v-container>
+
         <v-container class="grey lighten-5">
             <v-row :key="--i"
                    justify="start"
@@ -193,6 +226,7 @@
 <script>
     import FlatCard from "./FlatCard";
     import {mapActions, mapGetters, mapMutations} from 'vuex'
+    import {icon} from "leaflet";
 
     export default {
         name: "Flats",
@@ -203,7 +237,21 @@
                 numberOfColumns: 3,
                 pagination: {
                     limits: [24, 48, 72, 96],
-                }
+                },
+
+                markers: [],
+                url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+                zoom: 10,
+                center: [56.010563, 92.852572],
+                icon: icon({
+                    iconUrl: "https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Marker-Outside-Azure.png",
+                    shadowUrl: require("@/assets/img/shadow.png"),
+                    iconSize: [48, 48],
+                    shadowSize: [48, 48],
+                    iconAnchor: [20, 20],
+                    shadowAnchor: [20, 20],
+                }),
             }
         },
 
@@ -230,6 +278,8 @@
                 'setLimit',
                 'setCurrentPage',
                 'calculateOffset',
+                'setMapShowing',
+                'setCurrentOrdering',
             ]),
 
             searchFlats() {
@@ -280,6 +330,18 @@
                 this.calculateOffset();
                 this.getFlats();
             },
+
+            setOrdering(value) {
+                this.setCurrentOrdering(value)
+            },
+
+            marker(flat) {
+                markers.push({
+                        position: [flat.longitude, flat.latitude],
+                        content: `${flat.street.district.city.name}, ${flat.street.name} ${flat.house}`
+                    }
+                );
+            }
         },
 
         computed: {
@@ -301,7 +363,14 @@
                 'currentLimit',
                 'currentPage',
                 'pagesCount',
+                'showMap',
+                'orderings',
+                'currentOrdering',
             ]),
+
+            labelBtnMap() {
+                return this.showMap ? 'Скрыть карту' : 'Показать карту';
+            },
         },
 
         mounted() {

@@ -23,6 +23,8 @@ const store = new Vuex.Store({
         squareMax: null,
         currentFilters: {},
 
+        showMap: false,
+
         pagesCount: null,
         currentPage: 1,
         limit: 24,
@@ -37,7 +39,16 @@ const store = new Vuex.Store({
             costMax: 'Максимальная стоимость',
             squareMin: 'Минимальная площадь',
             squareMax: 'Максимальная площадь',
-        }
+        },
+
+        orderings: [
+            {title: 'По умолчанию', value: 'cost', icon: 'mdi-sort-ascending'},
+            {title: 'По цене, сначала дешевые', value: 'cost', icon: 'mdi-sort-ascending'},
+            {title: 'По цене, сначала дорогие', value: '-cost', icon: 'mdi-sort-descending'},
+            {title: 'По площади, сначала дешевые', value: 'square', icon: 'mdi-sort-ascending'},
+            {title: 'По площади, сначала дорогие', value: '-square', icon: 'mdi-sort-descending'},
+        ],
+        currentOrdering: null,
     },
 
     mutations: {
@@ -151,6 +162,14 @@ const store = new Vuex.Store({
         setCurrentPage(state, currentPage) {
             state.currentPage = currentPage;
         },
+
+        setMapShowing(state) {
+            state.showMap = !state.showMap;
+        },
+
+        setCurrentOrdering(state, currentOrdering) {
+            state.currentOrdering = currentOrdering;
+        },
     },
 
     actions: {
@@ -174,6 +193,7 @@ const store = new Vuex.Store({
                         square_max: state.squareMax,
                         offset: state.offset,
                         limit: state.limit,
+                        ordering: state.currentOrdering,
                     },
                     headers: HEADERS,
                     method: "GET"
@@ -266,6 +286,14 @@ const store = new Vuex.Store({
         setCurrentPage({commit}, newPage) {
             commit('setCurrentPage', newPage);
         },
+
+        setMapShowing({commit}) {
+            commit('setMapShowing');
+        },
+
+        setCurrentOrdering({commit}, currentOrdering) {
+            commit('setCurrentOrdering', currentOrdering);
+        }
     },
     getters: {
         flats(state) {
@@ -334,6 +362,18 @@ const store = new Vuex.Store({
 
         currentLimit(state) {
             return state.limit;
+        },
+
+        showMap(state) {
+            return state.showMap;
+        },
+
+        currentOrdering(state) {
+            return state.currentOrdering;
+        },
+
+        orderings(state) {
+            return state.orderings;
         },
     },
 

@@ -79,7 +79,7 @@
 
             <l-map :center="center" :zoom="zoom" style="height: 400px">
                 <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
-                <l-marker :icon="defaultIcon" :lat-lng="marker">
+                <l-marker :icon="icon" :lat-lng="marker">
                     <l-popup :content="content"/>
                 </l-marker>
             </l-map>
@@ -89,7 +89,8 @@
 
 <script>
     import {mapActions, mapGetters} from "vuex";
-    import {LIcon, LMap, LMarker, LPopup, LTileLayer} from 'vue2-leaflet';
+    import {LMap, LMarker, LPopup, LTileLayer} from 'vue2-leaflet';
+    import {icon} from "leaflet";
 
     export default {
         name: "FlatDetails",
@@ -99,7 +100,6 @@
             LTileLayer,
             LMarker,
             LPopup,
-            LIcon,
         },
 
         data() {
@@ -114,11 +114,13 @@
                 marker: [56.010563, 92.852572],
                 center: [56.010563, 92.852572],
                 content: null,
-                defaultIcon: LIcon({
-                    iconUrl: require('@/assets/img/marker.png'),
-                    iconSize: [40, 60],
-                    iconAnchor: [40, 60],
-                    popupAnchor: [-3, -76]
+                icon: icon({
+                    iconUrl: "https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Marker-Outside-Azure.png",
+                    shadowUrl: require("@/assets/img/shadow.png"),
+                    iconSize: [48, 48],
+                    shadowSize: [48, 48],
+                    iconAnchor: [20, 20],
+                    shadowAnchor: [20, 20],
                 }),
             }
         },
