@@ -101,6 +101,7 @@
 <style scoped>
     .flat-card {
         max-width: 320px;
+        height: 100%;
     }
 
     .flat-image {

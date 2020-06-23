@@ -19,19 +19,16 @@
             Основные виды деятельности компании ООО «Альтаир-Инвест»:
         </v-card-title>
         <v-container class="grey lighten-5">
-            <v-row :key="i"
-                   justify="start"
-                   v-for="i in mainActions.length"
-
-            >
-                <v-col :key="j"
+            <v-row>
+                <v-col :key="i"
+                       lg4
                        md4
                        sm6
                        xs12
-                       v-for="j in mainActions[i-1].items.length"
+                       v-for="i in mainActions.length"
                 >
-                    <ActionCard :image="mainActions[i-1].items[j-1].image"
-                                :title="mainActions[i-1].items[j-1].title">
+                    <ActionCard :image="mainActions[i-1].image"
+                                :title="mainActions[i-1].title">
                     </ActionCard>
                 </v-col>
             </v-row>
@@ -49,47 +46,39 @@
             mainActions() {
                 return [
                     {
-                        items: [{
-                            title: 'Продажа квартир на вторичном рынке',
-                            image: 'second-realty.png'
-                        },
-                            {
-                                title: 'Продажа квартир в новостройках',
-                                image: 'new-realty.png'
-                            },
-                            {
-                                title: 'Коммерческая недвижимость',
-                                image: 'commerce.png'
-                            },]
+                        title: 'Продажа квартир на вторичном рынке',
+                        image: 'second-realty.png'
                     },
                     {
-                        items: [
-                            {
-                                title: 'Загородная недвижимость',
-                                image: 'out-city.png'
-                            },
-                            {
-                                title: 'Элитная недвижимость',
-                                image: 'elite.png'
-                            },
-                            {
-                                title: 'Ипотечное кредитование',
-                                image: 'mortgage.png'
-                            },
-                        ]
+                        title: 'Продажа квартир в новостройках',
+                        image: 'new-realty.png'
                     },
                     {
-                        items: [
-                            {
-                                title: 'Работа со всеми видами субсидий и сертификатов',
-                                image: 'subsidies.png'
-                            },
-                            {
-                                title: 'Заказ любых справок',
-                                image: 'references.png'
-                            },
-                        ]
+                        title: 'Коммерческая недвижимость',
+                        image: 'commerce.png'
                     },
+                    {
+                        title: 'Загородная недвижимость',
+                        image: 'out-city.png'
+                    },
+                    {
+                        title: 'Элитная недвижимость',
+                        image: 'elite.png'
+                    },
+                    {
+                        title: 'Ипотечное кредитование',
+                        image: 'mortgage.png'
+                    },
+                    {
+                        title: 'Работа со всеми видами субсидий и сертификатов',
+                        image: 'subsidies.png'
+                    },
+                    {
+                        title: 'Заказ любых справок',
+                        image: 'references.png'
+                    },
+
+
                 ]
             },
         }

@@ -1,5 +1,20 @@
 <template>
     <div class="main-container mx-auto">
+        <v-container class="grey lighten-5">
+            <v-row>
+                <v-col :key="i"
+                       cols="12"
+                       md="4"
+                       sm="6"
+                       v-for="i in companyInfo.length"
+                       xs="12"
+                >
+                    <CompanyCard :data="companyInfo[--i]">
+                    </CompanyCard>
+                </v-col>
+            </v-row>
+        </v-container>
+
         <v-card>
             <v-img
                     class="white--text align-end"
@@ -78,22 +93,6 @@
                 </ol>
             </v-card-text>
         </v-card>
-
-        <v-container class="grey lighten-5">
-            <v-row :key="--i"
-                   justify="start"
-                   v-for="i in Math.ceil(companyInfo.length/numberOfColumns)"
-            >
-                <v-col :key="--i*numberOfColumns+j"
-                       cols="12"
-                       sm="4"
-                       v-for="j in companyInfo.length - (--i*numberOfColumns)"
-                >
-                    <CompanyCard :data="companyInfo[--j]">
-                    </CompanyCard>
-                </v-col>
-            </v-row>
-        </v-container>
     </div>
 </template>
 
@@ -105,7 +104,7 @@
         components: {CompanyCard},
         data() {
             return {
-                numberOfColumns: 4,
+                numberOfColumns: 3,
                 companyInfo:
                     [
                         {
@@ -117,33 +116,43 @@
                             image: 'new-realty.png'
                         },
                         {
-                            title: 'Коммерческая недвижимость',
+                            title: 'Благодаря деятельности компании в сфере строительства в наличии есть собстенные' +
+                                'квартиры цена и условия приобретения которых не имеет аналогов',
                             image: 'commerce.png'
                         },
                         {
-                            title: 'Загородная недвижимость',
+                            title: 'Большой выбор актуальных вариантов во всех районах городах',
                             image: 'out-city.png'
                         },
                         {
-                            title: 'Элитная недвижимость',
+                            title: 'Индивидуальный подход к каждому клиенту',
                             image: 'elite.png'
                         },
                         {
-                            title: 'Ипотечное кредитование',
+                            title: 'Гарантия безопасности сделки от момента обращения в компанию и до заселения',
                             image: 'mortgage.png'
                         },
                         {
 
-                            title: 'Работа со всеми видами субсидий и сертификатов',
+                            title: 'Помощь при оформлении ипотеки и покупки жилья с использованием материнского капитала.' +
+                                'Спецпрограммы по ставкам 1% / 2% / 6,5%',
                             image: 'subsidies.png'
                         },
-                        {
-                            title: 'Заказ любых справок',
-                            image: 'references.png'
-                        }
                     ]
             }
         },
+
+        methods: {
+            companyColumns(row) {
+                return this.companyInfo.length - row * this.numberOfColumns;
+            }
+        },
+
+        computed: {
+            companyRows() {
+                return Math.ceil(this.companyInfo.length / this.numberOfColumns);
+            },
+        }
     }
 </script>
 

@@ -29,8 +29,10 @@
 
 <style scoped>
     .action-card {
-        max-width: 256px;
-        height: 208px;
+        max-width: 320px;
+        height: 100%;
+        justify-content: center;
+        padding-bottom: 16px;
     }
 
     .action-image {
