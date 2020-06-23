@@ -22,7 +22,6 @@ const routes = [
     },
     {
         path: '/flat/:flatId',
-        name: 'flatDetails',
         component: FlatDetails
     },
     {

@@ -2,14 +2,15 @@
     <v-card class="mx-auto main-container">
         <div>
             <v-layout row wrap>
-                <v-flex class="main-image-container" d-flex md8 sm8 xs12>
+                <v-flex class="main-image-container" d-flex md6 sm12 xs12>
                     <v-card flat tile>
                         <v-img :src="mainImage"
                                @error="onErrorMainImageLoading"
+                               class="main-image"
                         ></v-img>
                     </v-card>
                 </v-flex>
-                <v-flex class="thumbnails-container" d-flex md4 sm4 xs12>
+                <v-flex class="thumbnails-container" d-flex md3 sm6 xs6>
                     <v-layout column justify-space-between wrap>
                         <v-card class="thumbnail-container" flat tile>
                             <v-flex d-flex>
@@ -36,6 +37,19 @@
                                     </v-card>
                                 </v-carousel>
                             </v-flex>
+                        </v-card>
+                    </v-layout>
+                </v-flex>
+
+                <v-flex class="thumbnails-container" d-flex md3 sm6 xs6>
+                    <v-layout column justify-space-between wrap>
+                        <v-card class="map-container" flat tile>
+                            <l-map :center="center" :zoom="zoom" style="height: 400px">
+                                <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
+                                <l-marker :icon="icon" :lat-lng="marker">
+                                    <l-popup :content="content"/>
+                                </l-marker>
+                            </l-map>
                         </v-card>
                     </v-layout>
                 </v-flex>
@@ -224,15 +238,20 @@
 
 <style scoped>
     .main-image-container {
-        width: 640px;
+        width: 320px;
         height: auto;
         padding-left: 12px;
         padding-right: 12px;
         padding-bottom: 4px;
     }
 
+    .main-image {
+        width: 480px;
+        height: 100%;
+    }
+
     .thumbnail-container {
-        width: 320px;
+        width: 240px;
         height: auto;
         padding-bottom: 4px;
     }
@@ -240,6 +259,11 @@
     .thumbnails-container {
         height: auto;
         padding-left: 12px;
+    }
+
+    .map-container {
+        height: auto;
+        padding-bottom: 4px;
         padding-right: 12px;
     }
 

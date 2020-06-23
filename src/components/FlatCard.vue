@@ -51,8 +51,7 @@
             ...mapActions('flatDetails', []),
 
             openDetails() {
-                const routeData = this.$router.resolve('/flat/' + this.flat.id);
-                window.open(routeData.href, '_blank');
+              this.$router.push('/flat/' + this.flat.id);
             },
 
             onErrorMainImageLoading() {
