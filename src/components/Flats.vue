@@ -179,7 +179,7 @@
                 <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
                 <v-btn @click="setMapShowing"
-                       class="ma-2  text-right"
+                       class="ma-2 text-right pr-4"
                        color="green"
                        outlined
                 >{{labelBtnMap}}
@@ -201,16 +201,15 @@
         </v-container>
 
         <v-container class="grey lighten-5">
-            <v-row :key="--i"
-                   justify="start"
-                   v-for="i in Math.ceil(flats.length/numberOfColumns)"
-            >
-                <v-col :key="--i*numberOfColumns+j"
+            <v-row justify="start">
+                <v-col :key="i"
                        cols="12"
-                       sm="4"
-                       v-for="j in flats.length - i*numberOfColumns"
+                       md="4"
+                       sm="6"
+                       v-for="i in flats.length"
+                       xs="12"
                 >
-                    <FlatCard :flat="flats[--j]">
+                    <FlatCard :flat="flats[--i]">
                     </FlatCard>
                 </v-col>
             </v-row>
