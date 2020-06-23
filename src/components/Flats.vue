@@ -179,7 +179,7 @@
                 <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
                 <v-btn @click="setMapShowing"
-                       class="ma-2 text-right pr-4"
+                       class="ma-2 text-right pr-4 mt-2"
                        color="green"
                        outlined
                 >{{labelBtnMap}}
@@ -239,12 +239,16 @@
     import {mapActions, mapGetters, mapMutations} from 'vuex'
     import {icon} from "leaflet";
     import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
+    import {LMap, LMarker, LPopup} from 'vue2-leaflet';
 
     export default {
         name: "Flats",
         components: {
             FlatCard,
             'v-marker-cluster': Vue2LeafletMarkerCluster,
+            LPopup,
+            LMarker,
+            LMap,
         },
 
         data() {
