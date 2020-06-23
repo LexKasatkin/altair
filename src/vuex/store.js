@@ -178,7 +178,7 @@ const store = new Vuex.Store({
                     position: [flat.longitude, flat.latitude],
                     content: `<table>
                                   <tr>
-                                    <td>
+                                    <td style="border-right:7px solid white;">
                                         <img src="${flat.main_image_thumbnail}" style="width: 50px; height: 50px">
                                     </td>
                                     <td>
