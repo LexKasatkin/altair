@@ -18,7 +18,7 @@
         <v-card-title class="text-justify">
             Основные виды деятельности компании ООО «Альтаир-Инвест»:
         </v-card-title>
-        <v-container class="grey lighten-5">
+        <v-content>
             <v-row>
                 <v-col :key="i"
                        lg4
@@ -32,7 +32,7 @@
                     </ActionCard>
                 </v-col>
             </v-row>
-        </v-container>
+        </v-content>
     </div>
 </template>
 

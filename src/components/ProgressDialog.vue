@@ -1,7 +1,7 @@
 <template>
     <v-row justify="center">
         <v-dialog class="box" hide-overlay max-width="80" persistent v-model="visibility">
-            <v-container fill-height fluid>
+            <v-content fill-height fluid>
                 <v-layout align-center justify-center>
                     <v-progress-circular
                             :size="55"
@@ -10,7 +10,7 @@
                             indeterminate
                     ></v-progress-circular>
                 </v-layout>
-            </v-container>
+            </v-content>
         </v-dialog>
     </v-row>
 </template>

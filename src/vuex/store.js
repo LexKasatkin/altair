@@ -42,8 +42,7 @@ const store = new Vuex.Store({
         },
 
         orderings: [
-            {title: 'По умолчанию', value: 'cost', icon: 'mdi-sort-ascending'},
-            {title: 'По цене, сначала дешевые', value: 'cost', icon: 'mdi-sort-ascending'},
+            {title: 'По цене, сначала дешёвые', value: 'cost', icon: 'mdi-sort-ascending'},
             {title: 'По цене, сначала дорогие', value: '-cost', icon: 'mdi-sort-descending'},
             {title: 'По площади, сначала малые', value: 'square', icon: 'mdi-sort-ascending'},
             {title: 'По площади, сначала большие', value: '-square', icon: 'mdi-sort-descending'},

@@ -9,9 +9,9 @@
                         class="overflow-y-auto"
                         id="scrolling-techniques-3"
                 >
-                    <v-container class="content-margin">
+                    <v-content class="content-margin">
                         <router-view></router-view>
-                    </v-container>
+                    </v-content>
                 </v-sheet>
             </div>
         </div>

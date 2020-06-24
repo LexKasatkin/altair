@@ -156,13 +156,13 @@
 
         <v-divider class="divider"></v-divider>
 
-        <v-container class="grey lighten-5">
+        <v-content>
             <v-row>
                 <v-select :items="orderings"
                           @change="onSelectOrdering"
-                          hide-details
                           menu-props="auto"
                           single-line
+                          class="pl-3"
                           item-text="title"
                           item-value="value"
                           v-model="currentOrdering"
@@ -198,9 +198,9 @@
                     </l-marker>
                 </v-marker-cluster>
             </l-map>
-        </v-container>
+        </v-content>
 
-        <v-container class="grey lighten-5">
+        <v-content>
             <v-row justify="start">
                 <v-col :key="i"
                        cols="12"
@@ -213,7 +213,7 @@
                     </FlatCard>
                 </v-col>
             </v-row>
-        </v-container>
+        </v-content>
 
         <v-layout row wrap>
             <v-flex md11 sm10 xs10>
