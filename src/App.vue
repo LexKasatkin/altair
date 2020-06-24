@@ -82,6 +82,10 @@
         color: #2c3e50;
     }
 
+    .main-container {
+        max-width: 984px;
+    }
+
     #nav {
         padding: 30px;
     }
@@ -94,9 +98,4 @@
         font-weight: bold;
         color: #2c3e50;
     }
-
-    .main-container {
-        max-width: 984px;
-    }
-
 </style>

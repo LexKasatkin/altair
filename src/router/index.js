@@ -4,6 +4,7 @@ import Main from "../components/Main";
 import Company from "../components/Company";
 import Flats from "../components/Flats";
 import FlatDetails from "../components/FlatDetails";
+import Contacts from "../components/Contacts";
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,10 @@ const routes = [
     {
         path: '/company',
         component: Company
+    },
+    {
+        path: '/contacts',
+        component: Contacts
     },
     {
         path: '/flats',
