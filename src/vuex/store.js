@@ -182,7 +182,7 @@ const store = new Vuex.Store({
                                         <img src="${flat.main_image_thumbnail}" style="width: 50px; height: 50px">
                                     </td>
                                     <td>
-                                        <a href="/flat/${flat.id}" style="{ text-decoration: none; }"><b>${flat.flat_type.name}</b></a>
+                                        <a href="/#/flat/${flat.id}" style="{ text-decoration: none; }"><b>${flat.flat_type.name}</b></a>
                                         <div><b>${flat.cost} ₽ </b>${flat.square}м<sup>2</sup></div>
                                         <div>${flat.street.district.city.name}, ${flat.street.name} ${flat.house}</div>
                                     </td>
