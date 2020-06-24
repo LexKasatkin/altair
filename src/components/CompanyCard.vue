@@ -1,14 +1,18 @@
 <template>
-    <v-card class="mx-auto action-card">
-        <v-card-subtitle class="text-center">
-            {{data.title}}
-        </v-card-subtitle>
-        <v-row class="justify-center">
-            <v-img :src="imagePath"
-                   class="action-image"
-            ></v-img>
-        </v-row>
-    </v-card>
+    <v-hover>
+        <template v-slot="{ hover }">
+            <v-card :elevation="hover ? 12 : 6" class="mx-auto action-card">
+                <v-card-subtitle class="text-center">
+                    {{data.title}}
+                </v-card-subtitle>
+                <v-row class="justify-center">
+                    <v-img :src="imagePath"
+                           class="action-image"
+                    ></v-img>
+                </v-row>
+            </v-card>
+        </template>
+    </v-hover>
 </template>
 
 <script>
@@ -31,7 +35,7 @@
     .action-card {
         max-width: 320px;
         height: 100%;
-        justify-content: center;
+        align-content: center;
         padding-bottom: 16px;
     }
 

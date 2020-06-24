@@ -1,34 +1,38 @@
 <template>
-    <v-card class="mx-auto flat-card">
-        <div @click="openDetails" class="pointer">
-            <v-card-title class="text-start">
-                {{formattedCost}}
-            </v-card-title>
+    <v-hover>
+        <template v-slot="{ hover }">
+            <v-card :elevation="hover ? 16 : 6" class="mx-auto flat-card">
+                <div @click="openDetails" class="pointer">
+                    <v-card-title class="text-start">
+                        {{formattedCost}}
+                    </v-card-title>
 
-            <v-card-subtitle class="text-start">
-                {{formattedSquareCost}}/м<sup>2</sup>
-            </v-card-subtitle>
+                    <v-card-subtitle class="text-start">
+                        {{formattedSquareCost}}/м<sup>2</sup>
+                    </v-card-subtitle>
 
-            <v-card-text class="text-justify">
-                <b class="color-text">{{flat.street.name}} {{flat.house}} кв. {{flat.flat}}</b> |
-                {{flat.square}}м<sup>2</sup> |
-                {{flat.flat_type.name}}
-            </v-card-text>
-        </div>
-        <v-carousel cycle
-                    @click="null"
-                    height="200px"
-                    hide-delimiter-background
-                    show-arrows-on-hover>
-            <v-carousel-item :key="i"
-                             v-for="(item,i) in items">
-                <v-img :src="item.src"
-                       @error="item.errorHandler"
-                       class="flat-image"
-                ></v-img>
-            </v-carousel-item>
-        </v-carousel>
-    </v-card>
+                    <v-card-text class="text-justify">
+                        <b class="color-text">{{flat.street.name}} {{flat.house}} кв. {{flat.flat}}</b> |
+                        {{flat.square}}м<sup>2</sup> |
+                        {{flat.flat_type.name}}
+                    </v-card-text>
+                </div>
+                <v-carousel @click="null"
+                            cycle
+                            height="200px"
+                            hide-delimiter-background
+                            show-arrows-on-hover>
+                    <v-carousel-item :key="i"
+                                     v-for="(item,i) in items">
+                        <v-img :src="item.src"
+                               @error="item.errorHandler"
+                               class="flat-image"
+                        ></v-img>
+                    </v-carousel-item>
+                </v-carousel>
+            </v-card>
+        </template>
+    </v-hover>
 </template>
 
 <script>
@@ -51,7 +55,7 @@
             ...mapActions('flatDetails', []),
 
             openDetails() {
-              this.$router.push('/flat/' + this.flat.id);
+                this.$router.push('/flat/' + this.flat.id);
             },
 
             onErrorMainImageLoading() {

@@ -1,6 +1,6 @@
 <template>
     <div class="mx-auto main-container">
-        <v-card class="mx-auto filters">
+        <v-card class="mx-auto filters" elevation="6">
             <v-form
                     @submit.prevent="searchFlats"
                     lazy-validation

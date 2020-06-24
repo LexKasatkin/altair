@@ -1,5 +1,5 @@
 <template>
-    <v-card class="mx-auto main-container">
+    <v-card class="mx-auto main-container" elevation="6">
         <div>
             <v-layout row wrap>
                 <v-flex class="main-image-container" d-flex md6 sm12 xs12>
@@ -72,29 +72,26 @@
             <v-card-title class="text-start">
                 Характеристики
             </v-card-title>
-            <div :key="i"
-                 v-for="(qualification, i) in qualifications">
+            <v-content :key="i"
+                       v-for="(qualification, i) in qualifications">
                 <v-card-subtitle class="text-start font-weight-bold">
                     {{qualification.title}}
                 </v-card-subtitle>
 
-                <v-layout row>
-                    <v-flex md8 sm10 xs12>
-                        <v-list class="ml-4">
-                            <v-list-item-group>
-                                <v-list-item :key="j"
-                                             v-for="(subQualification, j) in qualification.values"
-                                >
-                                    <v-list-item-subtitle class="text-start"
-                                                          v-text="subQualification.title"></v-list-item-subtitle>
-                                    <v-list-item-subtitle class="text-right"
-                                                          v-text="subQualification.content"></v-list-item-subtitle>
-                                </v-list-item>
-                            </v-list-item-group>
-                        </v-list>
+                <v-layout :key="j"
+                          :ripple="false"
+                          row
+                          v-for="(subQualification, j) in qualification.values">
+                    <v-flex md3 sm4 xs4>
+                        <v-card-text class="text-start ml-4"
+                                     v-text="subQualification.title"></v-card-text>
+                    </v-flex>
+                    <v-flex md9 sm8 xs8>
+                        <v-card-text class="text-start ml-4"
+                                     v-text="subQualification.content"></v-card-text>
                     </v-flex>
                 </v-layout>
-            </div>
+            </v-content>
 
 
             <v-card-title class="text-start">

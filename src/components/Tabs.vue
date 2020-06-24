@@ -22,7 +22,7 @@
                         route: '/main'
                     },
                     {
-                        name: 'Компания',
+                        name: 'О компании',
                         route: '/company'
                     },
                     {

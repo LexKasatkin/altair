@@ -1,41 +1,40 @@
 <template>
-    <div>
-        <v-app-bar
-                absolute
-                color="#01579b"
-                dark
-                fade-img-on-scroll
-                prominent
-                scroll-target="#scrolling-techniques-3"
-                shrink-on-scroll
-                src="@/assets/img/header.jpg"
-        >
-            <template v-slot:img="{ props }">
-                <v-img gradient="to top right, rgba(0, 88, 177, 1), rgba(0, 88, 177, 0.85)"
-                       v-bind="props"
-                ></v-img>
-            </template>
-            <v-spacer/>
-            <v-toolbar-title>{{title}}</v-toolbar-title>
-            <v-spacer/>
+    <v-app-bar
+            absolute
+            color="#01579b"
+            dark
+            elevation="10"
+            fade-img-on-scroll
+            prominent
+            scroll-target="#scrolling-techniques-3"
+            shrink-on-scroll
+            src="@/assets/img/header.jpg"
+    >
+        <template v-slot:img="{ props }">
+            <v-img gradient="to top right, rgba(0, 88, 177, 1), rgba(0, 88, 177, 0.85)"
+                   v-bind="props"
+            ></v-img>
+        </template>
+        <v-spacer/>
+        <v-toolbar-title>{{title}}</v-toolbar-title>
+        <v-spacer/>
 
-            <!--                <v-btn icon>-->
-            <!--                    <v-icon>mdi-magnify</v-icon>-->
-            <!--                </v-btn>-->
+        <!--                <v-btn icon>-->
+        <!--                    <v-icon>mdi-magnify</v-icon>-->
+        <!--                </v-btn>-->
 
-            <!--                <v-btn icon>-->
-            <!--                    <v-icon>mdi-heart</v-icon>-->
-            <!--                </v-btn>-->
+        <!--                <v-btn icon>-->
+        <!--                    <v-icon>mdi-heart</v-icon>-->
+        <!--                </v-btn>-->
 
-            <!--                <v-btn icon>-->
-            <!--                    <v-icon>mdi-dots-vertical</v-icon>-->
-            <!--                </v-btn>-->
+        <!--                <v-btn icon>-->
+        <!--                    <v-icon>mdi-dots-vertical</v-icon>-->
+        <!--                </v-btn>-->
 
-            <template v-slot:extension>
-                <Tabs></Tabs>
-            </template>
-        </v-app-bar>
-    </div>
+        <template v-slot:extension>
+            <Tabs></Tabs>
+        </template>
+    </v-app-bar>
 </template>
 
 <script>
