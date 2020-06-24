@@ -10,7 +10,7 @@
                         ></v-img>
                     </v-card>
                 </v-flex>
-                <v-flex class="thumbnails-container" d-flex md3 sm4 xs7>
+                <v-flex class="thumbnails-container pt-sm-1 pt-1" d-flex md3 sm4 xs7>
                     <v-layout column justify-space-between wrap>
                         <v-card class="thumbnail-container" flat tile>
                             <v-flex d-flex>
@@ -41,7 +41,7 @@
                     </v-layout>
                 </v-flex>
 
-                <v-flex class="map-container pl-1" d-flex md3 sm8 xs5>
+                <v-flex class="map-container pl-1 pt-sm-1 pt-1" d-flex md3 sm8 xs5>
                     <v-layout column>
                         <v-card flat tile>
                             <l-map :center="center" :zoom="zoom" style="height: 400px">
