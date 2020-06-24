@@ -85,11 +85,11 @@
             },
 
             mainImage() {
-                return this.errorMainImage ? this.noImage : this.flat.main_image_thumbnail;
+                return this.errorMainImage || !this.flat.main_image_thumbnail ? this.noImage : this.flat.main_image_thumbnail;
             },
 
             layoutImage() {
-                return this.errorLayout ? this.noImage : this.flat.layout_thumbnail
+                return this.errorLayout || !this.flat.layout_thumbnail ? this.noImage : this.flat.layout_thumbnail
             },
 
             items() {

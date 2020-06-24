@@ -30,8 +30,8 @@
                                                 :key="i"
                                                 v-for="(image,i) in this.images"
                                         >
-                                            <v-img :src="image"
-                                                   @error="onErrorImagesLoading"
+                                            <v-img :src="image.src"
+                                                   @error="image.errorHandler"
                                             ></v-img>
                                         </v-carousel-item>
                                     </v-card>
@@ -193,15 +193,18 @@
             },
 
             mainImage() {
-                return this.errorMainImage ? this.noImage : this.flat.main_image_big;
+                return this.errorMainImage || !this.flat.main_image_big ? this.noImage : this.flat.main_image_big;
             },
 
             layoutImage() {
-                return this.errorLayout ? this.noImage : this.flat.layout_thumbnail;
+                return this.errorLayout || !this.flat.layout_thumbnail ? this.noImage : this.flat.layout_thumbnail;
             },
 
             images() {
-                return this.errorImages ? [this.noImage] : [this.mainImage, this.layoutImage]
+                return [
+                    {src: this.mainImage, errorHandler: this.onErrorMainImageLoading},
+                    {src: this.layoutImage, errorHandler: this.onErrorLayoutLoading}
+                ];
             },
 
             qualifications() {
