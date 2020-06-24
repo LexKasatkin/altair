@@ -144,7 +144,7 @@
                     <v-col class="shrink"
                            v-if="Object.keys(currentFilters).length>0"
                     >
-                        <v-chip @click:close="removeAllFilters()"
+                        <v-chip @click:close="onRemoveAllFilters"
                                 close
                         >
                             Удалить все фильтры
@@ -351,6 +351,11 @@
 
             onSelectOrdering(value) {
                 this.setCurrentOrdering(value);
+                this.getFlats();
+            },
+
+            onRemoveAllFilters() {
+                this.removeAllFilters();
                 this.getFlats();
             },
         },
