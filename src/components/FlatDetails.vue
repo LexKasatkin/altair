@@ -1,7 +1,7 @@
 <template>
     <v-card class="mx-auto main-container" elevation="6">
         <div>
-            <v-layout row wrap>
+            <v-layout class="images-container" row wrap>
                 <v-flex class="main-image-container" d-flex md6 sm12 xs12>
                     <v-card flat tile>
                         <v-img :src="mainImage"
@@ -10,7 +10,7 @@
                         ></v-img>
                     </v-card>
                 </v-flex>
-                <v-flex class="thumbnails-container" d-flex md3 sm6 xs6>
+                <v-flex class="thumbnails-container" d-flex md3 sm4 xs6>
                     <v-layout column justify-space-between wrap>
                         <v-card class="thumbnail-container" flat tile>
                             <v-flex d-flex>
@@ -41,7 +41,7 @@
                     </v-layout>
                 </v-flex>
 
-                <v-flex class="map-container" d-flex md3 sm6 xs6>
+                <v-flex class="map-container" d-flex md3 sm8 xs6>
                     <v-layout column justify-space-between wrap>
                         <v-card flat tile>
                             <l-map :center="center" :zoom="zoom" style="height: 400px">
@@ -237,12 +237,15 @@
 </script>
 
 <style scoped>
+    .images-container {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
     .main-image-container {
         width: 320px;
         height: auto;
-        padding-left: 12px;
-        padding-right: 12px;
-        padding-bottom: 4px;
+        padding-right: 4px;
     }
 
     .main-image {
@@ -253,20 +256,16 @@
     .thumbnail-container {
         width: 240px;
         height: auto;
-        padding-bottom: 4px;
     }
 
     .thumbnails-container {
         height: auto;
-        padding-left: 12px;
     }
 
     .map-container {
         height: auto;
         width: 100%;
-        padding-bottom: 4px;
         padding-left: 4px;
-        padding-right: 12px;
     }
 
     .main-container {
