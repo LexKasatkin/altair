@@ -41,9 +41,9 @@
                     </v-layout>
                 </v-flex>
 
-                <v-flex class="thumbnails-container" d-flex md3 sm6 xs6>
+                <v-flex class="map-container" d-flex md3 sm6 xs6>
                     <v-layout column justify-space-between wrap>
-                        <v-card class="map-container" flat tile>
+                        <v-card flat tile>
                             <l-map :center="center" :zoom="zoom" style="height: 400px">
                                 <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
                                 <l-marker :icon="icon" :lat-lng="marker">
@@ -263,7 +263,9 @@
 
     .map-container {
         height: auto;
+        width: 100%;
         padding-bottom: 4px;
+        padding-left: 4px;
         padding-right: 12px;
     }
 
