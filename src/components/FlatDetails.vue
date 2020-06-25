@@ -12,7 +12,7 @@
                 </v-flex>
                 <v-flex class="thumbnails-container" d-flex md3 sm4 xs7>
                     <v-layout column justify-space-between wrap>
-                        <v-card class="thumbnail-container pt-sm-1 pt-1" flat tile>
+                        <v-card class="thumbnail-container pt-sm-1 pt-1 pt-md-0 pt-lg-0" flat tile>
                             <v-flex d-flex>
                                 <v-img :src="layoutImage"
                                        @error="onErrorLayoutLoading"
@@ -20,7 +20,7 @@
                             </v-flex>
                         </v-card>
                         <v-card flat tile>
-                            <v-flex class="thumbnail-container pt-sm-1 pt-1" d-flex>
+                            <v-flex class="thumbnail-container pt-1" d-flex>
                                 <v-carousel cycle
                                             hide-delimiter-background
                                             show-arrows-on-hover
@@ -41,7 +41,7 @@
                     </v-layout>
                 </v-flex>
 
-                <v-flex class="map-container pl-1 pt-sm-1 pt-1" d-flex md3 sm8 xs5>
+                <v-flex class="map-container pl-1 pt-sm-1 pt-1 pt-md-0 pt-lg-0" d-flex md3 sm8 xs5>
                     <v-layout column fill-height>
                         <v-card flat height="100%" tile>
                             <l-map :center="center" :zoom="zoom" style="height: 100%">
