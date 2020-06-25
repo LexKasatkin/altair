@@ -1,18 +1,11 @@
 <template>
-    <v-row justify="center">
-        <v-dialog class="box" hide-overlay max-width="80" persistent v-model="visibility">
-            <v-content fill-height fluid>
-                <v-layout align-center justify-center>
-                    <v-progress-circular
-                            :size="55"
-                            :width="6"
-                            color="purple"
-                            indeterminate
-                    ></v-progress-circular>
-                </v-layout>
-            </v-content>
-        </v-dialog>
-    </v-row>
+    <v-overlay color="transparent" v-model="visibility">
+        <v-card color="transparent" elevation="0" width="80">
+            <v-card-text class="text-center">
+                <v-progress-circular color="blue" indeterminate size="80" width="7"></v-progress-circular>
+            </v-card-text>
+        </v-card>
+    </v-overlay>
 </template>
 
 <script>
@@ -35,11 +28,5 @@
 <style scoped>
     v-progress-circular {
         margin: 1rem;
-    }
-
-    .box.noshadow {
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        box-shadow: none;
     }
 </style>
