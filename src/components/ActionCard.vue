@@ -2,9 +2,9 @@
     <v-hover>
         <template v-slot="{ hover }">
             <v-card :elevation="hover ? 12 : 6" class="mx-auto action-card">
-                <v-card-subtitle class="text-center">
+                <v-card-subtitle class="text-center"><b>
                     {{title}}
-                </v-card-subtitle>
+                </b></v-card-subtitle>
                 <v-row class="justify-center">
                     <v-img :src="imagePath"
                            class="action-image"

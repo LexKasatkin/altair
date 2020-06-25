@@ -117,7 +117,7 @@
                         </v-row>
                     </v-col>
                     <v-col class="d-flex" cols="12" sm="2">
-                        <v-btn class="mt-3 justify-end"
+                        <v-btn class="ml-2 mt-3 justify-end"
                                color="success"
                                type="submit"
                         >
@@ -162,7 +162,7 @@
                           @change="onSelectOrdering"
                           menu-props="auto"
                           single-line
-                          class="pl-3"
+                          class="ml-3 mr-3"
                           item-text="title"
                           item-value="value"
                           v-model="currentOrdering"
@@ -179,7 +179,7 @@
                 <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
                 <v-btn @click="setMapShowing"
-                       class="ma-2 text-right pr-4 mt-2"
+                       class="ma-2 text-right mr-3 mt-2 ml-3"
                        color="green"
                        outlined
                 >{{labelBtnMap}}
@@ -224,7 +224,7 @@
                         v-model="currentPage"
                 ></v-pagination>
             </v-flex>
-            <v-flex class="pr-2" md1 sm2 xs2>
+            <v-flex class="mr-3" md1 sm2 xs2>
                 <v-select :items="pagination.limits"
                           @input="onChangeLimit"
                           v-model="currentLimit"

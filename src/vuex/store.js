@@ -4,6 +4,8 @@ import axios from 'axios'
 import {API_HOST, HEADERS} from "../../config";
 import {loader} from "./loader";
 import {flatDetails} from "./flat-details";
+import {drawer} from "./drawer"
+import {tabs} from "./tabs"
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -405,6 +407,8 @@ const store = new Vuex.Store({
     modules: {
         loader,
         flatDetails,
+        drawer,
+        tabs,
     }
 })
 

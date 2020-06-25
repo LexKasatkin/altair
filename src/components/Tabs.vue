@@ -10,6 +10,7 @@
 </template>
 
 <script>
+
     export default {
         name: "Tabs",
 
@@ -19,23 +20,27 @@
                 tabItems: [
                     {
                         name: 'Главная',
-                        route: '/main'
+                        route: '/main',
+                        icon: 'mdi-home',
                     },
                     {
                         name: 'О компании',
-                        route: '/company'
+                        route: '/company',
+                        icon: 'mdi-information',
                     },
                     {
                         name: 'Квартиры',
-                        route: '/flats'
+                        route: '/flats',
+                        icon: 'mdi-office-building',
                     },
                     {
                         name: 'Контакты',
-                        route: '/contacts'
+                        route: '/contacts',
+                        icon: 'mdi-contacts',
                     },
                 ]
             }
-        }
+        },
     }
 </script>
 

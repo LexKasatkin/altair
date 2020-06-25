@@ -2,12 +2,12 @@
     <v-content class="mx-auto main-container pb-3">
         <v-card elevation="6">
             <v-row>
-                <v-col md="6" sm="6" xs="12">
-                    <v-img :src="avatar" class="avatar ml-3">
+                <v-col class="mt-n3" md="6" sm="6" xs="12">
+                    <v-img :src="avatar" class="avatar">
                     </v-img>
                 </v-col>
 
-                <v-col md="6" sm="6" xs="12">
+                <v-col class="mt-n3" md="6" sm="6" xs="12">
                     <v-card-title class="text-start">Касаткина Анна Андреевна</v-card-title>
                     <v-card-subtitle class="text-start">209-51-71, 8 (983) 269-51-71</v-card-subtitle>
                     <v-card-text class="text-start">2095171@mail.ru

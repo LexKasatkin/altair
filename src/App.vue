@@ -2,6 +2,7 @@
     <v-app>
         <div id="app">
             <Header></Header>
+            <NavigationDrawer></NavigationDrawer>
             <notifications group="errors" position="bottom right"/>
             <ProgressDialog :visibility="loading"></ProgressDialog>
             <div>
@@ -23,9 +24,10 @@
     import axios from "axios";
     import {mapActions, mapGetters} from "vuex";
     import ProgressDialog from "./components/ProgressDialog";
+    import NavigationDrawer from "./components/NavigationDrawer";
 
     export default {
-        components: {Header, ProgressDialog},
+        components: {Header, ProgressDialog, NavigationDrawer},
 
         created() {
             axios.interceptors.request.use((config) => {
