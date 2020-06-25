@@ -157,12 +157,12 @@
         <v-divider class="divider"></v-divider>
 
         <v-content>
-            <v-row>
+            <v-row class="pl-3">
                 <v-select :items="orderings"
                           @change="onSelectOrdering"
                           menu-props="auto"
                           single-line
-                          class="ml-3 mr-3"
+                          class="ma-3"
                           item-text="title"
                           item-value="value"
                           v-model="currentOrdering"
@@ -179,7 +179,7 @@
                 <v-spacer></v-spacer>
                 <v-spacer></v-spacer>
                 <v-btn @click="setMapShowing"
-                       class="ma-2 text-right mr-3 mt-2 ml-3"
+                       class="text-right mt-5"
                        color="green"
                        outlined
                 >{{labelBtnMap}}
@@ -224,7 +224,7 @@
                         v-model="currentPage"
                 ></v-pagination>
             </v-flex>
-            <v-flex class="mr-3" md1 sm2 xs2>
+            <v-flex class="mr-2" md1 sm2 xs2>
                 <v-select :items="pagination.limits"
                           @input="onChangeLimit"
                           v-model="currentLimit"

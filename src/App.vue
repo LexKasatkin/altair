@@ -10,7 +10,7 @@
                         class="overflow-y-auto"
                         id="scrolling-techniques-3"
                 >
-                    <v-content class="content-margin">
+                    <v-content :class="[bigMargin ? 'content-margin-big' : 'content-margin'  ]">
                         <router-view></router-view>
                     </v-content>
                 </v-sheet>
@@ -67,6 +67,23 @@
             ...mapGetters('loader', [
                 'loading',
             ]),
+
+            bigMargin() {
+                switch (this.$vuetify.breakpoint.name) {
+                    case 'xs':
+                        return false
+                    case 'sm':
+                        return false
+                    case 'md':
+                        return true
+                    case 'lg':
+                        return true
+                    case 'xl':
+                        return true
+                    default:
+                        return true
+                }
+            },
         }
     }
 </script>
@@ -92,8 +109,12 @@
         padding: 30px;
     }
 
-    .content-margin {
+    .content-margin-big {
         margin-top: 250px;
+    }
+
+    .content-margin {
+        margin-top: 150px;
     }
 
     #nav a {
