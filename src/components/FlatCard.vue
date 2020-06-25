@@ -114,10 +114,6 @@
         align-content: end;
     }
 
-    .color-text {
-        color: #0058b1;
-    }
-
     .pointer {
         cursor: pointer;
     }

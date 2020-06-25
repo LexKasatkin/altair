@@ -2,7 +2,7 @@
     <v-content>
         <v-app-bar
                 absolute
-                color="#01579b"
+                color="#1976D2"
                 dark
                 elevation="10"
                 fade-img-on-scroll
@@ -12,7 +12,7 @@
                 src="@/assets/img/header.jpg"
         >
             <template v-slot:img="{ props }">
-                <v-img gradient="to top right, rgba(0, 88, 177, 1), rgba(0, 88, 177, 0.85)"
+                <v-img gradient="to top right, rgba(25, 118, 210, 1), rgba(25, 118, 210, 0.85)"
                        v-bind="props"
                 ></v-img>
             </template>

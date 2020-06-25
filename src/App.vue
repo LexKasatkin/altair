@@ -105,10 +105,6 @@
         max-width: 984px;
     }
 
-    #nav {
-        padding: 30px;
-    }
-
     .content-margin-big {
         margin-top: 250px;
     }
@@ -117,8 +113,8 @@
         margin-top: 150px;
     }
 
-    #nav a {
-        font-weight: bold;
-        color: #2c3e50;
+
+    .color-text {
+        color: #1976D2;
     }
 </style>

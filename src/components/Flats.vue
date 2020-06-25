@@ -410,8 +410,4 @@
     .divider {
         margin-top: 24px;
     }
-
-    .color-text {
-        color: #0058b1;
-    }
 </style>
