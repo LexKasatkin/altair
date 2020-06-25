@@ -53,12 +53,12 @@
                 </v-row>
 
                 <v-row justify="space-between">
-                    <v-col class="d-flex" cols="12" sm="5">
+                    <v-col class="d-flex" cols="12" md="5" sm="12">
                         <v-row>
-                            <v-col class="d-flex mt-2" cols="4" sm="3">
+                            <v-col class="d-flex mt-2" md="4" sm="4" xs="4">
                                 Стоимость:
                             </v-col>
-                            <v-col class="d-flex" cols="4" sm="4">
+                            <v-col class="d-flex" md="4" sm="4" xs="4">
                                 <v-text-field
                                         @input="setCostMin"
                                         countFrom
@@ -70,7 +70,7 @@
                                         v-model.number="costMin"
                                 ></v-text-field>
                             </v-col>
-                            <v-col class="align-center" cols="4" sm="4">
+                            <v-col class="align-center" md="4" sm="4" xs="4">
                                 <v-text-field
                                         @input="setCostMax"
                                         countTo
@@ -85,12 +85,12 @@
                         </v-row>
                     </v-col>
 
-                    <v-col class="d-flex" cols="12" sm="5">
+                    <v-col class="d-flex" cols="12" md="5" sm="12">
                         <v-row>
-                            <v-col class="d-flex mt-2" cols="4" sm="3">
+                            <v-col class="d-flex mt-2" md="4" sm="4" xs="4">
                                 Площадь:
                             </v-col>
-                            <v-col class="d-flex" cols="4" sm="4">
+                            <v-col class="d-flex" md="4" sm="4" xs="4">
                                 <v-text-field
                                         @input="setSquareMin"
                                         dense
@@ -102,7 +102,7 @@
                                         v-model.number="squareMin"
                                 ></v-text-field>
                             </v-col>
-                            <v-col class="d-flex" cols="4" sm="4">
+                            <v-col class="d-flex" md="4" sm="4" xs="4">
                                 <v-text-field
                                         @input="setSquareMax"
                                         dense
@@ -116,8 +116,8 @@
                             </v-col>
                         </v-row>
                     </v-col>
-                    <v-col class="d-flex" cols="12" sm="2">
-                        <v-btn class="ml-2 mt-3 justify-end"
+                    <v-col class="d-flex" md="2" sm="12" xs="12">
+                        <v-btn class="ml-2 mt-3 text-right"
                                color="success"
                                type="submit"
                         >
@@ -216,7 +216,7 @@
         </v-content>
 
         <v-layout class="pa-4" row wrap>
-            <v-flex md11 sm10 xs10>
+            <v-flex class="pt-3" md11 sm10 xs10>
                 <v-pagination
                         :length="pagesCount"
                         @input="onChangeCurrentPage"
