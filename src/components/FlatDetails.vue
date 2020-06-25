@@ -10,9 +10,9 @@
                         ></v-img>
                     </v-card>
                 </v-flex>
-                <v-flex class="thumbnails-container pt-sm-1 pt-1" d-flex md3 sm4 xs7>
+                <v-flex class="thumbnails-container" d-flex md3 sm4 xs7>
                     <v-layout column justify-space-between wrap>
-                        <v-card class="thumbnail-container" flat tile>
+                        <v-card class="thumbnail-container pt-sm-1 pt-1" flat tile>
                             <v-flex d-flex>
                                 <v-img :src="layoutImage"
                                        @error="onErrorLayoutLoading"
@@ -20,7 +20,7 @@
                             </v-flex>
                         </v-card>
                         <v-card flat tile>
-                            <v-flex class="thumbnail-container" d-flex>
+                            <v-flex class="thumbnail-container pt-sm-1 pt-1" d-flex>
                                 <v-carousel cycle
                                             hide-delimiter-background
                                             show-arrows-on-hover
@@ -42,9 +42,9 @@
                 </v-flex>
 
                 <v-flex class="map-container pl-1 pt-sm-1 pt-1" d-flex md3 sm8 xs5>
-                    <v-layout column>
-                        <v-card flat tile>
-                            <l-map :center="center" :zoom="zoom" style="height: 400px">
+                    <v-layout column fill-height>
+                        <v-card flat height="100%" tile>
+                            <l-map :center="center" :zoom="zoom" style="height: 100%">
                                 <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
                                 <l-marker :icon="icon" :lat-lng="marker">
                                     <l-popup :content="content"/>
@@ -98,7 +98,7 @@
                 Расположение:
             </v-card-title>
 
-            <l-map :center="center" :zoom="zoom" style="height: 400px">
+            <l-map :center="center" :zoom="zoom" style="height: 300px">
                 <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
                 <l-marker :icon="icon" :lat-lng="marker">
                     <l-popup :content="content"/>

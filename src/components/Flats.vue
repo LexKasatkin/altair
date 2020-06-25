@@ -156,8 +156,8 @@
 
         <v-divider class="divider"></v-divider>
 
-        <v-content>
-            <v-row class="pl-3">
+        <v-content class="pa-4">
+            <v-row>
                 <v-select :items="orderings"
                           @change="onSelectOrdering"
                           menu-props="auto"
@@ -185,7 +185,7 @@
                 >{{labelBtnMap}}
                 </v-btn>
             </v-row>
-            <l-map :center="center" :zoom="zoom" class="mt-4" style="height: 400px" v-if="showMap">
+            <l-map :center="center" :zoom="zoom" class="mt-4" style="height: 300px" v-if="showMap">
                 <l-tile-layer :attribution="attribution"
                               :url="url"
                 ></l-tile-layer>
@@ -215,7 +215,7 @@
             </v-row>
         </v-content>
 
-        <v-layout row wrap>
+        <v-layout class="pa-4" row wrap>
             <v-flex md11 sm10 xs10>
                 <v-pagination
                         :length="pagesCount"
@@ -224,7 +224,7 @@
                         v-model="currentPage"
                 ></v-pagination>
             </v-flex>
-            <v-flex class="mr-2" md1 sm2 xs2>
+            <v-flex md1 sm2 xs2>
                 <v-select :items="pagination.limits"
                           @input="onChangeLimit"
                           v-model="currentLimit"
