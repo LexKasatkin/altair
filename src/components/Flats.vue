@@ -156,49 +156,52 @@
 
         <v-divider class="divider"></v-divider>
 
-        <v-content class="pa-4">
-            <v-row>
-                <v-select :items="orderings"
-                          @change="onSelectOrdering"
-                          menu-props="auto"
-                          single-line
-                          class="ma-3"
-                          item-text="title"
-                          item-value="value"
-                          v-model="currentOrdering"
-                >
-                    <template slot="selection" slot-scope="data">
-                        <v-icon color="#0058b1">{{ data.item.icon }}</v-icon>
-                        <v-subheader class="color-text">{{data.item.title}}</v-subheader>
-                    </template>
-                    <template slot="item" slot-scope="data">
-                        <v-icon color="#0058b1">{{ data.item.icon }}</v-icon>
-                        <v-subheader class="color-text">{{data.item.title}}</v-subheader>
-                    </template>
-                </v-select>
-                <v-spacer></v-spacer>
-                <v-spacer></v-spacer>
-                <v-btn @click="setMapShowing"
-                       class="text-right mt-5"
-                       color="green"
-                       outlined
-                >{{labelBtnMap}}
-                </v-btn>
-            </v-row>
-            <l-map :center="center" :zoom="zoom" class="mt-4" style="height: 300px" v-if="showMap">
-                <l-tile-layer :attribution="attribution"
-                              :url="url"
-                ></l-tile-layer>
-                <v-marker-cluster>
-                    <l-marker :icon="icon"
-                              :key="i"
-                              :lat-lng="marker.position"
-                              v-for="(marker,i) in this.markers">
-                        <l-popup :content="marker.content"/>
-                    </l-marker>
-                </v-marker-cluster>
-            </l-map>
+        <v-content class="pa-3">
+            <v-layout class="pr-3 pl-3" row wrap>
+                <v-flex class="justify-sm-center justify-center justify-md-start" d-flex md="7" sm="7" xs="12">
+                    <v-select :items="orderings"
+                              @change="onSelectOrdering"
+                              item-text="title"
+                              item-value="value"
+                              menu-props="auto"
+                              single-line
+                              v-model="currentOrdering"
+                    >
+                        <template slot="selection" slot-scope="data">
+                            <v-icon color="#0058b1">{{ data.item.icon }}</v-icon>
+                            <v-subheader class="color-text">{{data.item.title}}</v-subheader>
+                        </template>
+                        <template slot="item" slot-scope="data">
+                            <v-icon color="#0058b1">{{ data.item.icon }}</v-icon>
+                            <v-subheader class="color-text">{{data.item.title}}</v-subheader>
+                        </template>
+                    </v-select>
+                </v-flex>
+
+                <v-flex class="justify-start text-right" md="5" sm="5" xs="12">
+                    <v-btn @click="setMapShowing"
+                           class="mt-0 mt-sm-6 pl-2"
+                           color="green"
+                           outlined
+                    >{{labelBtnMap}}
+                    </v-btn>
+                </v-flex>
+            </v-layout>
         </v-content>
+
+        <l-map :center="center" :zoom="zoom" class="mt-4" style="height: 300px" v-if="showMap">
+            <l-tile-layer :attribution="attribution"
+                          :url="url"
+            ></l-tile-layer>
+            <v-marker-cluster>
+                <l-marker :icon="icon"
+                          :key="i"
+                          :lat-lng="marker.position"
+                          v-for="(marker,i) in this.markers">
+                    <l-popup :content="marker.content"/>
+                </l-marker>
+            </v-marker-cluster>
+        </l-map>
 
         <v-content>
             <v-row justify="start">
