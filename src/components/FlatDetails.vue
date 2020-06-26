@@ -2,7 +2,12 @@
     <v-card class="mx-auto main-container" elevation="6">
         <div>
             <v-layout class="pr-3 pl-3" row wrap>
-                <v-flex class="main-image-container pr-md-1" d-flex md6 sm12 xs12>
+                <v-flex class="main-image-container pr-md-1 justify-sm-center justify-center justify-md-start"
+                        d-flex
+                        md6
+                        sm12
+                        xs12
+                >
                     <v-card flat tile>
                         <v-img :src="mainImage"
                                @error="onErrorMainImageLoading"
@@ -239,7 +244,7 @@
 <style scoped>
 
     .main-image-container {
-        width: 320px;
+        width: 480px;
         height: auto;
     }
 

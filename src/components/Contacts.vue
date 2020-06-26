@@ -1,27 +1,29 @@
 <template>
     <v-content class="mx-auto main-container pb-3">
         <v-card elevation="6">
-            <v-row>
-                <v-col class="mt-n3" md="6" sm="6" xs="12">
+            <v-layout class="pr-3 pl-3" row wrap>
+                <v-flex class="justify-sm-center justify-center justify-md-start" d-flex md="6" sm="6" xs="12">
                     <v-img :src="avatar" class="avatar">
                     </v-img>
-                </v-col>
+                </v-flex>
 
-                <v-col class="mt-n3" md="6" sm="6" xs="12">
+                <v-flex class="justify-start" md="6" sm="6" xs="12">
                     <v-card-title class="text-start">Касаткина Анна Андреевна</v-card-title>
                     <v-card-subtitle class="text-start">209-51-71, 8 (983) 269-51-71</v-card-subtitle>
                     <v-card-text class="text-start">2095171@mail.ru
                         <p>Наш адрес: {{this.address}}</p>
                     </v-card-text>
-                </v-col>
-            </v-row>
+                </v-flex>
+            </v-layout>
 
-            <l-map :center="center" :zoom="zoom" style="height: 300px">
-                <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
-                <l-marker :icon="icon" :lat-lng="marker">
-                    <l-popup :content="this.address"/>
-                </l-marker>
-            </l-map>
+            <v-layout class="pt-4">
+                <l-map :center="center" :zoom="zoom" style="height: 300px">
+                    <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
+                    <l-marker :icon="icon" :lat-lng="marker">
+                        <l-popup :content="this.address"/>
+                    </l-marker>
+                </l-map>
+            </v-layout>
         </v-card>
     </v-content>
 </template>
