@@ -15,6 +15,7 @@
                     </v-content>
                 </v-sheet>
             </div>
+            <Footer></Footer>
         </div>
     </v-app>
 </template>
@@ -25,9 +26,10 @@
     import {mapActions, mapGetters} from "vuex";
     import ProgressDialog from "./components/ProgressDialog";
     import NavigationDrawer from "./components/NavigationDrawer";
+    import Footer from './components/Footer'
 
     export default {
-        components: {Header, ProgressDialog, NavigationDrawer},
+        components: {Header, ProgressDialog, NavigationDrawer, Footer},
 
         created() {
             axios.interceptors.request.use((config) => {

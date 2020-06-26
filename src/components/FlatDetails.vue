@@ -49,12 +49,11 @@
                 <v-flex class="map-container pl-1 pt-sm-1 pt-1 pt-md-0 pt-lg-0" d-flex md3 sm8 xs5>
                     <v-layout column fill-height>
                         <v-card flat height="100%" tile>
-                            <l-map :center="center" :zoom="zoom" style="height: 100%">
-                                <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
-                                <l-marker :icon="icon" :lat-lng="marker">
-                                    <l-popup :content="content"/>
-                                </l-marker>
-                            </l-map>
+                            <OpenMapComponent :center="marker"
+                                              :content="content"
+                                              :height="'100%'"
+                                              :marker="marker"
+                            ></OpenMapComponent>
                         </v-card>
                     </v-layout>
                 </v-flex>
@@ -103,30 +102,23 @@
                 Расположение:
             </v-card-title>
 
-            <l-map :center="center" :zoom="zoom" style="height: 300px">
-                <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
-                <l-marker :icon="icon" :lat-lng="marker">
-                    <l-popup :content="content"/>
-                </l-marker>
-            </l-map>
+            <OpenMapComponent :center="marker"
+                              :content="content"
+                              :height="'300px'"
+                              :marker="marker"
+            ></OpenMapComponent>
         </div>
     </v-card>
 </template>
 
 <script>
     import {mapActions, mapGetters} from "vuex";
-    import {LMap, LMarker, LPopup, LTileLayer} from 'vue2-leaflet';
-    import {icon} from "leaflet";
+    import OpenMapComponent from '../components/OpenMapComponent'
 
     export default {
         name: "FlatDetails",
 
-        components: {
-            LMap,
-            LTileLayer,
-            LMarker,
-            LPopup,
-        },
+        components: {OpenMapComponent,},
 
         data() {
             return {
@@ -134,20 +126,8 @@
                 errorMainImage: null,
                 errorLayout: null,
 
-                url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                zoom: 15,
-                marker: [56.010563, 92.852572],
-                center: [56.010563, 92.852572],
+                marker: [0, 0],
                 content: null,
-                icon: icon({
-                    iconUrl: "https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Marker-Outside-Azure.png",
-                    shadowUrl: require("@/assets/img/shadow.png"),
-                    iconSize: [48, 48],
-                    shadowSize: [48, 48],
-                    iconAnchor: [20, 20],
-                    shadowAnchor: [20, 20],
-                }),
             }
         },
 

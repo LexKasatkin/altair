@@ -1,0 +1,102 @@
+<template>
+    <v-footer class="mt-4" elevation="6" height="auto" padless>
+        <v-card class="flex" flat tile>
+
+            <v-card-title class="blue white--text">
+                <strong class="subtitle-2">Присоединяйтсь к нам в социальных сетях</strong>
+                <v-spacer></v-spacer>
+                <v-btn
+                        :href="socialNetwork.route"
+                        :key="socialNetwork"
+                        class="mx-3"
+                        dark
+                        icon
+                        target="_blank"
+                        v-for="socialNetwork in socialNetworks"
+                >
+                    <v-icon size="32px">{{ socialNetwork.icon }}</v-icon>
+                </v-btn>
+            </v-card-title>
+
+            <v-content>
+                <v-card-text>
+                    <v-layout>
+                        <v-flex class="pt-4" column layout xs3>
+                            <OpenMapComponent :center="[55.980180, 92.914331]"
+                                              :content="address"
+                                              :height="'170px'"
+                                              :marker="[55.980180, 92.914331]"
+                            ></OpenMapComponent>
+                        </v-flex>
+
+                        <v-flex class="ml-4 pt-4" column layout xs9>
+                            <span class="body-2 text-start">КОНТАКТЫ</span>
+                            <v-list dense>
+                                <v-list-item
+                                        :href="contact.link"
+                                        :key="contact"
+                                        class="ma-2"
+                                        color="transparent"
+                                        link
+                                        v-for="contact in contacts"
+                                >
+                                    <v-list-item-icon>
+                                        <v-icon>{{ contact.icon }}</v-icon>
+                                    </v-list-item-icon>
+
+                                    <v-list-item-content>
+                                        <v-list-item-title class="text-start">{{ contact.content }}
+                                        </v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                            </v-list>
+                        </v-flex>
+                    </v-layout>
+                </v-card-text>
+            </v-content>
+
+            <v-divider></v-divider>
+
+            <v-card-actions class="justify-center">
+                <strong>&copy;Lex</strong> - 2020
+            </v-card-actions>
+
+        </v-card>
+    </v-footer>
+</template>
+
+<script>
+    import OpenMapComponent from "./OpenMapComponent";
+
+    export default {
+        name: "Footer",
+        components: {OpenMapComponent},
+        data() {
+            return {
+                socialNetworks: [{route: 'https://vk.com/ainvest24', icon: 'mdi-vk'}],
+                address: 'г.Красноярск,ул, Мусоргского 18,  660019',
+                contacts: [
+                    {
+                        icon: 'mdi-home',
+                        content: 'г.Красноярск,ул, Мусоргского 18,  660019',
+                        link: 'https://www.google.com/maps/place/55.980180,92.914331'
+                    },
+                    {
+                        icon: 'mdi-email',
+                        content: '2095171@mail.ru',
+                        link: 'mailto:2095171@mail.ru'
+                    },
+                    {
+                        icon: 'mdi-phone',
+                        content: '209-51-71',
+                        link: 'tel:209-51-71'
+                    },
+                ]
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

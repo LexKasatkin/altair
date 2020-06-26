@@ -224,6 +224,7 @@
                         :length="pagesCount"
                         @input="onChangeCurrentPage"
                         circle
+                        color="blue"
                         v-model="currentPage"
                 ></v-pagination>
             </v-flex>

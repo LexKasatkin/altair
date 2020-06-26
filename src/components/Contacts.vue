@@ -1,5 +1,5 @@
 <template>
-    <v-content class="mx-auto main-container pb-3">
+    <v-content class="mx-auto main-container mb-3">
         <v-card elevation="6">
             <v-layout class="pr-3 pl-3" row wrap>
                 <v-flex class="justify-sm-center justify-center justify-md-start" d-flex md="6" sm="6" xs="12">
@@ -17,46 +17,27 @@
             </v-layout>
 
             <v-layout class="pt-4">
-                <l-map :center="center" :zoom="zoom" style="height: 300px">
-                    <l-tile-layer :attribution="attribution" :url="url"></l-tile-layer>
-                    <l-marker :icon="icon" :lat-lng="marker">
-                        <l-popup :content="this.address"/>
-                    </l-marker>
-                </l-map>
+                <OpenMapComponent :center="[55.980180, 92.914331]"
+                                  :content="address"
+                                  :height="'300px'"
+                                  :marker="[55.980180, 92.914331]"
+                ></OpenMapComponent>
             </v-layout>
         </v-card>
     </v-content>
 </template>
 
 <script>
-    import {icon} from "leaflet";
-    import {LPopup} from 'vue2-leaflet';
+    import OpenMapComponent from "./OpenMapComponent";
 
     export default {
         name: "Contacts",
 
-        components: {
-            LPopup,
-        },
+        components: {OpenMapComponent},
 
         data() {
             return {
-                address: "г.Красноярск, ул. Мусорского 18",
-
-                url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                zoom: 16,
-                marker: [55.980180, 92.914331],
-                center: [55.980180, 92.914331],
-                content: null,
-                icon: icon({
-                    iconUrl: "https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Marker-Outside-Azure.png",
-                    shadowUrl: require("@/assets/img/shadow.png"),
-                    iconSize: [48, 48],
-                    shadowSize: [48, 48],
-                    iconAnchor: [20, 20],
-                    shadowAnchor: [20, 20],
-                }),
+                address: "г.Красноярск,ул, Мусоргского 18,  660019",
             }
         },
 
