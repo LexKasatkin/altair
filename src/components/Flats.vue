@@ -309,7 +309,7 @@
             },
 
             costMaxRules(value) {
-                if (!this.costMin || Number(value) >= Number(this.costMin))
+                if (!this.costMin || Number(value) >= Number(this.costMin) || !value)
                     return true;
                 else {
                     return 'Максимальная стоимость должна быть больше минимальной.';
@@ -317,7 +317,7 @@
             },
 
             costMinRules(value) {
-                if (!this.costMax || Number(value) <= Number(this.costMax))
+                if (!this.costMax || Number(value) <= Number(this.costMax) || !value)
                     return true;
                 else {
                     return 'Минимальная стоимость должна быть меньше максимальной.';
@@ -325,7 +325,7 @@
             },
 
             squareMaxRules(value) {
-                if (!this.squareMin || Number(value) >= Number(this.squareMin))
+                if (!this.squareMin || Number(value) >= Number(this.squareMin) || !value)
                     return true;
                 else {
                     return 'Максимальная площадь должна быть больше минимальной.';
@@ -333,7 +333,7 @@
             },
 
             squareMinRules(value) {
-                if (!this.squareMax || Number(value) <= Number(this.squareMax))
+                if (!this.squareMax || Number(value) <= Number(this.squareMax) || !value)
                     return true;
                 else {
                     return 'Минимальная площадь должна быть меньше максимальной.';
