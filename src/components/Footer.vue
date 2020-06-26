@@ -3,7 +3,7 @@
         <v-card class="flex" flat tile>
 
             <v-card-title class="blue white--text">
-                <strong class="subtitle-2">Присоединяйтсь к нам в социальных сетях</strong>
+                <strong class="subtitle-2">Мы в социальных сетях</strong>
                 <v-spacer></v-spacer>
                 <v-btn
                         :href="socialNetwork.route"
@@ -21,21 +21,20 @@
             <v-content>
                 <v-card-text>
                     <v-layout>
-                        <v-flex class="pt-4" column layout xs3>
+                        <v-flex class="pt-4" column layout md4 sm3 xs12>
                             <OpenMapComponent :center="[55.980180, 92.914331]"
                                               :content="address"
-                                              :height="'170px'"
+                                              :height="'150px'"
                                               :marker="[55.980180, 92.914331]"
                             ></OpenMapComponent>
                         </v-flex>
 
-                        <v-flex class="ml-4 pt-4" column layout xs9>
+                        <v-flex class="ml-4 pt-4" column layout md8 sm9 xs12>
                             <span class="body-2 text-start">КОНТАКТЫ</span>
                             <v-list dense>
                                 <v-list-item
                                         :href="contact.link"
                                         :key="contact"
-                                        class="ma-2"
                                         color="transparent"
                                         link
                                         v-for="contact in contacts"
