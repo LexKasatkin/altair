@@ -36,13 +36,6 @@
                     </v-layout>
                 </v-card-text>
             </v-content>
-
-            <v-divider></v-divider>
-
-            <v-card-actions class="justify-center">
-                <strong>&copy;Lex</strong> - 2020
-            </v-card-actions>
-
         </v-card>
     </v-footer>
 </template>

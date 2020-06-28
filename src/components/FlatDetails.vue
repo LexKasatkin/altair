@@ -1,113 +1,88 @@
 <template>
-    <v-card class="mx-auto main-container" elevation="6">
-        <div>
-            <v-layout class="pr-3 pl-3" row wrap>
-                <v-flex class="main-image-container pr-md-1 justify-sm-center justify-center justify-md-start"
-                        d-flex
-                        md6
-                        sm12
-                        xs12
-                >
+    <v-card class="mx-auto main-container mb-2" elevation="6">
+        <v-layout class="pr-3 pl-3" row wrap>
+            <v-flex :class="[isMobile ? 'd-flex' : 'wrap']"
+                    class="main-image-container justify-sm-center justify-center justify-md-start"
+                    md5
+                    sm6
+                    xs12
+            >
+                <v-carousel class="main-image-container"
+                            cycle
+                            height="320px"
+                            show-arrows-on-hover>
                     <v-card flat tile>
-                        <v-img :src="mainImage"
-                               @error="onErrorMainImageLoading"
-                               class="main-image"
-                        ></v-img>
+                        <v-carousel-item
+                                :key="i"
+                                v-for="(image,i) in this.images"
+                        >
+                            <v-img :src="image.src"
+                                   @error="image.errorHandler"
+                                   class="main-image"
+                            ></v-img>
+                        </v-carousel-item>
                     </v-card>
-                </v-flex>
-                <v-flex class="thumbnails-container" d-flex md3 sm4 xs7>
-                    <v-layout column justify-space-between wrap>
-                        <v-card class="thumbnail-container pt-sm-1 pt-1 pt-md-0 pt-lg-0" flat tile>
-                            <v-flex d-flex>
-                                <v-img :src="layoutImage"
-                                       @error="onErrorLayoutLoading"
-                                ></v-img>
-                            </v-flex>
-                        </v-card>
-                        <v-card flat tile>
-                            <v-flex class="thumbnail-container pt-1" d-flex>
-                                <v-carousel cycle
-                                            hide-delimiter-background
-                                            show-arrows-on-hover
-                                            height="auto">
-                                    <v-card flat tile>
-                                        <v-carousel-item
-                                                :key="i"
-                                                v-for="(image,i) in this.images"
-                                        >
-                                            <v-img :src="image.src"
-                                                   @error="image.errorHandler"
-                                            ></v-img>
-                                        </v-carousel-item>
-                                    </v-card>
-                                </v-carousel>
-                            </v-flex>
-                        </v-card>
-                    </v-layout>
-                </v-flex>
+                </v-carousel>
 
-                <v-flex class="map-container pl-1 pt-sm-1 pt-1 pt-md-0 pt-lg-0" d-flex md3 sm8 xs5>
-                    <v-layout column fill-height>
-                        <v-card flat height="100%" tile>
-                            <OpenMapComponent :center="marker"
-                                              :content="content"
-                                              :height="'100%'"
-                                              :marker="marker"
-                            ></OpenMapComponent>
-                        </v-card>
-                    </v-layout>
-                </v-flex>
-            </v-layout>
-        </div>
-        <div>
-            <v-card-title class="headline text-start">
-                {{formattedCost}}
-            </v-card-title>
+                <OpenMapComponent :center="marker"
+                                  :content="content"
+                                  :height="'320px'"
+                                  :marker="marker"
+                                  class="mt-1"
+                                  v-if="!isMobile"
+                ></OpenMapComponent>
+            </v-flex>
+            <v-flex class="main-image-container justify-sm-center justify-center justify-md-start"
+                    md7
+                    sm6
+                    wrap
+                    xs12
+            >
+                <v-card-title class="headline text-start">
+                    {{formattedCost}}
+                </v-card-title>
 
-            <v-card-subtitle class="text-start">
-                {{formattedSquareCost}}/м<sup>2</sup>
-            </v-card-subtitle>
+                <v-card-subtitle class="text-start">
+                    {{formattedSquareCost}}/м<sup>2</sup>
+                </v-card-subtitle>
+
+                <v-card-title class="text-start">
+                    Характеристики
+                </v-card-title>
+                <v-content :key="i"
+                           v-for="(qualification, i) in qualifications">
+                    <v-card-subtitle class="text-start font-weight-bold">
+                        {{qualification.title}}
+                    </v-card-subtitle>
+
+                    <v-layout :key="j"
+                              :ripple="false"
+                              row
+                              v-for="(subQualification, j) in qualification.values">
+                        <v-flex md4 sm4 xs5>
+                            <v-card-text class="text-start ml-4 mt-0 mb-0"
+                                         v-text="subQualification.title"></v-card-text>
+                        </v-flex>
+                        <v-flex md8 sm8 xs7>
+                            <v-card-text class="text-start ml-4 mt-0 mb-0"
+                                         v-text="subQualification.content"></v-card-text>
+                        </v-flex>
+                    </v-layout>
+                </v-content>
+            </v-flex>
             <v-card-title class="text-start">
                 Описание
             </v-card-title>
             <v-card-text class="text-start">
                 {{this.flat.description}}
             </v-card-text>
-            <v-card-title class="text-start">
-                Характеристики
-            </v-card-title>
-            <v-content :key="i"
-                       v-for="(qualification, i) in qualifications">
-                <v-card-subtitle class="text-start font-weight-bold">
-                    {{qualification.title}}
-                </v-card-subtitle>
-
-                <v-layout :key="j"
-                          :ripple="false"
-                          row
-                          v-for="(subQualification, j) in qualification.values">
-                    <v-flex md3 sm4 xs4>
-                        <v-card-text class="text-start ml-4"
-                                     v-text="subQualification.title"></v-card-text>
-                    </v-flex>
-                    <v-flex md9 sm8 xs8>
-                        <v-card-text class="text-start ml-4"
-                                     v-text="subQualification.content"></v-card-text>
-                    </v-flex>
-                </v-layout>
-            </v-content>
-
-
-            <v-card-title class="text-start">
-                Расположение:
-            </v-card-title>
-
             <OpenMapComponent :center="marker"
                               :content="content"
                               :height="'300px'"
                               :marker="marker"
+                              v-if="isMobile"
             ></OpenMapComponent>
-        </div>
+        </v-layout>
     </v-card>
 </template>
 
@@ -190,6 +165,10 @@
                     {src: this.mainImage, errorHandler: this.onErrorMainImageLoading},
                     {src: this.layoutImage, errorHandler: this.onErrorLayoutLoading}
                 ];
+            },
+
+            isMobile() {
+                return this.$vuetify.breakpoint.name === 'xs';
             },
 
             qualifications() {
