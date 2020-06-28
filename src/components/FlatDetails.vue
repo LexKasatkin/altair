@@ -197,7 +197,7 @@
                     title: 'О квартире', values: [
                         {title: 'Общая площадь', content: `${this.flat.square} м.кв.`},
                         {title: 'Комнатнасть', content: this.flat.flat_type.name},
-                        {title: 'Этаж/Этажность', content: `${this.flat.floor}/${this.flat.max_floor}`},
+                        {title: 'Этаж/Этажность', content: `${this.flat.floor} из ${this.flat.max_floor}`},
                     ],
                 }, {
                     title: 'О доме', values: [
