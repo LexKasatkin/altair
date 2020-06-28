@@ -17,10 +17,22 @@
                 ></v-img>
             </template>
             <v-app-bar-nav-icon @click.stop="setDrawer"></v-app-bar-nav-icon>
+
             <v-spacer/>
             <v-toolbar-title>{{title}}</v-toolbar-title>
-            <v-spacer/>
 
+            <v-spacer/>
+            <v-btn
+                    :href="socialNetwork.route"
+                    :key="socialNetwork"
+                    class="mx-3"
+                    dark
+                    icon
+                    target="_blank"
+                    v-for="socialNetwork in socialNetworks"
+            >
+                <v-icon size="32px">{{ socialNetwork.icon }}</v-icon>
+            </v-btn>
             <template v-if="showTabs" v-slot:extension>
                 <Tabs></Tabs>
             </template>
@@ -39,6 +51,7 @@
             return {
                 title: 'Альтаир Инвест',
                 drawer: false,
+                socialNetworks: [{route: 'https://vk.com/ainvest24', icon: 'mdi-vk'}],
             }
         },
 

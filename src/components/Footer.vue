@@ -1,27 +1,10 @@
 <template>
     <v-footer class="mt-4" elevation="6" height="auto" padless>
         <v-card class="flex" flat tile>
-
-            <v-card-title class="blue white--text">
-                <strong class="subtitle-2">Мы в социальных сетях</strong>
-                <v-spacer></v-spacer>
-                <v-btn
-                        :href="socialNetwork.route"
-                        :key="socialNetwork"
-                        class="mx-3"
-                        dark
-                        icon
-                        target="_blank"
-                        v-for="socialNetwork in socialNetworks"
-                >
-                    <v-icon size="32px">{{ socialNetwork.icon }}</v-icon>
-                </v-btn>
-            </v-card-title>
-
             <v-content>
                 <v-card-text>
                     <v-layout>
-                        <v-flex class="pt-4" column layout md4 sm3 xs12>
+                        <v-flex class="pt-2" column layout md4 sm3 xs12>
                             <OpenMapComponent :center="[55.980180, 92.914331]"
                                               :content="address"
                                               :height="'150px'"
@@ -29,7 +12,7 @@
                             ></OpenMapComponent>
                         </v-flex>
 
-                        <v-flex class="ml-4 pt-4" column layout md8 sm9 xs12>
+                        <v-flex class="ml-4 pt-2 pl-4" column layout md5 sm5 xs12>
                             <span class="body-2 text-start">КОНТАКТЫ</span>
                             <v-list dense>
                                 <v-list-item
@@ -72,7 +55,6 @@
         components: {OpenMapComponent},
         data() {
             return {
-                socialNetworks: [{route: 'https://vk.com/ainvest24', icon: 'mdi-vk'}],
                 address: 'г.Красноярск,ул, Мусоргского 18,  660019',
                 contacts: [
                     {
