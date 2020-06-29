@@ -7,6 +7,7 @@
                 elevation="10"
                 fade-img-on-scroll
                 prominent
+                dense
                 scroll-target="#scrolling-techniques-3"
                 shrink-on-scroll
                 src="@/assets/img/header.jpg"
@@ -16,7 +17,7 @@
                        v-bind="props"
                 ></v-img>
             </template>
-            <v-app-bar-nav-icon @click.stop="setDrawer"></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon @click.stop="setDrawer" v-if="!showTabs"></v-app-bar-nav-icon>
 
             <v-spacer/>
             <v-toolbar-title>{{title}}</v-toolbar-title>
@@ -63,20 +64,7 @@
 
         computed: {
             showTabs() {
-                switch (this.$vuetify.breakpoint.name) {
-                    case 'xs':
-                        return false
-                    case 'sm':
-                        return false
-                    case 'md':
-                        return true
-                    case 'lg':
-                        return true
-                    case 'xl':
-                        return true
-                    default:
-                        return true
-                }
+                return !(this.$vuetify.breakpoint.name === 'xs' || this.$vuetify.breakpoint.name === 'sm');
             },
         }
     }

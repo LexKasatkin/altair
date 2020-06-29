@@ -10,7 +10,7 @@
                         class="overflow-y-auto"
                         id="scrolling-techniques-3"
                 >
-                    <v-content :class="[bigMargin ? 'content-margin-big' : 'content-margin'  ]">
+                    <v-content :class="[bigMargin ? 'content-margin-big' : 'content-margin']">
                         <router-view></router-view>
                     </v-content>
                 </v-sheet>
@@ -71,20 +71,7 @@
             ]),
 
             bigMargin() {
-                switch (this.$vuetify.breakpoint.name) {
-                    case 'xs':
-                        return false
-                    case 'sm':
-                        return false
-                    case 'md':
-                        return true
-                    case 'lg':
-                        return true
-                    case 'xl':
-                        return true
-                    default:
-                        return true
-                }
+                return !(this.$vuetify.breakpoint.name === 'xs' || this.$vuetify.breakpoint.name === 'sm');
             },
         }
     }
@@ -108,11 +95,11 @@
     }
 
     .content-margin-big {
-        margin-top: 250px;
+        margin-top: 220px;
     }
 
     .content-margin {
-        margin-top: 150px;
+        margin-top: 120px;
     }
 
 
