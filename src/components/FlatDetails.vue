@@ -153,18 +153,20 @@
             },
 
             mainImage() {
-                return this.errorMainImage || !this.flat.main_image_big ? this.noImage : this.flat.main_image_big;
+                return this.errorMainImage || !this.flat.main_image_big ? null : this.flat.main_image_big;
             },
 
             layoutImage() {
-                return this.errorLayout || !this.flat.layout_thumbnail ? this.noImage : this.flat.layout_thumbnail;
+                return this.errorLayout || !this.flat.layout_thumbnail ? null : this.flat.layout_thumbnail;
             },
 
             images() {
                 return [
                     {src: this.mainImage, errorHandler: this.onErrorMainImageLoading},
                     {src: this.layoutImage, errorHandler: this.onErrorLayoutLoading}
-                ];
+                ].filter(image => {
+                    if (image.src) return image
+                });
             },
 
             isMobile() {
