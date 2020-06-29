@@ -53,30 +53,32 @@
                 </v-row>
 
                 <v-row justify="space-between">
-                    <v-col class="d-flex" cols="12" md="5" sm="12">
+                    <v-col class="d-flex" cols="12" md="6" sm="12">
                         <v-row>
-                            <v-col class="d-flex mt-2" md="4" sm="4" xs="4">
+                            <v-col class="d-flex mt-2" md="4" sm="4" xs="2">
                                 Стоимость:
                             </v-col>
-                            <v-col class="d-flex" md="4" sm="4" xs="4">
+                            <v-col class="d-flex" md="4" sm="4" xs="5">
                                 <v-text-field
                                         @input="setCostMin"
                                         countFrom
                                         dense
                                         :rules="[costMinRules]"
                                         label="От"
+                                        :suffix="costSuffix"
                                         type="number"
                                         outlined
                                         v-model.number="costMin"
                                 ></v-text-field>
                             </v-col>
-                            <v-col class="align-center" md="4" sm="4" xs="4">
+                            <v-col class="align-center" md="4" sm="4" xs="5">
                                 <v-text-field
                                         @input="setCostMax"
                                         countTo
                                         dense
                                         :rules="[costMaxRules]"
                                         type="number"
+                                        :suffix="costSuffix"
                                         label="До"
                                         outlined
                                         v-model.number="costMax"
@@ -85,24 +87,27 @@
                         </v-row>
                     </v-col>
 
-                    <v-col class="d-flex" cols="12" md="5" sm="12">
+                    <v-col class="d-flex" cols="12" md="6" sm="12">
                         <v-row>
-                            <v-col class="d-flex mt-2" md="4" sm="4" xs="4">
+                            <v-col class="d-flex mt-2" md="4" sm="4" xs="2">
                                 Площадь:
                             </v-col>
-                            <v-col class="d-flex" md="4" sm="4" xs="4">
+                            <v-col class="d-flex" md="4" sm="4" xs="5">
                                 <v-text-field
                                         @input="setSquareMin"
                                         dense
                                         label="От"
                                         :rules="[squareMinRules]"
                                         type="number"
+                                        :suffix="squareSuffix"
                                         outlined
                                         squareMin
                                         v-model.number="squareMin"
-                                ></v-text-field>
+                                >
+                                    <template slot="append">2</template>
+                                </v-text-field>
                             </v-col>
-                            <v-col class="d-flex" md="4" sm="4" xs="4">
+                            <v-col class="d-flex" md="4" sm="4" xs="5">
                                 <v-text-field
                                         @input="setSquareMax"
                                         dense
@@ -110,13 +115,16 @@
                                         :rules="[squareMaxRules]"
                                         type="number"
                                         outlined
+                                        :suffix="squareSuffix"
                                         squareMax
                                         v-model.number="squareMax"
-                                ></v-text-field>
+                                >
+                                    <template slot="append">2</template>
+                                </v-text-field>
                             </v-col>
                         </v-row>
                     </v-col>
-                    <v-col class="d-flex" md="2" sm="12" xs="12">
+                    <v-col class="d-flex" md="12" sm="12" xs="12">
                         <v-btn class="ml-2 mt-3 text-right"
                                color="success"
                                type="submit"
@@ -219,7 +227,7 @@
         </v-content>
 
         <v-layout class="pa-4" row wrap>
-            <v-flex class="pt-3" md11 sm10 xs10>
+            <v-flex class="pt-3 pl-12" md11 sm10 xs10>
                 <v-pagination
                         :length="pagesCount"
                         @input="onChangeCurrentPage"
@@ -261,6 +269,8 @@
                 pagination: {
                     limits: [24, 48, 72, 96],
                 },
+                costSuffix: 'тыс.',
+                squareSuffix: 'м',
 
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
