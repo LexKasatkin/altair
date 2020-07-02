@@ -12,9 +12,9 @@
                     </v-card-subtitle>
 
                     <v-card-text class="text-justify">
-                        <b class="color-text">{{flat.street.name}} {{flat.house}} кв. {{flat.flat}}</b> |
+                        <b class="color-text">{{flat.street}} {{flat.house}} кв. {{flat.flat}}</b> |
                         {{flat.square}}м<sup>2</sup> |
-                        {{flat.flat_type.name}}
+                        {{flat.flat_type}}
                     </v-card-text>
                 </div>
                 <v-carousel @click="null"

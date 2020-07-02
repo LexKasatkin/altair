@@ -177,14 +177,14 @@
                 return [{
                     title: 'О квартире', values: [
                         {title: 'Общая площадь', content: `${this.flat.square} м.кв.`},
-                        {title: 'Комнатнасть', content: this.flat.flat_type.name},
+                        {title: 'Комнатнасть', content: this.flat.flat_type},
                         {title: 'Этаж/Этажность', content: `${this.flat.floor} из ${this.flat.max_floor}`},
                     ],
                 }, {
                     title: 'О доме', values: [
-                        {title: 'Стены', content: this.flat.wall_material.name},
-                        {title: 'Застройщик', content: this.flat.developer.name},
-                        {title: 'Жилой комплекс', content: this.flat.residential_complex.name},
+                        {title: 'Стены', content: this.flat.wall_material},
+                        {title: 'Застройщик', content: this.flat.developer},
+                        {title: 'Жилой комплекс', content: this.flat.residential_complex},
                         {title: 'Срок сдачи', content: `${this.flat.year_of_completion} ${this.flat.quarter}`},
                     ]
                 }
@@ -194,7 +194,7 @@
 
         watch: {
             flat: function () {
-                this.content = `${this.flat.street.district.city.name}, ${this.flat.street.name} ${this.flat.house}`
+                this.content = `${this.flat.city}, ${this.flat.street} ${this.flat.house}`
                 this.center = [this.flat.longitude, this.flat.latitude]
                 this.marker = [this.flat.longitude, this.flat.latitude];
             },
