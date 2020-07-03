@@ -11,8 +11,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         flats: [],
-        countFlats: [],
-        activeCountFlatsId: null,
+        typesFlat: [],
+        activeTypeFlatId: null,
         districts: [],
         activeDistrictId: null,
         developers: [],
@@ -34,7 +34,7 @@ const store = new Vuex.Store({
 
         filters: {
             activeWallMaterialId: 'Материал стен',
-            activeCountFlatsId: 'Количество комнат',
+            activeTypeFlatId: 'Количество комнат',
             activeDistrictId: 'Район',
             activeDeveloperId: 'Застройщик',
             costMin: 'Минимальная стоимость',
@@ -58,14 +58,14 @@ const store = new Vuex.Store({
             state.flats = flats;
         },
 
-        setCountFlatsToState(state, countFlats) {
-            state.countFlats = countFlats;
+        setTypesFlatToState(state, typesFlat) {
+            state.typesFlat = typesFlat;
         },
 
-        setActiveCountFlatsId(state, activeCountFlatsId) {
-            state.activeCountFlatsId = activeCountFlatsId;
-            if (activeCountFlatsId && !state.currentFilters[state.filters.activeCountFlatsId]) {
-                state.currentFilters['activeCountFlatsId'] = state.filters.activeCountFlatsId;
+        setActiveTypeFlatId(state, activeTypeFlatId) {
+            state.activeTypeFlatId = activeTypeFlatId;
+            if (activeTypeFlatId && !state.currentFilters[state.filters.activeTypeFlatId]) {
+                state.currentFilters['activeTypeFlatId'] = state.filters.activeTypeFlatId;
             }
         },
 
@@ -146,7 +146,7 @@ const store = new Vuex.Store({
             state.activeWallMaterialId = null;
             state.activeDeveloperId = null;
             state.activeDistrictId = null;
-            state.activeCountFlatsId = null;
+            state.activeTypeFlatId = null;
         },
 
         setPagesCount(state, pagesCount) {
@@ -206,7 +206,7 @@ const store = new Vuex.Store({
         getFlats({commit, state}) {
             return axios.get(`${API_HOST}/flats/`, {
                     params: {
-                        flat_type: state.activeCountFlatsId,
+                        flat_type: state.activeTypeFlatId,
                         district: state.activeDistrictId,
                         developer: state.activeDeveloperId,
                         cost_min: state.costMin ? state.costMin * 1000 : null,
@@ -234,17 +234,17 @@ const store = new Vuex.Store({
             )
         },
 
-        getCountFlats({commit}) {
+        getTypesFlat({commit}) {
             return axios.get(`${API_HOST}/flat-types/`, {
                     params: {}, headers: HEADERS,
                     method: "GET"
                 }
             ).then(response => {
-                commit('setCountFlatsToState', response.data.flat_types);
+                commit('setTypesFlatToState', response.data.flat_types);
                 this.dispatch('loader/setLoading', false);
                 return response.flat_types;
             }).catch(error => {
-                    console.log(error);
+                console.log(error);
                     return error;
                 }
             )
@@ -323,12 +323,12 @@ const store = new Vuex.Store({
             return state.flats;
         },
 
-        countFlats(state) {
-            return state.countFlats;
+        typesFlat(state) {
+            return state.typesFlat;
         },
 
-        activeCountFlatsId(state) {
-            return state.activeCountFlatsId;
+        activeTypeFlatId(state) {
+            return state.activeTypeFlatId;
         },
 
         districts(state) {

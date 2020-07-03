@@ -8,10 +8,10 @@
             >
                 <v-row justify="space-between">
                     <v-col class="d-flex" cols="12" sm="3">
-                        <v-select :items="countFlats"
-                                  :value="activeCountFlatsId"
-                                  @input="setActiveCountFlatsId"
-                                  countFlat
+                        <v-select :items="typesFlat"
+                                  :value="activeTypeFlatId"
+                                  @input="setTypeFlatId"
+                                  typeFlat
                                   item-text="name"
                                   item-value="id"
                                   label="Количество комнат"
@@ -21,7 +21,7 @@
                     <v-col class="d-flex" cols="12" sm="3">
                         <v-select :items="districts"
                                   :value="activeDistrictId"
-                                  @input="setActiveDistrictId"
+                                  @input="setDistrictId"
                                   district
                                   item-text="name"
                                   item-value="id"
@@ -32,7 +32,7 @@
                     <v-col class="d-flex" cols="12" sm="3">
                         <v-select :items="developers"
                                   :value="activeDeveloperId"
-                                  @input="setActiveDeveloperId"
+                                  @input="setDeveloperId"
                                   developer
                                   item-text="name"
                                   item-value="id"
@@ -43,7 +43,7 @@
                     <v-col class="d-flex" cols="12" sm="3">
                         <v-select :items="wallMaterials"
                                   :value="activeWallMaterialId"
-                                  @input="setActiveWallMaterialId"
+                                  @input="setWallMaterialId"
                                   item-text="name"
                                   item-value="id"
                                   label="Материал стен"
@@ -60,7 +60,7 @@
                             </v-col>
                             <v-col class="d-flex" md="4" sm="4" xs="5">
                                 <v-text-field
-                                        @input="setCostMin"
+                                        @input="setMinCost"
                                         countFrom
                                         dense
                                         :rules="[costMinRules]"
@@ -73,7 +73,7 @@
                             </v-col>
                             <v-col class="align-center" md="4" sm="4" xs="5">
                                 <v-text-field
-                                        @input="setCostMax"
+                                        @input="setMaxCost"
                                         countTo
                                         dense
                                         :rules="[costMaxRules]"
@@ -94,7 +94,7 @@
                             </v-col>
                             <v-col class="d-flex" md="4" sm="4" xs="5">
                                 <v-text-field
-                                        @input="setSquareMin"
+                                        @input="setMinSquare"
                                         dense
                                         label="От"
                                         :rules="[squareMinRules]"
@@ -109,7 +109,7 @@
                             </v-col>
                             <v-col class="d-flex" md="4" sm="4" xs="5">
                                 <v-text-field
-                                        @input="setSquareMax"
+                                        @input="setMaxSquare"
                                         dense
                                         label="До"
                                         :rules="[squareMaxRules]"
@@ -274,7 +274,7 @@
 
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                zoom: 10,
+                zoom: 9,
                 center: [56.010563, 92.852572],
                 icon: icon({
                     iconUrl: "https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Marker-Outside-Azure.png",
@@ -289,7 +289,7 @@
 
         methods: {
             ...mapMutations([
-                'setActiveCountFlatsId',
+                'setActiveTypeFlatId',
                 'setActiveDistrictId',
                 'setActiveDeveloperId',
                 'setCostMin',
@@ -301,7 +301,7 @@
 
             ...mapActions([
                 'getFlats',
-                'getCountFlats',
+                'getTypesFlat',
                 'getDistricts',
                 'getDevelopers',
                 'getWallMaterials',
@@ -313,6 +313,90 @@
                 'setMapShowing',
                 'setCurrentOrdering',
             ]),
+
+            convertToNull(value) {
+                return isNaN(value) ? null : value;
+            },
+
+            setTypeFlatId(value) {
+                this.setActiveTypeFlatId(value);
+                this.$router.replace({
+                    query: {
+                        ...this.$route.query,
+                        typeFlat: this.activeTypeFlatId
+                    }
+                });
+            },
+
+            setDistrictId(value) {
+                this.setActiveDistrictId(value);
+                this.$router.replace({
+                    query: {
+                        ...this.$route.query,
+                        district: this.activeDistrictId
+                    }
+                });
+            },
+
+            setDeveloperId(value) {
+                this.setActiveDeveloperId(value);
+                this.$router.replace({
+                    query: {
+                        ...this.$route.query,
+                        developer: this.activeDeveloperId
+                    }
+                });
+            },
+
+            setWallMaterialId(value) {
+                this.setActiveWallMaterialId(value);
+                this.$router.replace({
+                    query: {
+                        ...this.$route.query,
+                        wall_material: this.activeWallMaterialId
+                    }
+                });
+            },
+
+            setMinCost(value) {
+                this.setCostMin(value);
+                this.$router.replace({
+                    query: {
+                        ...this.$route.query,
+                        cost_min: this.costMin
+                    }
+                });
+            },
+
+            setMaxCost(value) {
+                this.setCostMax(value);
+                this.$router.replace({
+                    query: {
+                        ...this.$route.query,
+                        cost_max: this.costMax
+                    }
+                });
+            },
+
+            setMinSquare(value) {
+                this.setSquareMin(value);
+                this.$router.replace({
+                    query: {
+                        ...this.$route.query,
+                        square_min: this.squareMin
+                    }
+                });
+            },
+
+            setMaxSquare(value) {
+                this.setSquareMax(value);
+                this.$router.replace({
+                    query: {
+                        ...this.$route.query,
+                        square_max: this.squareMax
+                    }
+                });
+            },
 
             searchFlats() {
                 this.$refs.flatsFilters.validate();
@@ -365,11 +449,18 @@
 
             onSelectOrdering(value) {
                 this.setCurrentOrdering(value);
+                this.$router.replace({
+                    query: {
+                        ...this.$route.query,
+                        ordering: this.currentOrdering
+                    }
+                });
                 this.getFlats();
             },
 
             onRemoveAllFilters() {
                 this.removeAllFilters();
+                this.$router.push({query: null})
                 this.getFlats();
             },
         },
@@ -377,8 +468,8 @@
         computed: {
             ...mapGetters([
                 'flats',
-                'countFlats',
-                'activeCountFlatsId',
+                'typesFlat',
+                'activeTypeFlatId',
                 'districts',
                 'activeDistrictId',
                 'developers',
@@ -405,12 +496,132 @@
         },
 
         mounted() {
-            this.getCountFlats();
+            const typeFlat = Number(this.$route.query.typeFlat);
+            const district = Number(this.$route.query.district);
+            const developer = Number(this.$route.query.developer);
+            const wallMaterial = Number(this.$route.query.wall_material);
+            const costMin = Number(this.$route.query.cost_min)
+            const costMax = Number(this.$route.query.cost_max)
+            const squareMin = Number(this.$route.query.square_min)
+            const squareMax = Number(this.$route.query.square_max)
+            const ordering = this.$route.query.ordering
+
+            this.setActiveTypeFlatId(this.convertToNull(typeFlat));
+            this.setActiveDistrictId(this.convertToNull(district));
+            this.setActiveDeveloperId(this.convertToNull(developer));
+            this.setActiveWallMaterialId(this.convertToNull(wallMaterial));
+            this.setCostMin(this.convertToNull(costMin));
+            this.setCostMax(this.convertToNull(costMax));
+            this.setSquareMin(this.convertToNull(squareMin));
+            this.setSquareMax(this.convertToNull(squareMax));
+            this.setCurrentOrdering(ordering === null ? this.orderings[0].value : ordering);
+
+            this.getTypesFlat();
             this.getDistricts();
             this.getDevelopers();
             this.getWallMaterials();
-            this.setCurrentOrdering(this.orderings[0].value);
             this.getFlats();
+        },
+
+        watch: {
+            activeTypeFlatId: function (value) {
+                if (!value) {
+                    this.$router.replace({
+                        query: {
+                            ...this.$route.query,
+                            typeFlat: undefined
+                        }
+                    });
+                }
+            },
+
+            activeDistrictId: function (value) {
+                if (!value) {
+                    this.$router.replace({
+                        query: {
+                            ...this.$route.query,
+                            district: undefined
+                        }
+                    });
+                }
+            },
+
+            activeDeveloperId: function (value) {
+                if (!value) {
+                    this.$router.replace({
+                        query: {
+                            ...this.$route.query,
+                            developer: undefined
+                        }
+                    });
+                }
+            },
+
+            activeWallMaterialId: function (value) {
+                if (!value) {
+                    this.$router.replace({
+                        query: {
+                            ...this.$route.query,
+                            wall_material: undefined
+                        }
+                    });
+                }
+            },
+
+            costMin: function (value) {
+                if (!value) {
+                    this.$router.replace({
+                        query: {
+                            ...this.$route.query,
+                            cost_min: undefined
+                        }
+                    });
+                }
+            },
+
+            costMax: function (value) {
+                if (!value) {
+                    this.$router.replace({
+                        query: {
+                            ...this.$route.query,
+                            cost_max: undefined
+                        }
+                    });
+                }
+            },
+
+            squareMin: function (value) {
+                if (!value) {
+                    this.$router.replace({
+                        query: {
+                            ...this.$route.query,
+                            square_min: undefined
+                        }
+                    });
+                }
+            },
+
+            squareMax: function (value) {
+                if (!value) {
+                    this.$router.replace({
+                        query: {
+                            ...this.$route.query,
+                            square_max: undefined
+                        }
+                    });
+                }
+            },
+
+            currentOrdering: function (value) {
+                if (!value) {
+                    this.$router.replace({
+                        query: {
+                            ...this.$route.query,
+                            ordering: undefined
+                        }
+                    });
+                }
+            },
         },
     }
 </script>
