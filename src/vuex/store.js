@@ -216,6 +216,7 @@ const store = new Vuex.Store({
                         offset: state.offset,
                         limit: state.limit,
                         ordering: state.currentOrdering,
+                        format: 'json'
                     },
                     headers: HEADERS,
                     method: "GET"
@@ -236,7 +237,9 @@ const store = new Vuex.Store({
 
         getTypesFlat({commit}) {
             return axios.get(`${API_HOST}/flat-types/`, {
-                    params: {}, headers: HEADERS,
+                    params: {
+                        format: 'json'
+                    }, headers: HEADERS,
                     method: "GET"
                 }
             ).then(response => {
@@ -252,7 +255,9 @@ const store = new Vuex.Store({
 
         getDistricts({commit}) {
             return axios.get(`${API_HOST}/districts/`, {
-                    params: {}, headers: HEADERS,
+                    params: {
+                        format: 'json'
+                    }, headers: HEADERS,
                     method: "GET"
                 }
             ).then(response => {
@@ -268,7 +273,9 @@ const store = new Vuex.Store({
 
         getDevelopers({commit}) {
             return axios.get(`${API_HOST}/developers/`, {
-                    params: {}, headers: HEADERS,
+                    params: {
+                        format: 'json'
+                    }, headers: HEADERS,
                     method: "GET"
                 }
             ).then(response => {
@@ -284,7 +291,9 @@ const store = new Vuex.Store({
 
         getWallMaterials({commit}) {
             return axios.get(`${API_HOST}/wall-materials/`, {
-                    params: {}, headers: HEADERS,
+                    params: {
+                        format: 'json'
+                    }, headers: HEADERS,
                     method: "GET"
                 }
             ).then(response => {
