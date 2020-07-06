@@ -11,6 +11,7 @@
                         <v-select :items="typesFlat"
                                   :value="activeTypeFlatId"
                                   @input="setTypeFlatId"
+                                  multiple
                                   typeFlat
                                   item-text="name"
                                   item-value="id"
@@ -23,6 +24,7 @@
                                   :value="activeDistrictId"
                                   @input="setDistrictId"
                                   district
+                                  multiple
                                   item-text="name"
                                   item-value="id"
                                   label="Район"
@@ -34,6 +36,7 @@
                                   :value="activeDeveloperId"
                                   @input="setDeveloperId"
                                   developer
+                                  multiple
                                   item-text="name"
                                   item-value="id"
                                   label="Застройщик"
@@ -46,6 +49,7 @@
                                   @input="setWallMaterialId"
                                   item-text="name"
                                   item-value="id"
+                                  multiple
                                   label="Материал стен"
                                   wallMeterial
                         ></v-select>
@@ -318,12 +322,16 @@
                 return isNaN(value) ? null : value;
             },
 
+            convertToArray(array) {
+                return array ? array.split(',').map(value => this.convertToNull(Number(value))) : []
+            },
+
             setTypeFlatId(value) {
                 this.setActiveTypeFlatId(value);
                 this.$router.replace({
                     query: {
                         ...this.$route.query,
-                        typeFlat: this.activeTypeFlatId
+                        typeFlat: this.activeTypeFlatId.join(',')
                     }
                 });
             },
@@ -333,7 +341,7 @@
                 this.$router.replace({
                     query: {
                         ...this.$route.query,
-                        district: this.activeDistrictId
+                        district: this.activeDistrictId.join(',')
                     }
                 });
             },
@@ -343,7 +351,7 @@
                 this.$router.replace({
                     query: {
                         ...this.$route.query,
-                        developer: this.activeDeveloperId
+                        developer: this.activeDeveloperId.join(',')
                     }
                 });
             },
@@ -353,7 +361,7 @@
                 this.$router.replace({
                     query: {
                         ...this.$route.query,
-                        wall_material: this.activeWallMaterialId
+                        wall_material: this.activeWallMaterialId.join(',')
                     }
                 });
             },
@@ -496,20 +504,20 @@
         },
 
         mounted() {
-            const typeFlat = Number(this.$route.query.typeFlat);
-            const district = Number(this.$route.query.district);
-            const developer = Number(this.$route.query.developer);
-            const wallMaterial = Number(this.$route.query.wall_material);
+            const typesFlat = this.$route.query.typeFlat;
+            const districts = this.$route.query.district;
+            const developers = this.$route.query.developer;
+            const wallMaterials = this.$route.query.wall_material;
             const costMin = Number(this.$route.query.cost_min)
             const costMax = Number(this.$route.query.cost_max)
             const squareMin = Number(this.$route.query.square_min)
             const squareMax = Number(this.$route.query.square_max)
             const ordering = this.$route.query.ordering
 
-            this.setActiveTypeFlatId(this.convertToNull(typeFlat));
-            this.setActiveDistrictId(this.convertToNull(district));
-            this.setActiveDeveloperId(this.convertToNull(developer));
-            this.setActiveWallMaterialId(this.convertToNull(wallMaterial));
+            this.setActiveTypeFlatId(this.convertToArray(typesFlat));
+            this.setActiveDistrictId(this.convertToArray(districts));
+            this.setActiveDeveloperId(this.convertToArray(developers));
+            this.setActiveWallMaterialId(this.convertToArray(wallMaterials));
             this.setCostMin(this.convertToNull(costMin));
             this.setCostMax(this.convertToNull(costMax));
             this.setSquareMin(this.convertToNull(squareMin));

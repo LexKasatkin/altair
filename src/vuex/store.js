@@ -12,13 +12,13 @@ const store = new Vuex.Store({
     state: {
         flats: [],
         typesFlat: [],
-        activeTypeFlatId: null,
+        activeTypeFlatId: [],
         districts: [],
-        activeDistrictId: null,
+        activeDistrictId: [],
         developers: [],
-        activeDeveloperId: null,
+        activeDeveloperId: [],
         wallMaterials: [],
-        activeWallMaterialId: null,
+        activeWallMaterialId: [],
         costMin: null,
         costMax: null,
         squareMin: null,
@@ -64,7 +64,7 @@ const store = new Vuex.Store({
 
         setActiveTypeFlatId(state, activeTypeFlatId) {
             state.activeTypeFlatId = activeTypeFlatId;
-            if (activeTypeFlatId && !state.currentFilters[state.filters.activeTypeFlatId]) {
+            if (activeTypeFlatId && !state.currentFilters[state.filters.activeTypeFlatId] && activeTypeFlatId.length !== 0) {
                 state.currentFilters['activeTypeFlatId'] = state.filters.activeTypeFlatId;
             }
         },
@@ -75,7 +75,7 @@ const store = new Vuex.Store({
 
         setActiveDistrictId(state, activeDistrictId) {
             state.activeDistrictId = activeDistrictId;
-            if (activeDistrictId && !state.currentFilters[state.filters.activeDistrictId]) {
+            if (activeDistrictId && !state.currentFilters[state.filters.activeDistrictId] && activeDistrictId.length !== 0) {
                 state.currentFilters['activeDistrictId'] = state.filters.activeDistrictId;
             }
         },
@@ -86,7 +86,7 @@ const store = new Vuex.Store({
 
         setActiveDeveloperId(state, activeDeveloperId) {
             state.activeDeveloperId = activeDeveloperId;
-            if (activeDeveloperId && !state.currentFilters[state.filters.activeDeveloperId]) {
+            if (activeDeveloperId && !state.currentFilters[state.filters.activeDeveloperId] && activeDeveloperId.length !== 0) {
                 state.currentFilters['activeDeveloperId'] = state.filters.activeDeveloperId;
             }
         },
@@ -97,7 +97,7 @@ const store = new Vuex.Store({
 
         setActiveWallMaterialId(state, activeWallMaterialId) {
             state.activeWallMaterialId = activeWallMaterialId;
-            if (activeWallMaterialId && !state.currentFilters[state.filters.activeWallMaterialId]) {
+            if (activeWallMaterialId && !state.currentFilters[state.filters.activeWallMaterialId] && activeWallMaterialId.length !== 0) {
                 state.currentFilters['activeWallMaterialId'] = state.filters.activeWallMaterialId;
             }
         },
@@ -143,10 +143,10 @@ const store = new Vuex.Store({
             state.squareMax = null;
             state.costMin = null;
             state.costMax = null;
-            state.activeWallMaterialId = null;
-            state.activeDeveloperId = null;
-            state.activeDistrictId = null;
-            state.activeTypeFlatId = null;
+            state.activeWallMaterialId = [];
+            state.activeDeveloperId = [];
+            state.activeDistrictId = [];
+            state.activeTypeFlatId = [];
         },
 
         setPagesCount(state, pagesCount) {
@@ -206,9 +206,10 @@ const store = new Vuex.Store({
         getFlats({commit, state}) {
             return axios.get(`${API_HOST}/flats/`, {
                     params: {
-                        flat_type: state.activeTypeFlatId,
-                        district: state.activeDistrictId,
-                        developer: state.activeDeveloperId,
+                        flat_type: state.activeTypeFlatId ? state.activeTypeFlatId.join(',') : '',
+                        district: state.activeDistrictId ? state.activeDistrictId.join(',') : '',
+                        developer: state.activeDeveloperId ? state.activeDeveloperId.join(',') : '',
+                        wall_material: state.activeWallMaterialId ? state.activeWallMaterialId.join(',') : '',
                         cost_min: state.costMin ? state.costMin * 1000 : null,
                         cost_max: state.costMax ? state.costMax * 1000 : null,
                         square_min: state.squareMin,

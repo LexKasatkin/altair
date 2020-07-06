@@ -37,6 +37,7 @@
 
 <script>
     import {mapActions} from "vuex"
+    import {HOST} from "../../config";
 
     export default {
         name: "FlatCard",
@@ -85,11 +86,11 @@
             },
 
             mainImage() {
-                return this.errorMainImage || !this.flat.main_image_thumbnail ? null : this.flat.main_image_thumbnail;
+                return this.errorMainImage || !this.flat.main_image_thumbnail ? null : `${HOST}${this.flat.main_image_thumbnail}`;
             },
 
             layoutImage() {
-                return this.errorLayout || !this.flat.layout_thumbnail ? null : this.flat.layout_thumbnail
+                return this.errorLayout || !this.flat.layout_thumbnail ? null : `${HOST}${this.flat.layout_thumbnail}`;
             },
 
             items() {

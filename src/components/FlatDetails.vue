@@ -89,6 +89,7 @@
 <script>
     import {mapActions, mapGetters} from "vuex";
     import OpenMapComponent from '../components/OpenMapComponent'
+    import {HOST} from "../../config";
 
     export default {
         name: "FlatDetails",
@@ -153,11 +154,11 @@
             },
 
             mainImage() {
-                return this.errorMainImage || !this.flat.main_image_big ? null : this.flat.main_image_big;
+                return this.errorMainImage || !this.flat.main_image_thumbnail ? null : `${HOST}${this.flat.main_image_thumbnail}`;
             },
 
             layoutImage() {
-                return this.errorLayout || !this.flat.layout_thumbnail ? null : this.flat.layout_thumbnail;
+                return this.errorLayout || !this.flat.layout_thumbnail ? null : `${HOST}${this.flat.layout_thumbnail}`;
             },
 
             images() {
