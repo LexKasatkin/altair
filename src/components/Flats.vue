@@ -522,7 +522,7 @@
             this.setCostMax(this.convertToNull(costMax));
             this.setSquareMin(this.convertToNull(squareMin));
             this.setSquareMax(this.convertToNull(squareMax));
-            this.setCurrentOrdering(ordering === null ? this.orderings[0].value : ordering);
+            this.setCurrentOrdering(!ordering ? this.orderings[0].value : ordering);
 
             this.getTypesFlat();
             this.getDistricts();
