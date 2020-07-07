@@ -7,6 +7,7 @@ export const flatDetails = {
     state: {
         flatId: null,
         flat: Object,
+        flatDetailsLoaded: false,
     },
 
     actions: {
@@ -21,6 +22,7 @@ export const flatDetails = {
                 }
             ).then(response => {
                 commit('setFlatToState', response.data);
+                commit("setFlatDetailsLoaded", true);
                 this.dispatch('loader/setLoading', false);
                 return response.data;
             }).catch(error => {
@@ -39,6 +41,10 @@ export const flatDetails = {
         setFlatIdToState(state, flatId) {
             state.flatId = flatId;
         },
+
+        setFlatDetailsLoaded(state, loaded) {
+            state.flatDetailsLoaded = loaded;
+        },
     },
 
     getters: {
@@ -46,8 +52,12 @@ export const flatDetails = {
             return state.flatId;
         },
 
-        flat(state) {
+        flatDetails(state) {
             return state.flat;
+        },
+
+        flatDetailsLoaded(state) {
+            return state.flatDetailsLoaded;
         },
     }
 };
