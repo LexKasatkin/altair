@@ -66,6 +66,8 @@ const store = new Vuex.Store({
             state.activeTypeFlatId = activeTypeFlatId;
             if (activeTypeFlatId && !state.currentFilters[state.filters.activeTypeFlatId] && activeTypeFlatId.length !== 0) {
                 state.currentFilters['activeTypeFlatId'] = state.filters.activeTypeFlatId;
+            } else {
+                delete state.currentFilters['activeTypeFlatId'];
             }
         },
 
@@ -77,6 +79,8 @@ const store = new Vuex.Store({
             state.activeDistrictId = activeDistrictId;
             if (activeDistrictId && !state.currentFilters[state.filters.activeDistrictId] && activeDistrictId.length !== 0) {
                 state.currentFilters['activeDistrictId'] = state.filters.activeDistrictId;
+            } else {
+                delete state.currentFilters['activeDistrictId'];
             }
         },
 
@@ -88,6 +92,8 @@ const store = new Vuex.Store({
             state.activeDeveloperId = activeDeveloperId;
             if (activeDeveloperId && !state.currentFilters[state.filters.activeDeveloperId] && activeDeveloperId.length !== 0) {
                 state.currentFilters['activeDeveloperId'] = state.filters.activeDeveloperId;
+            } else {
+                delete state.currentFilters['activeDeveloperId'];
             }
         },
 
@@ -99,6 +105,8 @@ const store = new Vuex.Store({
             state.activeWallMaterialId = activeWallMaterialId;
             if (activeWallMaterialId && !state.currentFilters[state.filters.activeWallMaterialId] && activeWallMaterialId.length !== 0) {
                 state.currentFilters['activeWallMaterialId'] = state.filters.activeWallMaterialId;
+            } else {
+                delete state.currentFilters['activeWallMaterialId'];
             }
         },
 
@@ -106,6 +114,8 @@ const store = new Vuex.Store({
             state.costMin = costMin;
             if (costMin && !state.currentFilters[state.filters.costMin]) {
                 state.currentFilters['costMin'] = state.filters.costMin;
+            } else {
+                delete state.currentFilters['costMin'];
             }
         },
 
@@ -113,6 +123,8 @@ const store = new Vuex.Store({
             state.costMax = costMax;
             if (costMax && !state.currentFilters[state.filters.costMax]) {
                 state.currentFilters['costMax'] = state.filters.costMax;
+            } else {
+                delete state.currentFilters['costMax'];
             }
         },
 
@@ -120,6 +132,8 @@ const store = new Vuex.Store({
             state.squareMin = squareMin;
             if (squareMin && !state.currentFilters[state.filters.squareMin]) {
                 state.currentFilters['squareMin'] = state.filters.squareMin;
+            } else {
+                delete state.currentFilters['squareMin'];
             }
         },
 
@@ -127,6 +141,8 @@ const store = new Vuex.Store({
             state.squareMax = squareMax;
             if (squareMax && !state.currentFilters[state.filters.squareMax]) {
                 state.currentFilters['squareMax'] = state.filters.squareMax;
+            } else {
+                delete state.currentFilters['squareMax'];
             }
         },
 

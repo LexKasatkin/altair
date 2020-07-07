@@ -331,7 +331,7 @@
                 this.$router.replace({
                     query: {
                         ...this.$route.query,
-                        typeFlat: this.activeTypeFlatId.join(',')
+                        type_flat: this.activeTypeFlatId.join(',')
                     }
                 });
             },
@@ -504,7 +504,7 @@
         },
 
         mounted() {
-            const typesFlat = this.$route.query.typeFlat;
+            const typesFlat = this.$route.query.type_flat;
             const districts = this.$route.query.district;
             const developers = this.$route.query.developer;
             const wallMaterials = this.$route.query.wall_material;
@@ -523,7 +523,6 @@
             this.setSquareMin(this.convertToNull(squareMin));
             this.setSquareMax(this.convertToNull(squareMax));
             this.setCurrentOrdering(!ordering ? this.orderings[0].value : ordering);
-
             this.getTypesFlat();
             this.getDistricts();
             this.getDevelopers();
@@ -533,18 +532,18 @@
 
         watch: {
             activeTypeFlatId: function (value) {
-                if (!value) {
+                if (!value || value.length === 0) {
                     this.$router.replace({
                         query: {
                             ...this.$route.query,
-                            typeFlat: undefined
+                            type_flat: undefined
                         }
                     });
                 }
             },
 
             activeDistrictId: function (value) {
-                if (!value) {
+                if (!value || value.length === 0) {
                     this.$router.replace({
                         query: {
                             ...this.$route.query,
@@ -555,7 +554,7 @@
             },
 
             activeDeveloperId: function (value) {
-                if (!value) {
+                if (!value || value.length === 0) {
                     this.$router.replace({
                         query: {
                             ...this.$route.query,
@@ -566,7 +565,7 @@
             },
 
             activeWallMaterialId: function (value) {
-                if (!value) {
+                if (!value || value.length === 0) {
                     this.$router.replace({
                         query: {
                             ...this.$route.query,

@@ -101,7 +101,6 @@
                 errorImages: null,
                 errorMainImage: null,
                 errorLayout: null,
-
                 marker: [0, 0],
                 content: null,
             }
