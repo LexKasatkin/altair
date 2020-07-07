@@ -102,7 +102,6 @@
         margin-top: 120px;
     }
 
-
     .color-text {
         color: #1976D2;
     }

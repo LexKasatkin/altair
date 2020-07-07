@@ -51,7 +51,7 @@
                 </v-card-title>
                 <v-content :key="i"
                            v-for="(qualification, i) in qualifications">
-                    <v-card-subtitle class="text-start font-weight-bold">
+                    <v-card-subtitle class="text-start pl-3 text--primary">
                         {{qualification.title}}
                     </v-card-subtitle>
 
@@ -59,12 +59,12 @@
                               :ripple="false"
                               row
                               v-for="(subQualification, j) in qualification.values">
-                        <v-flex md4 sm4 xs5>
-                            <v-card-text class="text-start ml-4 mt-0 mb-0"
-                                         v-text="subQualification.title"></v-card-text>
+                        <v-flex class="ma-0" md4 sm4 xs5>
+                            <v-card-subtitle class="text-start ml-4 pa-3"
+                                             v-text="subQualification.title"></v-card-subtitle>
                         </v-flex>
-                        <v-flex md8 sm8 xs7>
-                            <v-card-text class="text-start ml-4 mt-0 mb-0"
+                        <v-flex class="ma-0" md8 sm8 xs7>
+                            <v-card-text class="text-start ml-4 pa-3"
                                          v-text="subQualification.content"></v-card-text>
                         </v-flex>
                     </v-layout>
@@ -182,6 +182,7 @@
                     ],
                 }, {
                     title: 'О доме', values: [
+                        {title: 'Адрес', content: `${this.flat.street} ${this.flat.house}`},
                         {title: 'Стены', content: this.flat.wall_material},
                         {title: 'Застройщик', content: this.flat.developer},
                         {title: 'Жилой комплекс', content: this.flat.residential_complex},
