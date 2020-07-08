@@ -73,7 +73,7 @@
             formattedSquareCost() {
                 return new Intl.NumberFormat('ru-RU', {
                     style: 'currency', currency: 'RUB', maximumFractionDigits: 0, minimumFractionDigits: 0,
-                }).format(Math.round(this.flat.cost / this.flat.square));
+                }).format(Math.round(this.flat.cost_square));
             },
 
             formattedCost() {
