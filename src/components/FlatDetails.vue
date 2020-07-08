@@ -86,6 +86,22 @@
             </v-layout>
         </v-card>
         <HotFlats :flatId="flatDetails.id" :house="flatDetails.house_id"></HotFlats>
+
+        <v-overlay opacity="0"
+                :value="true"
+                   z-index="20"
+        >
+            <v-btn
+                    color="success"
+                    fab
+                    large
+                    bottom
+                    left
+                    class="float-button"
+            >
+                <v-icon>mdi-edit</v-icon>
+            </v-btn>
+        </v-overlay>
     </v-content>
 </template>
 
@@ -240,5 +256,11 @@
 
     .main-container {
         max-width: 984px;
+    }
+
+    #lateral .float-button {
+        bottom: 0;
+        position: absolute;
+        margin: 0 0 16px 16px;
     }
 </style>
