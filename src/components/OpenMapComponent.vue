@@ -60,6 +60,7 @@
             mapStyle() {
                 return {
                     'height': `${this.height}`,
+                    'z-index': '0',
                 }
             }
         }

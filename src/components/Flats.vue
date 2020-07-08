@@ -201,7 +201,7 @@
             </v-layout>
         </v-content>
 
-        <l-map :center="center" :zoom="zoom" class="mt-4" style="height: 300px" v-if="showMap">
+        <l-map :center="center" :zoom="zoom" class="mt-4" style="z-index: 0; height: 300px" v-if="showMap">
             <l-tile-layer :attribution="attribution"
                           :url="url"
             ></l-tile-layer>

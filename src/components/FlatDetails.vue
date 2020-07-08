@@ -1,5 +1,6 @@
 <template>
     <v-content>
+        <Phone></Phone>
         <v-card class="mx-auto main-container mb-2" elevation="6">
             <v-layout class="pr-3 pl-3" row wrap>
                 <v-flex :class="[isMobile ? 'd-flex' : 'wrap']"
@@ -86,22 +87,6 @@
             </v-layout>
         </v-card>
         <HotFlats :flatId="flatDetails.id" :house="flatDetails.house_id"></HotFlats>
-
-        <v-overlay opacity="0"
-                :value="true"
-                   z-index="20"
-        >
-            <v-btn
-                    color="success"
-                    fab
-                    large
-                    bottom
-                    left
-                    class="float-button"
-            >
-                <v-icon>mdi-edit</v-icon>
-            </v-btn>
-        </v-overlay>
     </v-content>
 </template>
 
@@ -110,10 +95,11 @@
     import OpenMapComponent from '../components/OpenMapComponent'
     import {MEDIA_HOST} from "../../config";
     import HotFlats from "./HotFlats";
+    import Phone from "./Phone";
 
     export default {
         name: "FlatDetails",
-        components: {OpenMapComponent, HotFlats,},
+        components: {Phone, OpenMapComponent, HotFlats,},
 
         data() {
             return {
@@ -256,11 +242,5 @@
 
     .main-container {
         max-width: 984px;
-    }
-
-    #lateral .float-button {
-        bottom: 0;
-        position: absolute;
-        margin: 0 0 16px 16px;
     }
 </style>
