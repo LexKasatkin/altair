@@ -1,67 +1,86 @@
 <template>
-    <v-overlay
-            class="float-button"
-            opacity="0"
-            value="true"
-            z-index="100"
-    >
-        <v-speed-dial
-                class="text-end"
-                direction="left"
-                open-on-hover="true"
-                right="true"
-                top="true"
-                transition="scale-transition"
-        >
-            <template v-slot:activator>
-                <v-btn
-                        color="blue darken-2"
-                        dark
-                        fab
-                        v-model="fab"
-                >
-                    <v-icon v-if="fab">mdi-close</v-icon>
-                    <v-icon v-else>mdi-account-circle</v-icon>
-                </v-btn>
-            </template>
-            <v-btn
-                    color="green"
-                    dark
-                    fab
-                    small
+    <v-layout class="float-button-container">
+        <v-flex>
+            <v-speed-dial
+                    class="float-button"
+                    v-model="fab"
+                    bottom
+                    right
+                    fixed
+                    direction="left"
+                    open-on-hover
+                    transition="scale-transition"
             >
-                <v-icon>mdi-pencil</v-icon>
-            </v-btn>
-            <v-btn
-                    color="indigo"
-                    dark
-                    fab
-                    small
-            >
-                <v-icon>mdi-plus</v-icon>
-            </v-btn>
-            <v-btn
-                    color="red"
-                    dark
-                    fab
-                    small
-            >
-                <v-icon>mdi-delete</v-icon>
-            </v-btn>
-        </v-speed-dial>
-    </v-overlay>
+                <template v-slot:activator>
+                    <v-btn
+                            v-model="fab"
+                            color="blue darken-1"
+                            dark
+                            fab
+                    >
+                        <v-icon>mdi-home</v-icon>
+                    </v-btn>
+                </template>
+                    <v-btn
+                            fab
+                            dark
+                            large
+                            color="green"
+                            :href="mailLink"
+                    >
+                        <v-icon>mdi-email</v-icon>
+                    </v-btn>
+                    <v-btn
+                            fab
+                            dark
+                            large
+                            color="indigo"
+                            :href="telLink"
+                    >
+                        <v-icon>mdi-phone</v-icon>
+                    </v-btn>
+            </v-speed-dial>
+        </v-flex>
+    </v-layout>
 </template>
 
 <script>
     export default {
-        name: "Phone"
+        name: "Phone",
+
+        props:{
+          subject: null,
+          body: null,
+        },
+
+        data(){
+            return {
+                fab: false,
+                email: '2095171@mail.ru'
+            }
+        },
+
+        computed: {
+            mailLink() {
+                return 'mailto:'+this.email+'?subject='+this.subject+'&body='+this.body;
+            },
+
+            telLink(){
+                return 'tel:209-51-71';
+            }
+        }
     }
 </script>
 
 <style scoped>
-    .float-button {
-        width: 460px;
-        height: 64px;
+    .float-button-container {
+        position: sticky;
+        height: 0;
         z-index: 100;
+    }
+
+    .float-button{
+        margin-bottom: 128px;
+        margin-right: 64px;
     }
 </style>

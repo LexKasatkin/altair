@@ -86,7 +86,7 @@
             </v-layout>
         </v-card>
         <HotFlats :flatId="flatDetails.id" :house="flatDetails.house_id"></HotFlats>
-        <Phone class="contacts align-end"></Phone>
+        <Phone :subject="mailSubject" :body="mailBody"></Phone>
     </v-content>
 </template>
 
@@ -99,7 +99,7 @@
 
     export default {
         name: "FlatDetails",
-        components: {Phone, OpenMapComponent, HotFlats,},
+        components: {OpenMapComponent, HotFlats, Phone},
 
         data() {
             return {
@@ -202,6 +202,14 @@
                 }
                 ];
             },
+
+            mailSubject(){
+              return ` ${this.flatDetails.flat_type} ${this.flatDetails.square} м.кв. ${this.flatDetails.city} ${this.flatDetails.street} ${this.flatDetails.house}`;
+            },
+
+            mailBody(){
+                return 'Здравствуйте. Прошу сообщить о наличии данной квартиры.';
+            },
         },
 
         watch: {
@@ -242,11 +250,5 @@
 
     .main-container {
         max-width: 984px;
-    }
-
-    .contacts {
-        position: absolute;
-        bottom: 64px;
-        left: 64px;
     }
 </style>
