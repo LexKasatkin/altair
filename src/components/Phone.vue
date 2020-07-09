@@ -1,48 +1,55 @@
 <template>
-    <v-speed-dial
-            bottom="true"
-            direction="left"
-            open-on-hover="true"
-            right="true"
-            transition="scale-transition"
-            v-model="fab"
+    <v-overlay
+            class="float-button"
+            opacity="0"
+            value="true"
+            z-index="100"
     >
-        <template v-slot:activator>
+        <v-speed-dial
+                class="text-end"
+                direction="left"
+                open-on-hover="true"
+                right="true"
+                top="true"
+                transition="scale-transition"
+        >
+            <template v-slot:activator>
+                <v-btn
+                        color="blue darken-2"
+                        dark
+                        fab
+                        v-model="fab"
+                >
+                    <v-icon v-if="fab">mdi-close</v-icon>
+                    <v-icon v-else>mdi-account-circle</v-icon>
+                </v-btn>
+            </template>
             <v-btn
-                    color="blue darken-2"
+                    color="green"
                     dark
                     fab
-                    v-model="fab"
+                    small
             >
-                <v-icon v-if="fab">mdi-close</v-icon>
-                <v-icon v-else>mdi-account-circle</v-icon>
+                <v-icon>mdi-pencil</v-icon>
             </v-btn>
-        </template>
-        <v-btn
-                color="green"
-                dark
-                fab
-                small
-        >
-            <v-icon>mdi-pencil</v-icon>
-        </v-btn>
-        <v-btn
-                color="indigo"
-                dark
-                fab
-                small
-        >
-            <v-icon>mdi-plus</v-icon>
-        </v-btn>
-        <v-btn
-                color="red"
-                dark
-                fab
-                small
-        >
-            <v-icon>mdi-delete</v-icon>
-        </v-btn>
-    </v-speed-dial>
+            <v-btn
+                    color="indigo"
+                    dark
+                    fab
+                    small
+            >
+                <v-icon>mdi-plus</v-icon>
+            </v-btn>
+            <v-btn
+                    color="red"
+                    dark
+                    fab
+                    small
+            >
+                <v-icon>mdi-delete</v-icon>
+            </v-btn>
+        </v-speed-dial>
+    </v-overlay>
 </template>
 
 <script>
@@ -52,12 +59,9 @@
 </script>
 
 <style scoped>
-    #lateral .float-button {
-        bottom: 0;
-        position: fixed;
-        padding-top: 16px;
-        padding-bottom: 32px;
-        margin: 0 0 16px 16px;
-        z-index: 10;
+    .float-button {
+        width: 460px;
+        height: 64px;
+        z-index: 100;
     }
 </style>

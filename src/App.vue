@@ -6,14 +6,14 @@
             <notifications group="errors" position="bottom right"/>
             <ProgressDialog :visibility="loading"></ProgressDialog>
             <div>
-                <v-sheet
-                        class="overflow-y-auto"
-                        id="scrolling-techniques-3"
-                >
-                    <v-content :class="[bigMargin ? 'content-margin-big' : 'content-margin']">
+                <!--                <v-sheet-->
+                <!--                        class="overflow-y-auto"-->
+                <!--                        id="scrolling-techniques-3"-->
+                <!--                >-->
+                <v-content :class="[bigMargin ? 'content-margin-big' : 'content-margin']">
                         <router-view></router-view>
                     </v-content>
-                </v-sheet>
+                <!--                </v-sheet>-->
             </div>
             <Footer></Footer>
         </div>

@@ -1,6 +1,5 @@
 <template>
     <v-content>
-        <Phone></Phone>
         <v-card class="mx-auto main-container mb-2" elevation="6">
             <v-layout class="pr-3 pl-3" row wrap>
                 <v-flex :class="[isMobile ? 'd-flex' : 'wrap']"
@@ -87,6 +86,7 @@
             </v-layout>
         </v-card>
         <HotFlats :flatId="flatDetails.id" :house="flatDetails.house_id"></HotFlats>
+        <Phone class="contacts align-end"></Phone>
     </v-content>
 </template>
 
@@ -242,5 +242,11 @@
 
     .main-container {
         max-width: 984px;
+    }
+
+    .contacts {
+        position: absolute;
+        bottom: 64px;
+        left: 64px;
     }
 </style>
