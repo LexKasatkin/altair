@@ -12,7 +12,7 @@
                     </v-card-subtitle>
 
                     <v-card-text class="text-justify">
-                        <b class="color-text">{{flat.street}} {{flat.house}}</b> |
+                        <b class="color-text">{{flatAddress}}</b> |
                         {{flat.square}}м<sup>2</sup> |
                         {{flat.flat_type}}
                     </v-card-text>
@@ -70,6 +70,14 @@
         },
 
         computed: {
+            flatAddress() {
+                if (this.flat.street) {
+                    return `${this.flat.street} ${this.flat.house}`
+                } else {
+                    return `${this.flat.residential_complex} ${this.flat.house}`
+                }
+            },
+
             formattedSquareCost() {
                 return new Intl.NumberFormat('ru-RU', {
                     style: 'currency', currency: 'RUB', maximumFractionDigits: 0, minimumFractionDigits: 0,

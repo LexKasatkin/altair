@@ -178,6 +178,14 @@
                 return this.$vuetify.breakpoint.name === 'xs';
             },
 
+            flatAddress() {
+                if (this.flatDetails.street) {
+                    return `${this.flatDetails.street} ${this.flatDetails.house}`
+                } else {
+                    return `${this.flatDetails.residential_complex} ${this.flatDetails.house}`
+                }
+            },
+
             qualifications() {
                 return [{
                     title: 'О квартире', values: [
@@ -190,7 +198,7 @@
                     ],
                 }, {
                     title: 'О доме', values: [
-                        {title: 'Адрес', content: `${this.flatDetails.street} ${this.flatDetails.house}`},
+                        {title: 'Адрес', content: `${this.flatAddress}`},
                         {title: 'Стены', content: this.flatDetails.wall_material},
                         {title: 'Застройщик', content: this.flatDetails.developer},
                         {title: 'Жилой комплекс', content: this.flatDetails.residential_complex},
