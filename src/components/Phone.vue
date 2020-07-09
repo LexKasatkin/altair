@@ -24,7 +24,7 @@
                     <v-btn
                             fab
                             dark
-                            small
+                            large
                             color="green"
                             :href="mailLink"
                     >
@@ -33,7 +33,7 @@
                     <v-btn
                             fab
                             dark
-                            small
+                            large
                             color="indigo"
                             :href="telLink"
                     >
