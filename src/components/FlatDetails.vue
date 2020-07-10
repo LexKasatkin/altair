@@ -8,7 +8,8 @@
                         sm6
                         xs12
                 >
-                    <v-carousel class="main-image-container"
+                    <v-carousel :class="[showGallery? 'mb-1 main-image-container' : 'mb-0 main-image-container']"
+                                v-if="showGallery"
                                 cycle
                                 height="320px"
                                 show-arrows-on-hover>
@@ -16,6 +17,8 @@
                             <v-carousel-item
                                     :key="i"
                                     v-for="(image,i) in this.images"
+                                    v-bind="attrs"
+                                    v-on="on"
                             >
                                 <v-img :src="image.src"
                                        @error="image.errorHandler"
@@ -27,9 +30,8 @@
 
                     <OpenMapComponent :center="marker"
                                       :content="content"
-                                      :height="'320px'"
+                                      :height="[showGallery? '320px' : '640px']"
                                       :marker="marker"
-                                      class="mt-1"
                                       v-if="!isMobile"
                     ></OpenMapComponent>
                 </v-flex>
@@ -81,6 +83,7 @@
                                   :content="content"
                                   :height="'300px'"
                                   :marker="marker"
+                                  class="mt-1"
                                   v-if="isMobile"
                 ></OpenMapComponent>
             </v-layout>
@@ -158,11 +161,11 @@
             },
 
             mainImage() {
-                return this.errorMainImage || !this.flatDetails.main_image_thumbnail ? null : `${MEDIA_HOST}${this.flatDetails.main_image_thumbnail}`;
+                return this.errorMainImage || !this.flatDetails.main_image_big ? null : `${MEDIA_HOST}${this.flatDetails.main_image_big}`;
             },
 
             layoutImage() {
-                return this.errorLayout || !this.flatDetails.layout_thumbnail ? null : `${MEDIA_HOST}${this.flatDetails.layout_thumbnail}`;
+                return this.errorLayout || !this.flatDetails.layout_big ? null : `${MEDIA_HOST}${this.flatDetails.layout_big}`;
             },
 
             images() {
@@ -174,13 +177,17 @@
                 });
             },
 
+            showGallery() {
+                return this.images.length !== 0;
+            },
+
             isMobile() {
                 return this.$vuetify.breakpoint.name === 'xs';
             },
 
             flatAddress() {
                 if (this.flatDetails.street) {
-                    return `${this.flatDetails.street} ${this.flatDetails.house}`
+                    return `${this.flatDetails.city} ${this.flatDetails.street} ${this.flatDetails.house}`
                 } else {
                     return `${this.flatDetails.residential_complex} ${this.flatDetails.house}`
                 }
@@ -211,11 +218,11 @@
                 ];
             },
 
-            mailSubject(){
-              return ` ${this.flatDetails.flat_type} ${this.flatDetails.square} м.кв. ${this.flatDetails.city} ${this.flatDetails.street} ${this.flatDetails.house}`;
+            mailSubject() {
+                return ` ${this.flatDetails.flat_type} ${this.flatDetails.square} м.кв. ${this.flatAddress}`;
             },
 
-            mailBody(){
+            mailBody() {
                 return 'Здравствуйте. Прошу сообщить о наличии данной квартиры.';
             },
         },
@@ -240,20 +247,6 @@
     .main-image {
         width: 480px;
         height: 100%;
-    }
-
-    .thumbnail-container {
-        width: 240px;
-        height: auto;
-    }
-
-    .thumbnails-container {
-        height: auto;
-    }
-
-    .map-container {
-        height: auto;
-        width: 100%;
     }
 
     .main-container {

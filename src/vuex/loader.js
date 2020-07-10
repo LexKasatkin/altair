@@ -8,7 +8,9 @@ export const loader = {
         setLoading({commit, state}, isLoading) {
             if (isLoading) {
                 commit('incrementCount');
-                commit('show');
+                if (!state.loading) {
+                    commit('show');
+                }
             } else if (state.refCount > 0) {
                 commit('decrementCount');
                 if (state.refCount === 0) {

@@ -1,18 +1,14 @@
 <template>
-    <v-hover>
-        <template v-slot="{ hover }">
-            <v-card :elevation="hover ? 12 : 6" class="mx-auto action-card">
-                <v-card-subtitle class="text-center"><b>
-                    {{title}}
-                </b></v-card-subtitle>
-                <v-row class="justify-center">
-                    <v-img :src="imagePath"
-                           class="action-image"
-                    ></v-img>
-                </v-row>
-            </v-card>
-        </template>
-    </v-hover>
+    <v-card :elevation="6" class="mx-auto action-card">
+        <v-card-subtitle class="text-center"><b>
+            {{title}}
+        </b></v-card-subtitle>
+        <v-row class="justify-center">
+            <v-img :src="imagePath"
+                   class="action-image"
+            ></v-img>
+        </v-row>
+    </v-card>
 </template>
 
 <script>
