@@ -10,7 +10,7 @@
                         class="overflow-y-auto"
                         id="scrolling-techniques-3"
                 >
-                    <v-content :class="[bigMargin ? 'content-margin-big' : 'content-margin']">
+                    <v-content :class="bigMargin ? 'content-margin-big' : 'content-margin'">
                         <router-view></router-view>
                     </v-content>
                 </v-sheet>

@@ -2,7 +2,7 @@
     <v-layout class="float-button-container">
         <v-flex>
             <v-speed-dial
-                    :class="[floatButtonMobile ? 'float-button-mobile' : 'float-button-desktop']"
+                    :class="floatButtonMobile ? 'float-button-mobile' : 'float-button-desktop'"
                     v-model="fab"
                     bottom
                     right

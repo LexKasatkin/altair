@@ -2,13 +2,13 @@
     <v-content>
         <v-card class="mx-auto main-container mb-2" elevation="6">
             <v-layout class="pr-3 pl-3" row wrap>
-                <v-flex :class="[isMobile ? 'd-flex' : 'wrap']"
+                <v-flex :class="isMobile ? 'd-flex' : 'wrap'"
                         class="main-image-container justify-sm-center justify-center justify-md-start"
                         md5
                         sm6
                         xs12
                 >
-                    <v-carousel :class="[showGallery? 'mb-1 main-image-container' : 'mb-0 main-image-container']"
+                    <v-carousel :class="showGallery? 'mb-1 main-image-container' : 'mb-0 main-image-container'"
                                 v-if="showGallery"
                                 cycle
                                 height="320px"
@@ -17,20 +17,22 @@
                             <v-carousel-item
                                     :key="i"
                                     v-for="(image,i) in this.images"
-                                    v-bind="attrs"
-                                    v-on="on"
+                                    @click.stop="showDialog=true"
                             >
                                 <v-img :src="image.src"
                                        @error="image.errorHandler"
                                        class="main-image"
                                 ></v-img>
+                                <Gallery :srcArray="galleryImages"
+                                         :visible="showDialog && showGalleryDialog"
+                                         @close="showDialog=false"/>
                             </v-carousel-item>
                         </v-card>
                     </v-carousel>
 
                     <OpenMapComponent :center="marker"
                                       :content="content"
-                                      :height="[showGallery? '320px' : '640px']"
+                                      :height="showGallery? '320px' : '640px'"
                                       :marker="marker"
                                       v-if="!isMobile"
                     ></OpenMapComponent>
@@ -99,10 +101,11 @@
     import {MEDIA_HOST} from "../../config";
     import HotFlats from "./HotFlats";
     import Phone from "./Phone";
+    import Gallery from "./Gallery";
 
     export default {
         name: "FlatDetails",
-        components: {OpenMapComponent, HotFlats, Phone},
+        components: {OpenMapComponent, HotFlats, Phone, Gallery},
 
         data() {
             return {
@@ -111,6 +114,7 @@
                 errorLayout: null,
                 marker: [0, 0],
                 content: null,
+                showDialog: false
             }
         },
 
@@ -173,8 +177,19 @@
                     {src: this.mainImage, errorHandler: this.onErrorMainImageLoading},
                     {src: this.layoutImage, errorHandler: this.onErrorLayoutLoading}
                 ].filter(image => {
-                    if (image.src) return image
+                    if (image.src) return image;
                 });
+            },
+
+            galleryImages() {
+                return [this.flatDetails.main_image, this.flatDetails.layout]
+                    .filter(src => {
+                        if (src) return src;
+                    });
+            },
+
+            showGalleryDialog() {
+                return this.galleryImages.length !== 0;
             },
 
             showGallery() {
