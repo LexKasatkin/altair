@@ -1,9 +1,7 @@
 <template>
     <v-card class="centered" flat tile>
-        <!--        <v-layout row child-flex justify-center align-center wrap>-->
-        <!--            <v-flex fill-heigth>-->
         <v-carousel class="main-image-container"
-                    height="70%"
+                    height="auto"
                     show-arrows-on-hover
                     v-model="imageIndex">
             <v-carousel-item
@@ -16,8 +14,6 @@
                 ></v-img>
             </v-carousel-item>
         </v-carousel>
-        <!--            </v-flex>-->
-        <!--        </v-layout>-->
     </v-card>
 </template>
 
@@ -65,14 +61,12 @@
 
 <style scoped>
     .main-image {
-        width: 70%;
-        height: 70%;
-        margin: auto;
+        width: 100%;
         display: block;
     }
 
     .main-image-container {
         width: 100%;
-        height: auto;
+        height: 100%;
     }
 </style>

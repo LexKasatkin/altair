@@ -18,7 +18,7 @@
                                     :key="i"
                                     v-for="(image,i) in this.images"
                             >
-                                <v-dialog fullscreen>
+                                <v-dialog>
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-img :src="image.src"
                                                @error="image.errorHandler"
