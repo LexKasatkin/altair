@@ -27,7 +27,10 @@
                                                v-on="on"
                                         ></v-img>
                                     </template>
-                                    <Gallery :imageIndex="i" @close="galleryDialog=false"></Gallery>
+                                    <Gallery :imageIndex="i"
+                                             :visible="galleryDialog"
+                                             @close="galleryDialog=false"
+                                    ></Gallery>
                                 </v-dialog>
                             </v-carousel-item>
 

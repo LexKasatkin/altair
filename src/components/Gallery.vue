@@ -1,30 +1,24 @@
 <template>
     <v-card class="card-container" flat tile>
-        <v-carousel class="main-image-container"
+        <v-carousel class="main-image-container pa-16"
                     height="100%"
-                    show-arrows-on-hover
-                    v-model="imageIndex">
-            <v-toolbar color="transparent" elevation="0">
-                <v-spacer></v-spacer>
-                <v-toolbar-items>
-                    <v-btn @click.stop="show=false" icon light>
-                        <v-icon>mdi-close</v-icon>
-                    </v-btn>
-                </v-toolbar-items>
-            </v-toolbar>
-            <v-layout row wrap>
-                <v-flex class="justify-center" d-flex md="6" sm="6" xs="12">
-                    <v-carousel-item
-                            :key="i"
-                            class="main-image"
-                            v-for="(image,i) in this.galleryImages"
-                    >
-                        <v-img :src="image"
-                               @error="setErrorHandler(i)"
-                        ></v-img>
-                    </v-carousel-item>
-                </v-flex>
-            </v-layout>
+                    show-arrows-on-hover>
+            <v-carousel-item
+                    :key="i"
+                    :src="image"
+                    @error="this.setImage(i)"
+                    class="main-image"
+                    v-for="(image,i) in this.galleryImages"
+            >
+                <v-toolbar color="transparent" elevation="0">
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                        <v-btn @click.stop="show=false" icon light>
+                            <v-icon>mdi-close</v-icon>
+                        </v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
+            </v-carousel-item>
         </v-carousel>
     </v-card>
 </template>
@@ -38,7 +32,11 @@
         props: {
             imageIndex: {
                 required: true,
-                type: Number
+                type: Number,
+            },
+            visible: {
+                required: true,
+                type: Boolean,
             }
         },
 
@@ -54,6 +52,10 @@
 
         computed: {
             show: {
+                get() {
+                    return this.visible;
+                },
+
                 set(value) {
                     if (!value) {
                         this.$emit('close')
@@ -79,14 +81,15 @@
     }
 
     .main-image-container {
-        width: 100%;
-        height: 100%;
+        height: 100vh;
     }
 
     .main-image {
-        vertical-align: middle;
-        text-align: center;
-        display: table-cell;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: static;
+        top: 50%;
+        bottom: 50%;
     }
 </style>
