@@ -17,7 +17,7 @@
                             <v-list dense>
                                 <v-list-item
                                         :href="contact.link"
-                                        :key="contact"
+                                        :key="contact.link"
                                         color="transparent"
                                         link
                                         v-for="contact in contacts"

@@ -25,7 +25,7 @@
             <v-spacer/>
             <v-btn
                     :href="socialNetwork.route"
-                    :key="socialNetwork"
+                    :key="socialNetwork.route"
                     class="mx-3"
                     dark
                     icon
