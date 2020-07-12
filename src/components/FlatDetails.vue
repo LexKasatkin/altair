@@ -18,7 +18,7 @@
                                     :key="i"
                                     v-for="(image,i) in this.images"
                             >
-                                <v-dialog>
+                                <v-dialog fullscreen v-model="galleryDialog">
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-img :src="image.src"
                                                @error="image.errorHandler"
@@ -27,7 +27,7 @@
                                                v-on="on"
                                         ></v-img>
                                     </template>
-                                    <Gallery :imageIndex="i"></Gallery>
+                                    <Gallery :imageIndex="i" @close="galleryDialog=false"></Gallery>
                                 </v-dialog>
                             </v-carousel-item>
 
@@ -117,6 +117,7 @@
                 errorLayout: null,
                 marker: [0, 0],
                 content: null,
+                galleryDialog: false,
             }
         },
 
