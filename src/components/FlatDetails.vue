@@ -17,19 +17,22 @@
                             <v-carousel-item
                                     :key="i"
                                     v-for="(image,i) in this.images"
-                                    @click.stop="showDialog=true"
                             >
-                                <v-img :src="image.src"
-                                       @error="image.errorHandler"
-                                       class="main-image"
-                                ></v-img>
-                                <Gallery :srcArray="galleryImages"
-                                         :visible="showDialog && showGalleryDialog"
-                                         @close="showDialog=false"/>
+                                <v-dialog fullscreen>
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-img :src="image.src"
+                                               @error="image.errorHandler"
+                                               class="main-image"
+                                               v-bind="attrs"
+                                               v-on="on"
+                                        ></v-img>
+                                    </template>
+                                    <Gallery :imageIndex="i"></Gallery>
+                                </v-dialog>
                             </v-carousel-item>
+
                         </v-card>
                     </v-carousel>
-
                     <OpenMapComponent :center="marker"
                                       :content="content"
                                       :height="showGallery? '320px' : '640px'"
@@ -114,7 +117,6 @@
                 errorLayout: null,
                 marker: [0, 0],
                 content: null,
-                showDialog: false
             }
         },
 
@@ -126,15 +128,11 @@
         methods: {
             ...mapActions('flatDetails', [
                 'setFlatId',
-                'getFlat'
+                'getFlat',
             ]),
 
             onErrorMainImageLoading() {
                 this.errorMainImage = true;
-            },
-
-            onErrorImagesLoading() {
-                this.errorImages = true;
             },
 
             onErrorLayoutLoading() {
@@ -179,17 +177,6 @@
                 ].filter(image => {
                     if (image.src) return image;
                 });
-            },
-
-            galleryImages() {
-                return [this.flatDetails.main_image, this.flatDetails.layout]
-                    .filter(src => {
-                        if (src) return src;
-                    });
-            },
-
-            showGalleryDialog() {
-                return this.galleryImages.length !== 0;
             },
 
             showGallery() {

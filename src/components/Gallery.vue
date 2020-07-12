@@ -1,26 +1,38 @@
 <template>
-    <v-dialog v-model="show">
-        <v-card flat tile>
-            <v-carousel cycle
-                        show-arrows-on-hover>
-                <v-carousel-item
-                        :key="i"
-                        v-for="(image,i) in this.images"
-                >
-                    <v-img :src="image.src"
-                           @error="setErrorHandler(i)"
-                    ></v-img>
-                </v-carousel-item>
-            </v-carousel>
-        </v-card>
-    </v-dialog>
+    <v-card class="centered" flat tile>
+        <!--        <v-layout row child-flex justify-center align-center wrap>-->
+        <!--            <v-flex fill-heigth>-->
+        <v-carousel class="main-image-container"
+                    height="70%"
+                    show-arrows-on-hover
+                    v-model="imageIndex">
+            <v-carousel-item
+                    :key="i"
+                    class="main-image"
+                    v-for="(image,i) in this.galleryImages"
+            >
+                <v-img :src="image"
+                       @error="setErrorHandler(i)"
+                ></v-img>
+            </v-carousel-item>
+        </v-carousel>
+        <!--            </v-flex>-->
+        <!--        </v-layout>-->
+    </v-card>
 </template>
 
 <script>
-    import {MEDIA_HOST} from "../../config";
+    import {mapActions, mapGetters} from "vuex";
 
     export default {
         name: "Gallery",
+
+        props: {
+            imageIndex: {
+                required: true,
+                type: Number
+            }
+        },
 
         data() {
             return {
@@ -28,43 +40,39 @@
             };
         },
 
-        props: {
-            visible: Boolean,
-            srcArray: {
-                required: true,
-                type: Array,
-            },
-        },
-
-        created() {
-            console.log(this.srcArray);
+        mounted() {
+            console.log(this.images);
         },
 
         computed: {
-            show: {
-                get() {
-                    return this.visible
-                },
-                set(value) {
-                    if (!value) {
-                        this.$emit('close')
-                    }
-                }
-            }
+
+            ...mapGetters('galleryImages', [
+                'galleryImages',
+            ]),
         },
 
         methods: {
             setErrorHandler(index) {
-                this.errors[index] = true;
+                this.setImage(index, null);
             },
 
-            images() {
-                return this.srcArray.map((source, i) => this.errors[i] || !source ? null : `${MEDIA_HOST}${source}`)
-            },
+            ...mapActions('galleryImages', [
+                'setImage',
+            ])
         },
     }
 </script>
 
 <style scoped>
+    .main-image {
+        width: 70%;
+        height: 70%;
+        margin: auto;
+        display: block;
+    }
 
+    .main-image-container {
+        width: 100%;
+        height: auto;
+    }
 </style>

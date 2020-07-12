@@ -7,6 +7,7 @@ import {flatDetails} from "./flat-details";
 import {drawer} from "./drawer"
 import {tabs} from "./tabs"
 import {hotFlats} from "./hot-flats";
+import {galleryImages} from "./gallery-images";
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
@@ -439,6 +440,7 @@ const store = new Vuex.Store({
         drawer,
         tabs,
         hotFlats,
+        galleryImages,
     }
 })
 

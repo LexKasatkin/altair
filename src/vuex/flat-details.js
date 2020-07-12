@@ -1,5 +1,5 @@
 import axios from "axios";
-import {API_HOST, HEADERS} from "../../config";
+import {API_HOST, HEADERS, MEDIA_HOST} from "../../config";
 
 export const flatDetails = {
     namespaced: true,
@@ -21,13 +21,19 @@ export const flatDetails = {
                     method: "GET"
                 }
             ).then(response => {
-                commit('setFlatToState', response.data);
+                const flat = response.data;
+                commit('setFlatToState', flat);
                 commit("setFlatDetailsLoaded", true);
                 this.dispatch('loader/setLoading', false);
-                return response.data;
+                const images = [flat.main_image, flat.layout]
+                    .filter(src => {
+                        if (src) return src;
+                    }).map(source => !source ? null : `${MEDIA_HOST}${source}`);
+                this.dispatch('galleryImages/setImages', images);
+                return flat;
             }).catch(error => {
-                console.log(error);
-                return error;
+                    console.log(error);
+                    return error;
                 }
             )
         },
