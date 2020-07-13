@@ -7,11 +7,13 @@ import Vuelidate from 'vuelidate'
 import Notifications from 'vue-notification'
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
+import Lightbox from 'vue-easy-lightbox'
 
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
 Vue.component('l-marker', LMarker);
 
+Vue.use(Lightbox);
 Vue.use(Vuelidate);
 Vue.use(Notifications);
 Vue.config.productionTip = false;

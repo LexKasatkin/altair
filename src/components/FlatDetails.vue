@@ -8,6 +8,13 @@
                         sm6
                         xs12
                 >
+                    <vue-easy-lightbox
+                            :visible="showFullscreenDialog"
+                            :imgs="galleryImages"
+                            :index="i"
+                            @hide="hideFullscreenDialog"
+                            style="z-index: 1000"
+                    ></vue-easy-lightbox>
                     <v-carousel :class="showGallery? 'mb-1 main-image-container' : 'mb-0 main-image-container'"
                                 v-if="showGallery"
                                 cycle
@@ -15,23 +22,13 @@
                                 show-arrows-on-hover>
                         <v-card flat tile>
                             <v-carousel-item
+                                    class="main-image"
                                     :key="i"
                                     v-for="(image,i) in this.images"
+                                    :src="image.src"
+                                    @error="image.errorHandler"
+                                    @click="openFullscreenDialog"
                             >
-                                <v-dialog fullscreen v-model="galleryDialog">
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-img :src="image.src"
-                                               @error="image.errorHandler"
-                                               class="main-image"
-                                               v-bind="attrs"
-                                               v-on="on"
-                                        ></v-img>
-                                    </template>
-                                    <Gallery :imageIndex="i"
-                                             :visible="galleryDialog"
-                                             @close="galleryDialog=false"
-                                    ></Gallery>
-                                </v-dialog>
                             </v-carousel-item>
 
                         </v-card>
@@ -107,11 +104,10 @@
     import {MEDIA_HOST} from "../../config";
     import HotFlats from "./HotFlats";
     import Phone from "./Phone";
-    import Gallery from "./Gallery";
 
     export default {
         name: "FlatDetails",
-        components: {OpenMapComponent, HotFlats, Phone, Gallery},
+        components: {OpenMapComponent, HotFlats, Phone},
 
         data() {
             return {
@@ -120,7 +116,7 @@
                 errorLayout: null,
                 marker: [0, 0],
                 content: null,
-                galleryDialog: false,
+                showFullscreenDialog: false,
             }
         },
 
@@ -135,6 +131,10 @@
                 'getFlat',
             ]),
 
+            ...mapActions('galleryImages', [
+                'setImage',
+            ]),
+
             onErrorMainImageLoading() {
                 this.errorMainImage = true;
             },
@@ -142,12 +142,24 @@
             onErrorLayoutLoading() {
                 this.errorLayout = true;
             },
+
+            openFullscreenDialog(){
+                this.showFullscreenDialog = true;
+            },
+
+           hideFullscreenDialog() {
+                this.showFullscreenDialog = false
+            }
         },
 
         computed: {
             ...mapGetters('flatDetails', [
                 'flatDetails',
                 'currentFlatId',
+            ]),
+
+            ...mapGetters('galleryImages', [
+                'galleryImages',
             ]),
 
             formattedSquareCost() {
