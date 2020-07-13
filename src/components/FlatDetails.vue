@@ -213,7 +213,7 @@
                 return [{
                     title: 'О квартире', values: [
                         {title: 'Общая площадь', content: `${this.flatDetails.square} м.кв.`},
-                        {title: 'Комнатнасть', content: this.flatDetails.flat_type},
+                        {title: 'Комнатнасть', content: this.flatDetails.flat_type_name},
                         {
                             title: 'Этаж/Этажность',
                             content: `${this.flatDetails.floor} из ${this.flatDetails.max_floor}`

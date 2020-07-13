@@ -14,7 +14,7 @@
                     <v-card-text class="text-justify">
                         <b class="color-text">{{flatAddress}}</b> |
                         {{flat.square}}м<sup>2</sup> |
-                        {{flat.flat_type}}
+                        {{flat.flat_type_name}}
                     </v-card-text>
                 </div>
                 <v-carousel cycle
