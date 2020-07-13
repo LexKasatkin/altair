@@ -1,5 +1,5 @@
 <template>
-    <v-content>
+    <v-main>
         <v-app-bar
                 absolute
                 color="#1976D2"
@@ -38,7 +38,7 @@
                 <Tabs></Tabs>
             </template>
         </v-app-bar>
-    </v-content>
+    </v-main>
 </template>
 
 <script>

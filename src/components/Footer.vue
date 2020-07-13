@@ -1,7 +1,7 @@
 <template>
     <v-footer class="mt-4" elevation="6" height="auto" padless>
         <v-card class="flex" flat tile>
-            <v-content>
+            <v-main>
                 <v-card-text>
                     <v-layout>
                         <v-flex class="pt-2" column layout md4 sm3 xs12>
@@ -35,7 +35,7 @@
                         </v-flex>
                     </v-layout>
                 </v-card-text>
-            </v-content>
+            </v-main>
         </v-card>
     </v-footer>
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <v-content>
+    <v-main>
         <v-card class="mx-auto main-container mb-2" elevation="6">
             <v-layout class="pr-3 pl-3" row wrap>
                 <v-flex :class="isMobile ? 'd-flex' : 'wrap'"
@@ -11,7 +11,6 @@
                     <vue-easy-lightbox
                             :visible="showFullscreenDialog"
                             :imgs="galleryImages"
-                            :index="i"
                             @hide="hideFullscreenDialog"
                             style="z-index: 1000"
                     ></vue-easy-lightbox>
@@ -57,7 +56,7 @@
                     <v-card-title class="text-start">
                         Характеристики
                     </v-card-title>
-                    <v-content :key="i"
+                    <v-main :key="i"
                                v-for="(qualification, i) in qualifications">
                         <v-card-subtitle class="text-start pl-3 text--primary">
                             {{qualification.title}}
@@ -76,7 +75,7 @@
                                              v-text="subQualification.content"></v-card-text>
                             </v-flex>
                         </v-layout>
-                    </v-content>
+                    </v-main>
                 </v-flex>
                 <v-card-title class="text-start">
                     Описание
@@ -95,7 +94,7 @@
         </v-card>
         <HotFlats :flatId="flatDetails.id" :house="flatDetails.house_id"></HotFlats>
         <Phone :subject="mailSubject" :body="mailBody"></Phone>
-    </v-content>
+    </v-main>
 </template>
 
 <script>
