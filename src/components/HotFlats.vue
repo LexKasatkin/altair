@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-auto main-container" v-show="showHotFlats">
+    <div class="mx-auto main-container" v-if="showHotFlats()">
         <v-card-title class="text-start">
             Другие квартиры в этом доме
         </v-card-title>
@@ -30,10 +30,12 @@
             house: {
                 required: true,
                 type: Number,
+                default: -1,
             },
             flatId: {
                 required: true,
                 type: Number,
+                default: -1,
             }
         },
 

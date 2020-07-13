@@ -1,5 +1,5 @@
 <template>
-    <v-main class="mx-auto main-container mb-3">
+    <v-container class="mx-auto main-container mb-3">
         <v-card elevation="6">
             <v-layout class="pr-3 pl-3" row wrap>
                 <v-flex class="justify-sm-center justify-center justify-md-start" d-flex md="6" sm="6" xs="12">
@@ -24,7 +24,7 @@
                 ></OpenMapComponent>
             </v-layout>
         </v-card>
-    </v-main>
+    </v-container>
 </template>
 
 <script>

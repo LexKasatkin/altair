@@ -1,6 +1,6 @@
 <template>
     <div class="main-container mx-auto">
-        <v-main>
+        <v-container>
             <v-row class="justify-center">
                 <v-col :key="i"
                        cols="12"
@@ -13,7 +13,7 @@
                     </CompanyCard>
                 </v-col>
             </v-row>
-        </v-main>
+        </v-container>
     </div>
 </template>
 

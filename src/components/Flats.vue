@@ -168,7 +168,7 @@
 
         <v-divider class="divider"></v-divider>
 
-        <v-main class="pa-3">
+        <v-container class="pa-3">
             <v-layout class="pr-3 pl-3" row wrap>
                 <v-flex class="justify-sm-center justify-center justify-md-start" d-flex md="7" sm="7" xs="12">
                     <v-select :items="orderings"
@@ -199,7 +199,7 @@
                     </v-btn>
                 </v-flex>
             </v-layout>
-        </v-main>
+        </v-container>
 
         <l-map :center="center" :zoom="zoom" class="mt-4" style="z-index: 0; height: 300px" v-if="showMap">
             <l-tile-layer :attribution="attribution"
@@ -215,7 +215,7 @@
             </v-marker-cluster>
         </l-map>
 
-        <v-main>
+        <v-container>
             <v-row justify="start">
                 <v-col :key="i"
                        cols="12"
@@ -228,7 +228,7 @@
                     </FlatCard>
                 </v-col>
             </v-row>
-        </v-main>
+        </v-container>
 
         <v-layout class="pa-4" row wrap>
             <v-flex class="pt-3 pl-12" md11 sm10 xs10>
