@@ -17,8 +17,7 @@
                         {{flat.flat_type}}
                     </v-card-text>
                 </div>
-                <v-carousel @click="null"
-                            cycle
+                <v-carousel cycle
                             height="200px"
                             hide-delimiter-background
                             show-arrows-on-hover>

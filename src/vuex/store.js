@@ -21,6 +21,8 @@ const store = new Vuex.Store({
         activeDeveloperId: [],
         wallMaterials: [],
         activeWallMaterialId: [],
+        residentialComplexes: [],
+        activeResidentialComplexId: [],
         costMin: null,
         costMax: null,
         squareMin: null,
@@ -39,6 +41,7 @@ const store = new Vuex.Store({
             activeTypeFlatId: 'Количество комнат',
             activeDistrictId: 'Район',
             activeDeveloperId: 'Застройщик',
+            activeResidentialComplexId: 'Жилой комплекс',
             costMin: 'Минимальная стоимость',
             costMax: 'Максимальная стоимость',
             squareMin: 'Минимальная площадь',
@@ -50,8 +53,16 @@ const store = new Vuex.Store({
             {title: 'По стоимости, сначала дорогие', value: '-cost', icon: 'mdi-sort-descending'},
             {title: 'По площади, сначала малые', value: 'square', icon: 'mdi-sort-ascending'},
             {title: 'По площади, сначала большие', value: '-square', icon: 'mdi-sort-descending'},
-            {title: 'По стоимости за квадратный метр, сначала дешёвые', value: 'cost_square', icon: 'mdi-sort-ascending'},
-            {title: 'По стоимости за квадратный метр, сначала дорогие', value: '-cost_square', icon: 'mdi-sort-descending'},
+            {
+                title: 'По стоимости за квадратный метр, сначала дешёвые',
+                value: 'cost_square',
+                icon: 'mdi-sort-ascending'
+            },
+            {
+                title: 'По стоимости за квадратный метр, сначала дорогие',
+                value: '-cost_square',
+                icon: 'mdi-sort-descending'
+            },
         ],
         currentOrdering: null,
         markers: [],
@@ -111,6 +122,19 @@ const store = new Vuex.Store({
                 state.currentFilters['activeWallMaterialId'] = state.filters.activeWallMaterialId;
             } else {
                 delete state.currentFilters['activeWallMaterialId'];
+            }
+        },
+
+        setResidentialComplexesToState(state, residentialComplexes) {
+            state.residentialComplexes = residentialComplexes;
+        },
+
+        setActiveResidentialComplexId(state, activeResidentialComplexId) {
+            state.activeResidentialComplexId = activeResidentialComplexId;
+            if (activeResidentialComplexId && !state.currentFilters[state.filters.activeResidentialComplexId] && activeResidentialComplexId.length !== 0) {
+                state.currentFilters['activeResidentialComplexId'] = state.filters.activeResidentialComplexId;
+            } else {
+                delete state.currentFilters['activeResidentialComplexId'];
             }
         },
 
@@ -230,6 +254,7 @@ const store = new Vuex.Store({
                         district: state.activeDistrictId ? state.activeDistrictId.join(',') : '',
                         developer: state.activeDeveloperId ? state.activeDeveloperId.join(',') : '',
                         wall_material: state.activeWallMaterialId ? state.activeWallMaterialId.join(',') : '',
+                        residential_complex: state.activeResidentialComplexId ? state.activeResidentialComplexId.join(',') : '',
                         cost_min: state.costMin ? state.costMin * 1000 : null,
                         cost_max: state.costMax ? state.costMax * 1000 : null,
                         square_min: state.squareMin,
@@ -264,9 +289,10 @@ const store = new Vuex.Store({
                     method: "GET"
                 }
             ).then(response => {
-                commit('setTypesFlatToState', response.data.flat_types);
+                const flatTypes = response.data.flat_types.sort((a, b) => a.id - b.id);
+                commit('setTypesFlatToState', flatTypes);
                 this.dispatch('loader/setLoading', false);
-                return response.flat_types;
+                return flatTypes;
             }).catch(error => {
                 console.log(error);
                     return error;
@@ -321,6 +347,24 @@ const store = new Vuex.Store({
                 commit('setWallMaterialsToState', response.data.wall_materials);
                 this.dispatch('loader/setLoading', false);
                 return response.wall_materials;
+            }).catch(error => {
+                    console.log(error);
+                    return error;
+                }
+            )
+        },
+
+        getResidentialComplexes({commit}) {
+            return axios.get(`${API_HOST}/residential-complexes/`, {
+                    params: {
+                        format: 'json'
+                    }, headers: HEADERS,
+                    method: "GET"
+                }
+            ).then(response => {
+                commit('setResidentialComplexesToState', response.data.residential_complexes);
+                this.dispatch('loader/setLoading', false);
+                return response.residential_complexes;
             }).catch(error => {
                     console.log(error);
                     return error;
@@ -383,6 +427,14 @@ const store = new Vuex.Store({
 
         activeWallMaterialId(state) {
             return state.activeWallMaterialId;
+        },
+
+        residentialComplexes(state) {
+            return state.residentialComplexes;
+        },
+
+        activeResidentialComplexId(state) {
+            return state.activeResidentialComplexId;
         },
 
         costMin(state) {

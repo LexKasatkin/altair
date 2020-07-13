@@ -8,14 +8,14 @@
             >
                 <v-row justify="space-between">
                     <v-col class="d-flex" cols="12" sm="3">
-                        <v-select :items="typesFlat"
-                                  :value="activeTypeFlatId"
-                                  @input="setTypeFlatId"
+                        <v-select :items="residentialComplexes"
+                                  :value="activeResidentialComplexId"
+                                  @input="setResidentialComplexId"
                                   multiple
-                                  typeFlat
+                                  label="Жилой комплекс"
                                   item-text="name"
                                   item-value="id"
-                                  label="Количество комнат"
+                                  residentialComplex
                         ></v-select>
                     </v-col>
 
@@ -128,8 +128,25 @@
                             </v-col>
                         </v-row>
                     </v-col>
-                    <v-col class="d-flex" md="12" sm="12" xs="12">
-                        <v-btn class="ml-2 mt-3 text-right"
+                </v-row>
+
+                <v-row>
+                    <v-col class="mt-0 text-start" cols="12" md="6" sm="8">
+                        <p class="mb-0">Количество комнат</p>
+                        <v-btn-toggle
+                                :key="flatType.id"
+                                class="text-start"
+                                multiple
+                                v-for="flatType in typesFlat"
+                                v-model="flatTypes"
+                        >
+                            <v-btn :value="flatType.id" color="blue darken-1" outlined tile>
+                                {{flatType.label}}
+                            </v-btn>
+                        </v-btn-toggle>
+                    </v-col>
+                    <v-col class="d-flex" cols="12" md="6" sm="4">
+                        <v-btn class="mt-7 sm-mt-7 md-mt-7"
                                color="success"
                                type="submit"
                         >
@@ -275,6 +292,7 @@
                 },
                 costSuffix: 'тыс.',
                 squareSuffix: 'м',
+                flatTypes: [],
 
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -296,6 +314,7 @@
                 'setActiveTypeFlatId',
                 'setActiveDistrictId',
                 'setActiveDeveloperId',
+                'setActiveResidentialComplexId',
                 'setCostMin',
                 'setCostMax',
                 'setSquareMin',
@@ -309,6 +328,7 @@
                 'getDistricts',
                 'getDevelopers',
                 'getWallMaterials',
+                'getResidentialComplexes',
                 'removeFilter',
                 'removeAllFilters',
                 'setLimit',
@@ -362,6 +382,16 @@
                     query: {
                         ...this.$route.query,
                         wall_material: this.activeWallMaterialId.join(',')
+                    }
+                });
+            },
+
+            setResidentialComplexId(value) {
+                this.setActiveResidentialComplexId(value);
+                this.$router.replace({
+                    query: {
+                        ...this.$route.query,
+                        residential_complex: this.activeResidentialComplexId.join(',')
                     }
                 });
             },
@@ -484,6 +514,8 @@
                 'activeDeveloperId',
                 'wallMaterials',
                 'activeWallMaterialId',
+                'residentialComplexes',
+                'activeResidentialComplexId',
                 'costMin',
                 'costMax',
                 'squareMin',
@@ -508,16 +540,18 @@
             const districts = this.$route.query.district;
             const developers = this.$route.query.developer;
             const wallMaterials = this.$route.query.wall_material;
+            const residentialComplexes = this.$route.query.residential_complex;
             const costMin = Number(this.$route.query.cost_min)
             const costMax = Number(this.$route.query.cost_max)
             const squareMin = Number(this.$route.query.square_min)
             const squareMax = Number(this.$route.query.square_max)
             const ordering = this.$route.query.ordering
-
-            this.setActiveTypeFlatId(this.convertToArray(typesFlat));
+            this.flatTypes = this.convertToArray(typesFlat);
+            this.setActiveTypeFlatId(this.flatTypes);
             this.setActiveDistrictId(this.convertToArray(districts));
             this.setActiveDeveloperId(this.convertToArray(developers));
             this.setActiveWallMaterialId(this.convertToArray(wallMaterials));
+            this.setActiveResidentialComplexId(this.convertToArray(residentialComplexes));
             this.setCostMin(this.convertToNull(costMin));
             this.setCostMax(this.convertToNull(costMax));
             this.setSquareMin(this.convertToNull(squareMin));
@@ -527,12 +561,14 @@
             this.getDistricts();
             this.getDevelopers();
             this.getWallMaterials();
+            this.getResidentialComplexes();
             this.getFlats();
         },
 
         watch: {
             activeTypeFlatId: function (value) {
                 if (!value || value.length === 0) {
+                    this.flatTypes = value;
                     this.$router.replace({
                         query: {
                             ...this.$route.query,
@@ -570,6 +606,17 @@
                         query: {
                             ...this.$route.query,
                             wall_material: undefined
+                        }
+                    });
+                }
+            },
+
+            activeResidentialComplexId: function (value) {
+                if (!value || value.length === 0) {
+                    this.$router.replace({
+                        query: {
+                            ...this.$route.query,
+                            residential_complex: undefined
                         }
                     });
                 }
@@ -628,6 +675,10 @@
                         }
                     });
                 }
+            },
+
+            flatTypes: function (value) {
+                this.setTypeFlatId(value);
             },
         },
     }
