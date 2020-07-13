@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="pa-0" fluid>
         <v-card class="mx-auto main-container mb-2" elevation="6">
             <v-layout class="pr-3 pl-3" row wrap>
                 <v-flex :class="isMobile ? 'd-flex' : 'wrap'"
@@ -17,8 +17,7 @@
                     <v-carousel :class="showGallery? 'mb-1 main-image-container' : 'mb-0 main-image-container'"
                                 v-if="showGallery"
                                 cycle
-                                height="320px"
-                                show-arrows-on-hover>
+                                height="320px">
                         <v-card flat tile>
                             <v-carousel-item
                                     class="main-image"

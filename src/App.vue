@@ -95,11 +95,11 @@
     }
 
     .content-margin-big {
-        margin-top: 220px;
+        margin-top: 180px;
     }
 
     .content-margin {
-        margin-top: 120px;
+        margin-top: 80px;
     }
 
     .color-text {
