@@ -2,7 +2,7 @@
     <v-hover>
         <template v-slot="{ hover }">
             <v-card :elevation="hover ? 16 : 6" class="mx-auto flat-card align-content-space-between">
-                <v-content @click="openDetails" class="pointer">
+                <v-container @click="openDetails" class="pointer">
                     <v-card-title class="text-start">
                         {{formattedCost}}
                     </v-card-title>
@@ -16,7 +16,7 @@
                         {{flat.square}}м<sup>2</sup> |
                         {{flat.flat_type_name}}
                     </v-card-text>
-                </v-content>
+                </v-container>
                 <v-carousel cycle
                             height="auto"
                             hide-delimiter-background
