@@ -1,8 +1,8 @@
 <template>
     <v-hover>
         <template v-slot="{ hover }">
-            <v-card :elevation="hover ? 16 : 6" class="mx-auto flat-card">
-                <div @click="openDetails" class="pointer">
+            <v-card :elevation="hover ? 16 : 6" class="mx-auto flat-card align-content-space-between">
+                <v-content @click="openDetails" class="pointer">
                     <v-card-title class="text-start">
                         {{formattedCost}}
                     </v-card-title>
@@ -16,17 +16,16 @@
                         {{flat.square}}м<sup>2</sup> |
                         {{flat.flat_type_name}}
                     </v-card-text>
-                </div>
+                </v-content>
                 <v-carousel cycle
-                            height="200px"
+                            height="auto"
                             hide-delimiter-background
                             show-arrows-on-hover>
                     <v-carousel-item :key="i"
+                                     :src="item.src"
+                                     @error="item.errorHandler"
+                                     class="flat-image"
                                      v-for="(item,i) in items">
-                        <v-img :src="item.src"
-                               @error="item.errorHandler"
-                               class="flat-image"
-                        ></v-img>
                     </v-carousel-item>
                 </v-carousel>
             </v-card>
@@ -117,12 +116,12 @@
     .flat-card {
         max-width: 320px;
         height: 100%;
+        display: grid;
     }
 
     .flat-image {
         max-width: 100%;
         height: 200px;
-        align-content: end;
     }
 
     .pointer {

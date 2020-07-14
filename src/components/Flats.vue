@@ -248,7 +248,7 @@
         </v-container>
 
         <v-layout class="pa-4" row wrap>
-            <v-flex class="pt-3 pl-12" md11 sm10 xs10>
+            <v-flex class="pt-3 pl-12" md11 sm10 xs9>
                 <v-pagination
                         :length="pagesCount"
                         @input="onChangeCurrentPage"
@@ -257,7 +257,7 @@
                         v-model="currentPage"
                 ></v-pagination>
             </v-flex>
-            <v-flex class="pr-2" md1 sm2 xs2>
+            <v-flex class="pr-2" md1 sm2 xs3>
                 <v-select :items="pagination.limits"
                           @input="onChangeLimit"
                           v-model="currentLimit"
