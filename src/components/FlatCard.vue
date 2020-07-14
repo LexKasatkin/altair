@@ -12,7 +12,7 @@
                     </v-card-subtitle>
 
                     <v-card-text class="text-justify">
-                        <b class="color-text">{{flatAddress}}</b> |
+                        <strong class="color-text">{{flatAddress}}</strong> |
                         {{flat.square}}м<sup>2</sup> |
                         {{flat.flat_type_name}}
                     </v-card-text>
@@ -22,9 +22,9 @@
                             hide-delimiter-background
                             show-arrows-on-hover>
                     <v-carousel-item :key="i"
+                                     class="flat-image"
                                      :src="item.src"
                                      @error="item.errorHandler"
-                                     class="flat-image"
                                      v-for="(item,i) in items">
                     </v-carousel-item>
                 </v-carousel>
