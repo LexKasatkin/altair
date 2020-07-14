@@ -145,7 +145,7 @@
                             </v-btn>
                         </v-btn-toggle>
                     </v-col>
-                    <v-col class="d-flex" cols="12" md="6" sm="4">
+                    <v-col class="d-flex justify-end" cols="12" md="6" sm="4">
                         <v-btn class="mt-7 sm-mt-7 md-mt-7"
                                color="success"
                                type="submit"
