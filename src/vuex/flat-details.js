@@ -1,5 +1,5 @@
 import axios from "axios";
-import {API_HOST, HEADERS, MEDIA_HOST} from "../../config";
+import {HEADERS, MEDIA_HOST} from "../../config";
 
 export const flatDetails = {
     namespaced: true,
@@ -16,7 +16,7 @@ export const flatDetails = {
         },
 
         getFlat({commit, state}) {
-            return axios.get(`${API_HOST}/flats/${state.flatId}`, {
+            return axios.get(`${process.env.API_HOST}/flats/${state.flatId}`, {
                     headers: HEADERS,
                     method: "GET"
                 }

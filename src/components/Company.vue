@@ -23,6 +23,10 @@
     export default {
         name: "Company",
         components: {CompanyCard},
+        metaInfo: {
+            title: this.$title('Компания')
+        },
+
         data() {
             return {
                 numberOfColumns: 3,

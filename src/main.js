@@ -7,8 +7,11 @@ import Vuelidate from 'vuelidate'
 import Notifications from 'vue-notification'
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
+import titlePlugin from '@/utils/title.plugin'
 import Lightbox from 'vue-easy-lightbox'
+import VueMeta from 'vue-meta';
 
+Vue.use(VueMeta);
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
 Vue.component('l-marker', LMarker);
@@ -16,6 +19,7 @@ Vue.component('l-marker', LMarker);
 Vue.use(Lightbox);
 Vue.use(Vuelidate);
 Vue.use(Notifications);
+Vue.use(titlePlugin);
 Vue.config.productionTip = false;
 
 new Vue({

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {API_HOST, HEADERS} from "../../config";
+import {HEADERS} from "../../config";
 
 export const hotFlats = {
     namespaced: true,
@@ -12,7 +12,7 @@ export const hotFlats = {
     },
     actions: {
         getHotFlats({commit, state}) {
-            return axios.get(`${API_HOST}/flats/`, {
+            return axios.get(`${process.env.API_HOST}/flats/`, {
                     params: {
                         offset: state.offset,
                         limit: state.limit,

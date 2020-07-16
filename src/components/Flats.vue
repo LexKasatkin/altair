@@ -283,6 +283,9 @@
             LMarker,
             LMap,
         },
+        metaInfo: {
+            title: this.$title('Квартиры')
+        },
 
         data() {
             return {

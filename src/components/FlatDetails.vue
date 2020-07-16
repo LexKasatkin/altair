@@ -106,6 +106,9 @@
     export default {
         name: "FlatDetails",
         components: {OpenMapComponent, HotFlats, Phone},
+        metaInfo: {
+            title: this.$title(`${this.flatAddress()}`)
+        },
 
         data() {
             return {

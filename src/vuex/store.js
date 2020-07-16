@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import {API_HOST, HEADERS} from "../../config";
+import {HEADERS} from "../../config";
 import {loader} from "./loader";
 import {flatDetails} from "./flat-details";
 import {drawer} from "./drawer"
@@ -248,7 +248,7 @@ const store = new Vuex.Store({
         },
 
         getFlats({commit, state}) {
-            return axios.get(`${API_HOST}/flats/`, {
+            return axios.get(`${process.env.API_HOST}/flats/`, {
                     params: {
                         flat_type: state.activeTypeFlatId ? state.activeTypeFlatId.join(',') : '',
                         district: state.activeDistrictId ? state.activeDistrictId.join(',') : '',
@@ -282,7 +282,7 @@ const store = new Vuex.Store({
         },
 
         getTypesFlat({commit}) {
-            return axios.get(`${API_HOST}/flat-types/`, {
+            return axios.get(`${process.env.API_HOST}/flat-types/`, {
                     params: {
                         format: 'json'
                     }, headers: HEADERS,
@@ -301,7 +301,7 @@ const store = new Vuex.Store({
         },
 
         getDistricts({commit}) {
-            return axios.get(`${API_HOST}/districts/`, {
+            return axios.get(`${process.env.API_HOST}/districts/`, {
                     params: {
                         format: 'json'
                     }, headers: HEADERS,
@@ -319,7 +319,7 @@ const store = new Vuex.Store({
         },
 
         getDevelopers({commit}) {
-            return axios.get(`${API_HOST}/developers/`, {
+            return axios.get(`${process.env.API_HOST}/developers/`, {
                     params: {
                         format: 'json'
                     }, headers: HEADERS,
@@ -337,7 +337,7 @@ const store = new Vuex.Store({
         },
 
         getWallMaterials({commit}) {
-            return axios.get(`${API_HOST}/wall-materials/`, {
+            return axios.get(`${process.env.API_HOST}/wall-materials/`, {
                     params: {
                         format: 'json'
                     }, headers: HEADERS,
@@ -355,7 +355,7 @@ const store = new Vuex.Store({
         },
 
         getResidentialComplexes({commit}) {
-            return axios.get(`${API_HOST}/residential-complexes/`, {
+            return axios.get(`${process.env.API_HOST}/residential-complexes/`, {
                     params: {
                         format: 'json'
                     }, headers: HEADERS,
