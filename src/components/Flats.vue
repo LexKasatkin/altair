@@ -273,6 +273,9 @@
     import {icon} from "leaflet";
     import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
     import {LMap, LMarker, LPopup} from 'vue2-leaflet';
+    import router from "../router";
+    import {sync} from "vuex-router-sync";
+    import store from "../vuex/store"
 
     export default {
         name: "Flats",
@@ -536,6 +539,8 @@
         },
 
         mounted() {
+            const unsync = sync(store, router) // done. Returns an unsync callback fn
+            console.log(unsync);
             const typesFlat = this.$route.query.type_flat;
             const districts = this.$route.query.district;
             const developers = this.$route.query.developer;
