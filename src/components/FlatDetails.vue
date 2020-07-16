@@ -99,7 +99,6 @@
 <script>
     import {mapActions, mapGetters} from "vuex";
     import OpenMapComponent from '../components/OpenMapComponent'
-    import {MEDIA_HOST} from "../../config";
     import HotFlats from "./HotFlats";
     import Phone from "./Phone";
 
@@ -108,7 +107,7 @@
         components: {OpenMapComponent, HotFlats, Phone},
         metaInfo() {
             return {
-                title: this.$title(`${this.flatAddress()}`)
+                title: this.$title('Детали квартиры')
             };
         },
 
@@ -182,11 +181,11 @@
             },
 
             mainImage() {
-                return this.errorMainImage || !this.flatDetails.main_image_big ? null : `${MEDIA_HOST}${this.flatDetails.main_image_big}`;
+                return this.errorMainImage || !this.flatDetails.main_image_big ? null : `${process.env.VUE_APP_MEDIA_URL}${this.flatDetails.main_image_big}`;
             },
 
             layoutImage() {
-                return this.errorLayout || !this.flatDetails.layout_big ? null : `${MEDIA_HOST}${this.flatDetails.layout_big}`;
+                return this.errorLayout || !this.flatDetails.layout_big ? null : `${process.env.VUE_APP_MEDIA_URL}${this.flatDetails.layout_big}`;
             },
 
             images() {

@@ -1,5 +1,4 @@
 import axios from "axios";
-import {HEADERS, MEDIA_HOST} from "../../config";
 
 export const flatDetails = {
     namespaced: true,
@@ -17,7 +16,7 @@ export const flatDetails = {
 
         getFlat({commit, state}) {
             return axios.get(`${process.env.VUE_APP_URL}/flats/${state.flatId}`, {
-                    headers: HEADERS,
+                    headers: process.env.HEADERS,
                     method: "GET"
                 }
             ).then(response => {
@@ -28,7 +27,7 @@ export const flatDetails = {
                 const images = [flat.main_image, flat.layout]
                     .filter(src => {
                         if (src) return src;
-                    }).map(source => !source ? null : `${MEDIA_HOST}${source}`);
+                    }).map(source => !source ? null : `${process.env.VUE_APP_MEDIA_URL}${source}`);
                 this.dispatch('galleryImages/setImages', images);
                 return flat;
             }).catch(error => {

@@ -1,5 +1,4 @@
 import axios from "axios";
-import {HEADERS} from "../../config";
 
 export const hotFlats = {
     namespaced: true,
@@ -20,7 +19,7 @@ export const hotFlats = {
                         flat_id: state.flatId,
                         format: 'json'
                     },
-                    headers: HEADERS,
+                    headers: process.env.HEADERS,
                     method: "GET"
                 }
             ).then(response => {

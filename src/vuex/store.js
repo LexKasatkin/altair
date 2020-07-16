@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import {HEADERS} from "../../config";
 import {loader} from "./loader";
 import {flatDetails} from "./flat-details";
 import {drawer} from "./drawer"
@@ -259,12 +258,12 @@ const store = new Vuex.Store({
                     cost_max: state.costMax ? state.costMax * 1000 : null,
                     square_min: state.squareMin,
                     square_max: state.squareMax,
-                        offset: state.offset,
-                        limit: state.limit,
-                        ordering: state.currentOrdering,
-                        format: 'json'
-                    },
-                    headers: HEADERS,
+                    offset: state.offset,
+                    limit: state.limit,
+                    ordering: state.currentOrdering,
+                    format: 'json'
+                },
+                    headers: process.env.HEADERS,
                     method: "GET"
                 }
             ).then(response => {
@@ -285,7 +284,7 @@ const store = new Vuex.Store({
             return axios.get(`${process.env.VUE_APP_URL}/flat-types/`, {
                     params: {
                         format: 'json'
-                    }, headers: HEADERS,
+                    }, headers: process.env.HEADERS,
                     method: "GET"
                 }
             ).then(response => {
@@ -304,7 +303,7 @@ const store = new Vuex.Store({
             return axios.get(`${process.env.VUE_APP_URL}/districts/`, {
                     params: {
                         format: 'json'
-                    }, headers: HEADERS,
+                    }, headers: process.env.HEADERS,
                     method: "GET"
                 }
             ).then(response => {
@@ -322,7 +321,7 @@ const store = new Vuex.Store({
             return axios.get(`${process.env.VUE_APP_URL}/developers/`, {
                     params: {
                         format: 'json'
-                    }, headers: HEADERS,
+                    }, headers: process.env.HEADERS,
                     method: "GET"
                 }
             ).then(response => {
@@ -340,7 +339,7 @@ const store = new Vuex.Store({
             return axios.get(`${process.env.VUE_APP_URL}/wall-materials/`, {
                     params: {
                         format: 'json'
-                    }, headers: HEADERS,
+                    }, headers: process.env.HEADERS,
                     method: "GET"
                 }
             ).then(response => {
@@ -358,7 +357,7 @@ const store = new Vuex.Store({
             return axios.get(`${process.env.VUE_APP_URL}/residential-complexes/`, {
                     params: {
                         format: 'json'
-                    }, headers: HEADERS,
+                    }, headers: process.env.HEADERS,
                     method: "GET"
                 }
             ).then(response => {
