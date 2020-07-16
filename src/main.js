@@ -5,9 +5,9 @@ import {vuetify} from "./plugins/vuetify";
 import store from "./vuex/store"
 import Vuelidate from 'vuelidate'
 import Notifications from 'vue-notification'
-import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import {LMap, LMarker, LTileLayer} from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
-import titlePlugin from '@/utils/title.plugin'
+import titlePlugin from './utils/title.plugin'
 import Lightbox from 'vue-easy-lightbox'
 import VueMeta from 'vue-meta';
 

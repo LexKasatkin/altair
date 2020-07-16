@@ -283,8 +283,8 @@
             LMarker,
             LMap,
         },
-        metaInfo: {
-            title: this.$title('Квартиры')
+        metaInfo() {
+            return {title: this.$title('Квартиры')};
         },
 
         data() {

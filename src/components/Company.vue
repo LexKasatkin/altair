@@ -23,8 +23,8 @@
     export default {
         name: "Company",
         components: {CompanyCard},
-        metaInfo: {
-            title: this.$title('Компания')
+        metaInfo() {
+            return {title: this.$title('Компания')};
         },
 
         data() {

@@ -12,7 +12,7 @@ export const hotFlats = {
     },
     actions: {
         getHotFlats({commit, state}) {
-            return axios.get(`${process.env.API_HOST}/flats/`, {
+            return axios.get(`${process.env.VUE_APP_URL}/flats/`, {
                     params: {
                         offset: state.offset,
                         limit: state.limit,

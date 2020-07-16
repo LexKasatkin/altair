@@ -42,8 +42,8 @@
     export default {
         name: "Main",
         components: {ActionCard},
-        metaInfo: {
-            title: this.$title('Главная')
+        metaInfo() {
+            return {title: this.$title('Главная')};
         },
 
         computed: {

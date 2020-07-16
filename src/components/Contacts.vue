@@ -33,8 +33,8 @@
     export default {
         name: "Contacts",
         components: {OpenMapComponent},
-        metaInfo: {
-            title: this.$title('Контакты')
+        metaInfo() {
+            return {title: this.$title('Контакты')};
         },
 
         data() {

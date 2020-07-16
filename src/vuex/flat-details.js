@@ -16,7 +16,7 @@ export const flatDetails = {
         },
 
         getFlat({commit, state}) {
-            return axios.get(`${process.env.API_HOST}/flats/${state.flatId}`, {
+            return axios.get(`${process.env.VUE_APP_URL}/flats/${state.flatId}`, {
                     headers: HEADERS,
                     method: "GET"
                 }

@@ -106,8 +106,10 @@
     export default {
         name: "FlatDetails",
         components: {OpenMapComponent, HotFlats, Phone},
-        metaInfo: {
-            title: this.$title(`${this.flatAddress()}`)
+        metaInfo() {
+            return {
+                title: this.$title(`${this.flatAddress()}`)
+            };
         },
 
         data() {
@@ -144,11 +146,11 @@
                 this.errorLayout = true;
             },
 
-            openFullscreenDialog(){
+            openFullscreenDialog() {
                 this.showFullscreenDialog = true;
             },
 
-           hideFullscreenDialog() {
+            hideFullscreenDialog() {
                 this.showFullscreenDialog = false
             }
         },

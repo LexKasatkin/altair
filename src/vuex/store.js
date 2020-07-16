@@ -248,17 +248,17 @@ const store = new Vuex.Store({
         },
 
         getFlats({commit, state}) {
-            return axios.get(`${process.env.API_HOST}/flats/`, {
-                    params: {
-                        flat_type: state.activeTypeFlatId ? state.activeTypeFlatId.join(',') : '',
-                        district: state.activeDistrictId ? state.activeDistrictId.join(',') : '',
-                        developer: state.activeDeveloperId ? state.activeDeveloperId.join(',') : '',
-                        wall_material: state.activeWallMaterialId ? state.activeWallMaterialId.join(',') : '',
-                        residential_complex: state.activeResidentialComplexId ? state.activeResidentialComplexId.join(',') : '',
-                        cost_min: state.costMin ? state.costMin * 1000 : null,
-                        cost_max: state.costMax ? state.costMax * 1000 : null,
-                        square_min: state.squareMin,
-                        square_max: state.squareMax,
+            return axios.get(`${process.env.VUE_APP_URL}/flats/`, {
+                params: {
+                    flat_type: state.activeTypeFlatId ? state.activeTypeFlatId.join(',') : '',
+                    district: state.activeDistrictId ? state.activeDistrictId.join(',') : '',
+                    developer: state.activeDeveloperId ? state.activeDeveloperId.join(',') : '',
+                    wall_material: state.activeWallMaterialId ? state.activeWallMaterialId.join(',') : '',
+                    residential_complex: state.activeResidentialComplexId ? state.activeResidentialComplexId.join(',') : '',
+                    cost_min: state.costMin ? state.costMin * 1000 : null,
+                    cost_max: state.costMax ? state.costMax * 1000 : null,
+                    square_min: state.squareMin,
+                    square_max: state.squareMax,
                         offset: state.offset,
                         limit: state.limit,
                         ordering: state.currentOrdering,
@@ -282,7 +282,7 @@ const store = new Vuex.Store({
         },
 
         getTypesFlat({commit}) {
-            return axios.get(`${process.env.API_HOST}/flat-types/`, {
+            return axios.get(`${process.env.VUE_APP_URL}/flat-types/`, {
                     params: {
                         format: 'json'
                     }, headers: HEADERS,
@@ -301,7 +301,7 @@ const store = new Vuex.Store({
         },
 
         getDistricts({commit}) {
-            return axios.get(`${process.env.API_HOST}/districts/`, {
+            return axios.get(`${process.env.VUE_APP_URL}/districts/`, {
                     params: {
                         format: 'json'
                     }, headers: HEADERS,
@@ -319,7 +319,7 @@ const store = new Vuex.Store({
         },
 
         getDevelopers({commit}) {
-            return axios.get(`${process.env.API_HOST}/developers/`, {
+            return axios.get(`${process.env.VUE_APP_URL}/developers/`, {
                     params: {
                         format: 'json'
                     }, headers: HEADERS,
@@ -337,7 +337,7 @@ const store = new Vuex.Store({
         },
 
         getWallMaterials({commit}) {
-            return axios.get(`${process.env.API_HOST}/wall-materials/`, {
+            return axios.get(`${process.env.VUE_APP_URL}/wall-materials/`, {
                     params: {
                         format: 'json'
                     }, headers: HEADERS,
@@ -355,7 +355,7 @@ const store = new Vuex.Store({
         },
 
         getResidentialComplexes({commit}) {
-            return axios.get(`${process.env.API_HOST}/residential-complexes/`, {
+            return axios.get(`${process.env.VUE_APP_URL}/residential-complexes/`, {
                     params: {
                         format: 'json'
                     }, headers: HEADERS,
